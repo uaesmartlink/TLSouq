@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../controllers/forgot_password_controller.dart';
-import 'package:yoori_ecommerce/src/utils/app_tags.dart';
+import 'package:TLSouq/src/utils/app_tags.dart';
 import '../../utils/app_theme_data.dart';
-import 'package:yoori_ecommerce/src/utils/responsive.dart';
+import 'package:TLSouq/src/utils/responsive.dart';
 import '../../widgets/login_edit_textform_field.dart';
 
 class ForgetPasswordScreen extends StatelessWidget {

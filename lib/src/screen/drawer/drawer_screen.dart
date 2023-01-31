@@ -7,10 +7,10 @@ import '../../_route/routes.dart';
 import '../../controllers/auth_controller.dart';
 import '../../controllers/dashboard_controller.dart';
 import '../../models/user_data_model.dart';
-import 'package:yoori_ecommerce/src/utils/app_tags.dart';
+import 'package:TLSouq/src/utils/app_tags.dart';
 import '../../data/local_data_helper.dart';
 import '../../utils/app_theme_data.dart';
-import 'package:yoori_ecommerce/src/utils/responsive.dart';
+import 'package:TLSouq/src/utils/responsive.dart';
 
 class DrawerScreen extends StatefulWidget {
   const DrawerScreen({Key? key}) : super(key: key);

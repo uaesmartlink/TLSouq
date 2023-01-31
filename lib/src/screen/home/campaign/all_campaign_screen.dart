@@ -6,7 +6,7 @@ import '../../../models/all_campaign_model.dart';
 import '../../../utils/app_theme_data.dart';
 import '../../../servers/repository.dart';
 import '../../../utils/app_tags.dart';
-import 'package:yoori_ecommerce/src/utils/responsive.dart';
+import 'package:TLSouq/src/utils/responsive.dart';
 import '../../../widgets/loader/shimmer_all_campaign.dart';
 import 'campaign_screen.dart';
 

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 import '../models/video_shopping_details_model.dart';
-import 'package:yoori_ecommerce/src/servers/repository.dart';
+import 'package:TLSouq/src/servers/repository.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoShoppingDetailsController extends GetxController{

@@ -1,6 +1,6 @@
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:yoori_ecommerce/src/models/product_details_model.dart';
+import 'package:TLSouq/src/models/product_details_model.dart';
 
 
 class ColorSelectionController extends GetxController {

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class Config {
   // copy your server url from admin panel
-  static String apiServerUrl = "https://yoori.spagreen.net/api";
+  static String apiServerUrl = "https://wared.smart-link.ae/api";
   // copy your api key from admin panel
-  static String apiKey = "spagreen";
+  static String apiKey = "5XI9GCLSIUSF8DKL";
 
   //enter onesignal app id below
   static String oneSignalAppId = "fe15cb82-a45f-4ea7-8501-9dd973547563";
@@ -21,4 +21,5 @@ class Config {
     const Locale("ar", "SA"),
   ];
   static const String initialCountrySelection = "US";
+
 }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:yoori_ecommerce/src/_route/routes.dart';
+import 'package:TLSouq/src/_route/routes.dart';
 import '../../../controllers/payment_controller.dart';
 import '../../../servers/network_service.dart';
 import '../../../utils/app_tags.dart';
@@ -12,7 +12,7 @@ import '../../../utils/constants.dart';
 import '../../../../../config.dart';
 import '../../../controllers/currency_converter_controller.dart';
 import '../../../data/local_data_helper.dart';
-import 'package:yoori_ecommerce/src/utils/responsive.dart';
+import 'package:TLSouq/src/utils/responsive.dart';
 import '../../../widgets/loader/loader_widget.dart';
 
 

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:yoori_ecommerce/src/servers/repository.dart';
+import 'package:TLSouq/src/servers/repository.dart';
 import '../../../models/all_category_product_model.dart';
 import '../../../utils/app_theme_data.dart';
 import '../../../utils/app_tags.dart';
-import 'package:yoori_ecommerce/src/utils/responsive.dart';
+import 'package:TLSouq/src/utils/responsive.dart';
 import '../../../widgets/loader/shimmer_category_content.dart';
 import 'product_by_category_screen.dart';
 

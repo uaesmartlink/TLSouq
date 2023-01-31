@@ -5,7 +5,7 @@ import 'package:pagination_view/pagination_view.dart';
 import '../../../controllers/home_screen_controller.dart';
 import '../../../models/product_by_category_model.dart';
 import '../../../utils/app_theme_data.dart';
-import 'package:yoori_ecommerce/src/utils/responsive.dart';
+import 'package:TLSouq/src/utils/responsive.dart';
 import '../../../widgets/product_card_widgets/category_product_card.dart';
 import '../../../servers/repository.dart';
 import '../../../utils/app_tags.dart';

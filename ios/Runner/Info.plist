@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>YOORI</string>
+	<string>TLSouq</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -15,7 +15,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>yoori_ecommerce</string>
+	<string>TLSouq</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -48,7 +48,7 @@
 	<key>FacebookClientToken</key>
 	<string>c6daad3c161ee20c2873f636a3b9e092</string>
 	<key>FacebookDisplayName</key>
-	<string>Yoori</string>
+	<string>TLSouq</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
@@ -62,7 +62,7 @@
 	<dict>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>yoori.spagreen.net</key>
+			<key>TLSouq.spagreen.net</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
 				<true/>
@@ -72,11 +72,11 @@
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>yoori MyApp needs access to your camera for meetings.</string>
+	<string>TLSouq MyApp needs access to your camera for meetings.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app requires access to the location to support feature .</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>yoori MyApp needs access to your microphone for meetings.</string>
+	<string>TLSouq MyApp needs access to your microphone for meetings.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app requires access to the photo library to support Profile Update.</string>
 	<key>UILaunchStoryboardName</key>

@@ -6,11 +6,11 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:yoori_ecommerce/src/_route/routes.dart';
-import 'package:yoori_ecommerce/src/servers/repository.dart';
-import 'package:yoori_ecommerce/src/data/local_data_helper.dart';
+import 'package:TLSouq/src/_route/routes.dart';
+import 'package:TLSouq/src/servers/repository.dart';
+import 'package:TLSouq/src/data/local_data_helper.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:yoori_ecommerce/src/utils/app_tags.dart';
+import 'package:TLSouq/src/utils/app_tags.dart';
 
 class SplashController extends GetxController {
   var isLoading = true.obs;

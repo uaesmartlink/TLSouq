@@ -54,7 +54,7 @@ import '../utils/app_tags.dart';
 import '../utils/constants.dart';
 import '../utils/validators.dart';
 import '../../config.dart';
-import 'package:yoori_ecommerce/src/data/local_data_helper.dart';
+import 'package:TLSouq/src/data/local_data_helper.dart';
 import '../models/all_brand_model.dart';
 import 'network_service.dart';
 

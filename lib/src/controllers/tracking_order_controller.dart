@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:yoori_ecommerce/src/models/track_order_model.dart';
+import 'package:TLSouq/src/models/track_order_model.dart';
 
-import 'package:yoori_ecommerce/src/servers/repository.dart';
-import 'package:yoori_ecommerce/src/utils/app_theme_data.dart';
+import 'package:TLSouq/src/servers/repository.dart';
+import 'package:TLSouq/src/utils/app_theme_data.dart';
 
 
 class TrackingOrderController extends GetxController {

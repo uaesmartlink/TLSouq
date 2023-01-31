@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
-import 'package:yoori_ecommerce/src/models/all_category_product_model.dart';
-import 'package:yoori_ecommerce/src/servers/repository.dart';
+import 'package:TLSouq/src/models/all_category_product_model.dart';
+import 'package:TLSouq/src/servers/repository.dart';
 
 class CategoryContentController extends GetxController {
   final categoryList = <Categories>[].obs;

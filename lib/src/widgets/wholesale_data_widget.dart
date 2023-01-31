@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
-import 'package:yoori_ecommerce/src/controllers/currency_converter_controller.dart';
+import 'package:TLSouq/src/controllers/currency_converter_controller.dart';
 import '../models/product_details_model.dart';
 import '../utils/app_theme_data.dart';
 

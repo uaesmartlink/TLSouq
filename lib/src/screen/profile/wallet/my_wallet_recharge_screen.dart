@@ -4,7 +4,7 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../../config.dart';
-import 'package:yoori_ecommerce/src/_route/routes.dart';
+import 'package:TLSouq/src/_route/routes.dart';
 import '../../../controllers/payment_controller.dart';
 import '../../../data/local_data_helper.dart';
 import '../../../servers/network_service.dart';

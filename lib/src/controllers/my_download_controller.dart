@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:yoori_ecommerce/src/models/my_download_model.dart';
-import 'package:yoori_ecommerce/src/servers/repository.dart';
+import 'package:TLSouq/src/models/my_download_model.dart';
+import 'package:TLSouq/src/servers/repository.dart';
 
 class MyDownloadController extends GetxController {
   late Rx<MyDownloadModel> myDownloadModel = MyDownloadModel().obs;

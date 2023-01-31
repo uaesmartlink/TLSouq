@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:yoori_ecommerce/src/utils/images.dart';
+import 'package:TLSouq/src/utils/images.dart';
 
 import '../models/all_notifications.dart';
 import '../utils/app_theme_data.dart';

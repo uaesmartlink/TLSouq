@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:yoori_ecommerce/config.dart';
+import 'package:TLSouq/config.dart';
 import '../../controllers/news_controller.dart';
 import '../../utils/app_theme_data.dart';
-import 'package:yoori_ecommerce/src/utils/responsive.dart';
+import 'package:TLSouq/src/utils/responsive.dart';
 
 class NewsScreen extends GetView<NewsController> {
   NewsScreen({Key? key}) : super(key: key);

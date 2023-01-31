@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:yoori_ecommerce/src/_route/routes.dart';
+import 'package:TLSouq/src/_route/routes.dart';
 import '../../../controllers/currency_converter_controller.dart';
 import '../../../controllers/my_wallet_controller.dart';
 import '../../../data/local_data_helper.dart';
 import '../../../models/user_data_model.dart';
 import '../../../utils/app_tags.dart';
 import '../../../utils/app_theme_data.dart';
-import 'package:yoori_ecommerce/src/utils/responsive.dart';
+import 'package:TLSouq/src/utils/responsive.dart';
 import '../../../widgets/loader/loader_widget.dart';
 
 class MyWalletScreen extends StatelessWidget {

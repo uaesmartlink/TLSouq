@@ -1,12 +1,12 @@
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:yoori_ecommerce/src/data/local_data_helper.dart';
-import 'package:yoori_ecommerce/src/models/edit_view_model.dart';
-import 'package:yoori_ecommerce/src/models/shipping_address_model/country_list_model.dart';
-import 'package:yoori_ecommerce/src/models/shipping_address_model/get_city_model.dart';
-import 'package:yoori_ecommerce/src/models/shipping_address_model/shipping_address_model.dart';
-import 'package:yoori_ecommerce/src/models/shipping_address_model/state_list_model.dart';
-import 'package:yoori_ecommerce/src/servers/repository.dart';
+import 'package:TLSouq/src/data/local_data_helper.dart';
+import 'package:TLSouq/src/models/edit_view_model.dart';
+import 'package:TLSouq/src/models/shipping_address_model/country_list_model.dart';
+import 'package:TLSouq/src/models/shipping_address_model/get_city_model.dart';
+import 'package:TLSouq/src/models/shipping_address_model/shipping_address_model.dart';
+import 'package:TLSouq/src/models/shipping_address_model/state_list_model.dart';
+import 'package:TLSouq/src/servers/repository.dart';
 import 'currency_converter_controller.dart';
 
 class AddressScreenController extends GetxController{

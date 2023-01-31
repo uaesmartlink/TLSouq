@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:store_redirect/store_redirect.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import '../../../../config.dart';
-import 'package:yoori_ecommerce/src/_route/routes.dart';
+import 'package:TLSouq/src/_route/routes.dart';
 import '../../../controllers/currency_converter_controller.dart';
 import '../../../controllers/language_controller.dart';
 import '../../../controllers/setting_controller.dart';
 import '../../../data/local_data_helper.dart';
 import '../../../utils/app_tags.dart';
 import '../../../utils/app_theme_data.dart';
-import 'package:yoori_ecommerce/src/utils/responsive.dart';
+import 'package:TLSouq/src/utils/responsive.dart';
 import 'address_screen.dart';
 
 class Settings extends StatelessWidget {

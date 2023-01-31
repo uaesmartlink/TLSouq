@@ -1,9 +1,9 @@
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:yoori_ecommerce/src/models/home_data_model.dart';
-import 'package:yoori_ecommerce/src/data/local_data_helper.dart';
-import 'package:yoori_ecommerce/src/servers/repository.dart';
+import 'package:TLSouq/src/models/home_data_model.dart';
+import 'package:TLSouq/src/data/local_data_helper.dart';
+import 'package:TLSouq/src/servers/repository.dart';
 
 class HomeScreenController extends GetxController {
   PageController pageController = PageController();

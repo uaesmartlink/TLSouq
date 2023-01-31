@@ -1,7 +1,7 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:yoori_ecommerce/src/_route/routes.dart';
+import 'package:TLSouq/src/_route/routes.dart';
 import '../../../controllers/dashboard_controller.dart';
 import '../../../utils/app_tags.dart';
 import '../../../utils/app_theme_data.dart';

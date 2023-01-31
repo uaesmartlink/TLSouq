@@ -1,5 +1,5 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:yoori_ecommerce/src/utils/app_theme_data.dart';
+import 'package:TLSouq/src/utils/app_theme_data.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/responsive.dart';

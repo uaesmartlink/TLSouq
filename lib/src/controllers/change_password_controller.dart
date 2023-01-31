@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:yoori_ecommerce/src/_route/routes.dart';
-import 'package:yoori_ecommerce/src/servers/repository.dart';
+import 'package:TLSouq/src/_route/routes.dart';
+import 'package:TLSouq/src/servers/repository.dart';
 
 class ChangePasswordController extends GetxController{
   var isVisibleA = true.obs;

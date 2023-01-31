@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:yoori_ecommerce/src/widgets/loader/shimmer_products.dart';
+import 'package:TLSouq/src/widgets/loader/shimmer_products.dart';
 import '../../../controllers/home_screen_controller.dart';
 import '../../../models/product_by_shop_model.dart';
 import '../../../utils/app_theme_data.dart';

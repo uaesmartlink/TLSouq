@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pagination_view/pagination_view.dart';
-import 'package:yoori_ecommerce/src/utils/app_tags.dart';
+import 'package:TLSouq/src/utils/app_tags.dart';
 import '../../../models/product_by_brand_model.dart';
 import '../../../utils/app_theme_data.dart';
 import '../../../widgets/brand_card.dart';

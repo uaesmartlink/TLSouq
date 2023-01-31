@@ -6,9 +6,9 @@ import 'package:pagination_view/pagination_view.dart';
 import '../../controllers/all_notifications_controller.dart';
 import '../../models/all_notifications.dart';
 import '../../servers/repository.dart';
-import 'package:yoori_ecommerce/src/utils/app_tags.dart';
+import 'package:TLSouq/src/utils/app_tags.dart';
 import '../../utils/app_theme_data.dart';
-import 'package:yoori_ecommerce/src/utils/responsive.dart';
+import 'package:TLSouq/src/utils/responsive.dart';
 import '../../widgets/loader/shimmer_notification.dart';
 import '../../widgets/notification_widget.dart';
 

@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:yoori_ecommerce/src/screen/dashboard/dashboard_screen.dart';
-import 'package:yoori_ecommerce/src/utils/constants.dart';
-import 'package:yoori_ecommerce/src/servers/repository.dart';
+import 'package:TLSouq/src/screen/dashboard/dashboard_screen.dart';
+import 'package:TLSouq/src/utils/constants.dart';
+import 'package:TLSouq/src/servers/repository.dart';
 
 class PhoneAuthController extends GetxController{
   var isLoading = true.obs;

@@ -3,7 +3,7 @@
 // import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
 // import 'package:get/get.dart';
-// import 'package:yoori_ecommerce/src/utils/constants.dart';
+// import 'package:TLSouq/src/utils/constants.dart';
 //
 // class InternetCheckController extends GetxController {
 //   final Connectivity _connectivity = Connectivity();

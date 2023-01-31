@@ -16,12 +16,12 @@ import '../../models/shipping_address_model/shipping_address_model.dart';
 import '../../models/shipping_address_model/state_list_model.dart';
 import '../../servers/network_service.dart';
 import '../../servers/repository.dart';
-import 'package:yoori_ecommerce/src/utils/app_tags.dart';
+import 'package:TLSouq/src/utils/app_tags.dart';
 import '../../data/local_data_helper.dart';
 import '../../utils/app_theme_data.dart';
 import '../../widgets/button_widget.dart';
 import '../../../../config.dart';
-import 'package:yoori_ecommerce/src/utils/responsive.dart';
+import 'package:TLSouq/src/utils/responsive.dart';
 import '../../utils/validators.dart';
 import '../../widgets/loader/loader_widget.dart';
 

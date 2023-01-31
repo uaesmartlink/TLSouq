@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:ribbon_widget/ribbon_widget.dart';
-import 'package:yoori_ecommerce/config.dart';
-import 'package:yoori_ecommerce/src/utils/constants.dart';
+import 'package:TLSouq/config.dart';
+import 'package:TLSouq/src/utils/constants.dart';
 import '../../_route/routes.dart';
 import '../../controllers/cart_content_controller.dart';
 import '../../controllers/currency_converter_controller.dart';
 import '../../controllers/home_screen_controller.dart';
-import 'package:yoori_ecommerce/src/utils/app_tags.dart';
+import 'package:TLSouq/src/utils/app_tags.dart';
 import '../../utils/app_theme_data.dart';
-import 'package:yoori_ecommerce/src/utils/responsive.dart';
+import 'package:TLSouq/src/utils/responsive.dart';
 
 class HomeProductCard extends StatelessWidget {
   HomeProductCard({

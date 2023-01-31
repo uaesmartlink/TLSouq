@@ -7,7 +7,7 @@ import '../../../utils/app_theme_data.dart';
 import '../../../widgets/error_message_widget.dart';
 import '../../../models/campaign_details_model.dart';
 import '../../../servers/repository.dart';
-import 'package:yoori_ecommerce/src/utils/responsive.dart';
+import 'package:TLSouq/src/utils/responsive.dart';
 import '../../../widgets/loader/shimmer_campaign_details.dart';
 import 'campaign_by_brand.dart';
 import 'campaign_by_products.dart';

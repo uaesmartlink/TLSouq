@@ -1,7 +1,7 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:ribbon_widget/ribbon_widget.dart';
-import 'package:yoori_ecommerce/src/controllers/home_screen_controller.dart';
+import 'package:TLSouq/src/controllers/home_screen_controller.dart';
 import '../models/product_by_brand_model.dart';
 import '../utils/app_theme_data.dart';
 import 'package:flutter/material.dart';

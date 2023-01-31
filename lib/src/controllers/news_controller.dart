@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
-import 'package:yoori_ecommerce/src/models/all_news_model.dart';
-import 'package:yoori_ecommerce/src/servers/repository.dart';
+import 'package:TLSouq/src/models/all_news_model.dart';
+import 'package:TLSouq/src/servers/repository.dart';
 
 class NewsController extends GetxController {
   bool isLoading = true;

@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-const printLogTag = "[YOORI-Flutter]";
+const printLogTag = "[TLSouq-Flutter]";
 const printLogEnable = true;
 
 printLog(dynamic data) {

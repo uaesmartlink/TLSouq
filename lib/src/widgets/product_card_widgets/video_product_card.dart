@@ -5,9 +5,9 @@ import 'package:get/get.dart';
 import 'package:ribbon_widget/ribbon_widget.dart';
 import '../../controllers/currency_converter_controller.dart';
 import '../../controllers/home_screen_controller.dart';
-import 'package:yoori_ecommerce/src/utils/app_tags.dart';
+import 'package:TLSouq/src/utils/app_tags.dart';
 import '../../utils/app_theme_data.dart';
-import 'package:yoori_ecommerce/src/utils/responsive.dart';
+import 'package:TLSouq/src/utils/responsive.dart';
 
 class VideoProductCard extends StatelessWidget {
   VideoProductCard({

@@ -3,12 +3,12 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:yoori_ecommerce/src/utils/app_tags.dart';
-import 'package:yoori_ecommerce/src/utils/images.dart';
+import 'package:TLSouq/src/utils/app_tags.dart';
+import 'package:TLSouq/src/utils/images.dart';
 import '../../utils/app_theme_data.dart';
 import '../../_route/routes.dart';
 import '../../models/favorite_product_model.dart';
-import 'package:yoori_ecommerce/src/utils/responsive.dart';
+import 'package:TLSouq/src/utils/responsive.dart';
 
 
 

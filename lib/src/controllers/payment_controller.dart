@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:yoori_ecommerce/src/data/local_data_helper.dart';
+import 'package:TLSouq/src/data/local_data_helper.dart';
 
 class PaymentController extends GetxController {
   bool isLoading = true;

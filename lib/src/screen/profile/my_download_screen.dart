@@ -5,9 +5,9 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../controllers/currency_converter_controller.dart';
 import '../../controllers/my_download_controller.dart';
-import 'package:yoori_ecommerce/src/utils/app_tags.dart';
+import 'package:TLSouq/src/utils/app_tags.dart';
 import '../../utils/app_theme_data.dart';
-import 'package:yoori_ecommerce/src/utils/responsive.dart';
+import 'package:TLSouq/src/utils/responsive.dart';
 import '../../widgets/loader/loader_widget.dart';
 class MyDownload extends StatelessWidget {
   MyDownload({Key? key}) : super(key: key);

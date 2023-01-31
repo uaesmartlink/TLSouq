@@ -5,7 +5,7 @@ import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 import '../../../controllers/details_screen_controller.dart';
 import '../../../utils/app_theme_data.dart';
-import 'package:yoori_ecommerce/src/utils/responsive.dart';
+import 'package:TLSouq/src/utils/responsive.dart';
 
 class DescriptionImageViewScreen extends StatelessWidget {
   final List? descriptionImage;

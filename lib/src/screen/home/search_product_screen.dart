@@ -3,11 +3,11 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
-import 'package:yoori_ecommerce/src/utils/images.dart';
+import 'package:TLSouq/src/utils/images.dart';
 import '../../controllers/search_controller.dart';
-import 'package:yoori_ecommerce/src/utils/app_tags.dart';
+import 'package:TLSouq/src/utils/app_tags.dart';
 import '../../utils/app_theme_data.dart';
-import 'package:yoori_ecommerce/src/utils/responsive.dart';
+import 'package:TLSouq/src/utils/responsive.dart';
 import '../../widgets/product_card_widgets/search_product_card.dart';
 
 class SearchProduct extends StatefulWidget {

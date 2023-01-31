@@ -15,11 +15,11 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.spagreen.yoori</string>
+	<string>com.spagreen.TLSouq</string>
 	<key>PROJECT_ID</key>
-	<string>yoori-ecommerce</string>
+	<string>TLSouq-ecommerce</string>
 	<key>STORAGE_BUCKET</key>
-	<string>yoori-ecommerce.appspot.com</string>
+	<string>TLSouq-ecommerce.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../_route/routes.dart';
-import 'package:yoori_ecommerce/src/utils/images.dart';
-import 'package:yoori_ecommerce/src/utils/app_tags.dart';
+import 'package:TLSouq/src/utils/images.dart';
+import 'package:TLSouq/src/utils/app_tags.dart';
 
 class PreSignUp extends StatelessWidget {
   const PreSignUp({super.key});

@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:yoori_ecommerce/src/models/coupon_list_model.dart';
+import 'package:TLSouq/src/models/coupon_list_model.dart';
 
-import 'package:yoori_ecommerce/src/servers/repository.dart';
+import 'package:TLSouq/src/servers/repository.dart';
 
 class VoucherController extends GetxController {
   Rx<CouponListModel?> couponListModel = CouponListModel().obs;

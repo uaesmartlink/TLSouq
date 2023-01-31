@@ -7,8 +7,8 @@ import '../../controllers/invoice_screen_controller.dart';
 import '../../servers/network_service.dart';
 import '../../data/local_data_helper.dart';
 import '../../utils/app_theme_data.dart';
-import 'package:yoori_ecommerce/src/utils/app_tags.dart';
-import 'package:yoori_ecommerce/src/utils/responsive.dart';
+import 'package:TLSouq/src/utils/app_tags.dart';
+import 'package:TLSouq/src/utils/responsive.dart';
 import '../../widgets/loader/shimmer_invoice.dart';
 
 class InvoiceScreen extends StatelessWidget {

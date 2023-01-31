@@ -7,7 +7,7 @@ import '../../../models/all_product_model.dart';
 import '../../../utils/app_tags.dart';
 import '../../../utils/app_theme_data.dart';
 import '../../../servers/repository.dart';
-import 'package:yoori_ecommerce/src/utils/responsive.dart';
+import 'package:TLSouq/src/utils/responsive.dart';
 import '../../../widgets/product_card_widgets/category_product_card.dart';
 import '../../../widgets/loader/shimmer_load_data.dart';
 import '../../../widgets/loader/shimmer_products.dart';

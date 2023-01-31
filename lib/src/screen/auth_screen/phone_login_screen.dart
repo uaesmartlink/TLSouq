@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:yoori_ecommerce/src/utils/images.dart';
+import 'package:TLSouq/src/utils/images.dart';
 import '../../controllers/phone_auth_controller.dart';
 import '../../data/local_data_helper.dart';
-import 'package:yoori_ecommerce/src/utils/app_tags.dart';
+import 'package:TLSouq/src/utils/app_tags.dart';
 import '../../utils/app_theme_data.dart';
 
 class PhoneLoginScreen extends StatelessWidget {

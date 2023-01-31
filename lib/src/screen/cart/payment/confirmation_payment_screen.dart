@@ -1,13 +1,13 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:yoori_ecommerce/src/_route/routes.dart';
+import 'package:TLSouq/src/_route/routes.dart';
 import '../../../controllers/dashboard_controller.dart';
 import '../../../controllers/order_history_controller.dart';
 import '../../../utils/app_tags.dart';
 import '../../../data/local_data_helper.dart';
 import '../../../utils/app_theme_data.dart';
 import 'package:flutter/material.dart';
-import 'package:yoori_ecommerce/src/utils/responsive.dart';
+import 'package:TLSouq/src/utils/responsive.dart';
 import '../../profile/order_history_screen.dart';
 
 

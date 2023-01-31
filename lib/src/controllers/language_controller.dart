@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:yoori_ecommerce/src/data/local_data_helper.dart';
-import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
-import 'package:yoori_ecommerce/src/models/config_model.dart';
+import 'package:TLSouq/src/data/local_data_helper.dart';
+import 'package:TLSouq/src/data/data_storage_service.dart';
+import 'package:TLSouq/src/models/config_model.dart';
 
 class LanguageController extends GetxController {
   final storage = Get.find<StorageService>();

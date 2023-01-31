@@ -1,11 +1,11 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:yoori_ecommerce/src/controllers/change_password_controller.dart';
-import 'package:yoori_ecommerce/src/utils/app_tags.dart';
-import 'package:yoori_ecommerce/src/utils/app_theme_data.dart';
+import 'package:TLSouq/src/controllers/change_password_controller.dart';
+import 'package:TLSouq/src/utils/app_tags.dart';
+import 'package:TLSouq/src/utils/app_theme_data.dart';
 import 'package:flutter/material.dart';
-import 'package:yoori_ecommerce/src/utils/responsive.dart';
-import 'package:yoori_ecommerce/src/widgets/button_widget.dart';
+import 'package:TLSouq/src/utils/responsive.dart';
+import 'package:TLSouq/src/widgets/button_widget.dart';
 import '../../widgets/loader/loader_widget.dart';
 import '../../widgets/login_edit_textform_field.dart';
 

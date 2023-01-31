@@ -8,9 +8,9 @@ import '../../controllers/currency_converter_controller.dart';
 import '../../controllers/order_history_controller.dart';
 import '../../data/local_data_helper.dart';
 import '../../servers/network_service.dart';
-import 'package:yoori_ecommerce/src/utils/app_tags.dart';
+import 'package:TLSouq/src/utils/app_tags.dart';
 import '../../utils/app_theme_data.dart';
-import 'package:yoori_ecommerce/src/utils/responsive.dart';
+import 'package:TLSouq/src/utils/responsive.dart';
 import '../../widgets/loader/shimmer_order_history.dart';
 
 

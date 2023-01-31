@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:yoori_ecommerce/src/models/config_model.dart';
-import 'package:yoori_ecommerce/src/servers/repository.dart';
-import 'package:yoori_ecommerce/src/data/local_data_helper.dart';
+import 'package:TLSouq/src/models/config_model.dart';
+import 'package:TLSouq/src/servers/repository.dart';
+import 'package:TLSouq/src/data/local_data_helper.dart';
 
 class SettingController extends GetxController {
   RxBool isToggle = false.obs;

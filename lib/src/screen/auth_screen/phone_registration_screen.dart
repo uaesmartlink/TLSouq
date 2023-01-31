@@ -4,12 +4,12 @@ import 'package:country_pickers/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:yoori_ecommerce/src/data/local_data_helper.dart';
-import 'package:yoori_ecommerce/src/utils/app_tags.dart';
-import 'package:yoori_ecommerce/src/utils/images.dart';
+import 'package:TLSouq/src/data/local_data_helper.dart';
+import 'package:TLSouq/src/utils/app_tags.dart';
+import 'package:TLSouq/src/utils/images.dart';
 import '../../utils/app_theme_data.dart';
 import '../../utils/constants.dart';
-import 'package:yoori_ecommerce/src/utils/responsive.dart';
+import 'package:TLSouq/src/utils/responsive.dart';
 
 import '../../controllers/phone_auth_controller.dart';
 import '../../widgets/login_edit_textform_field.dart';

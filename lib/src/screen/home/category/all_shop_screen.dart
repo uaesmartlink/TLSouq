@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pagination_view/pagination_view.dart';
-import 'package:yoori_ecommerce/src/widgets/shop_card.dart';
+import 'package:TLSouq/src/widgets/shop_card.dart';
 import '../../../models/all_shop_model.dart';
 import '../../../utils/app_tags.dart';
 import '../../../utils/app_theme_data.dart';
 import '../../../servers/repository.dart';
-import 'package:yoori_ecommerce/src/utils/responsive.dart';
+import 'package:TLSouq/src/utils/responsive.dart';
 import '../../../widgets/loader/shimmer_shop.dart';
 import '../../../widgets/loader/shimmer_shop_load.dart';
 

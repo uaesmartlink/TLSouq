@@ -2,20 +2,20 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:yoori_ecommerce/src/controllers/profile_content_controller.dart';
-import 'package:yoori_ecommerce/src/servers/repository.dart';
-import 'package:yoori_ecommerce/src/utils/app_tags.dart';
-import 'package:yoori_ecommerce/src/utils/app_theme_data.dart';
+import 'package:TLSouq/src/controllers/profile_content_controller.dart';
+import 'package:TLSouq/src/servers/repository.dart';
+import 'package:TLSouq/src/utils/app_tags.dart';
+import 'package:TLSouq/src/utils/app_theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
-import 'package:yoori_ecommerce/src/utils/images.dart';
-import 'package:yoori_ecommerce/src/widgets/button_widget.dart';
+import 'package:TLSouq/src/utils/images.dart';
+import 'package:TLSouq/src/widgets/button_widget.dart';
 import 'dart:convert';
 import 'dart:io';
 
 import '../../models/profile_data_model.dart';
-import 'package:yoori_ecommerce/src/utils/responsive.dart';
+import 'package:TLSouq/src/utils/responsive.dart';
 import '../../widgets/loader/loader_widget.dart';
 import '../../widgets/login_edit_textform_field.dart';
 
