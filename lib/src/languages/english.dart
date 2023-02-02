@@ -11,7 +11,7 @@ const Map<String, String> enUS = {
   "aboutThisApp": "About This App",
   "settings": "Settings",
   "editProfile": "Edit Profile",
-  "favorites": "Favorite Product",
+  "favorites": "Favorite Products",
   "messages": "Messages",
   "trackOrder": "Track Order",
   "orderHistory": "Order History",

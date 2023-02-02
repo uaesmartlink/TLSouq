@@ -37,7 +37,7 @@ class FavoritesScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          SizedBox(
+                         /* SizedBox(
                             width: 140.w,
                             height: isMobile(context) ? 25.h : 35.h,
                             child: TabBar(
@@ -54,10 +54,10 @@ class FavoritesScreen extends StatelessWidget {
                               ),
                               tabs: [
                                 Tab(text: AppTags.products.tr),
-                                Tab(text: AppTags.store.tr),
+                                // Tab(text: AppTags.store.tr),
                               ],
                             ),
-                          ),
+                          ),*/
                           controller.data != null
                               ? Expanded(
                                   child: TabBarView(

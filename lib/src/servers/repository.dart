@@ -353,27 +353,32 @@ class Repository {
       required String email,
       required String password,
       required String confirmPassword}) async {
-    var headers = {"apiKey": Config.apiKey};
-    var body = {
-      'first_name': firstName,
-      'last_name': lastName,
-      'email': email,
-      'password': password,
-      'password_confirmation': confirmPassword,
-    };
-    var url = Uri.parse("${NetworkService.apiUrl}/register?$langCurrCode");
-    final response = await http.post(url, body: body, headers: headers);
+    try {
+      var headers = {"apiKey": Config.apiKey};
+      var body = {
+        'first_name': firstName,
+        'last_name': lastName,
+        'email': email,
+        'password': password,
+        'password_confirmation': confirmPassword,
 
-    var data = json.decode(response.body);
+      };
+      var url = Uri.parse("${NetworkService.apiUrl}/register?$langCurrCode");
+      final response = await http.post(url, body: body, headers: headers);
 
-    printLog(data);
-    if (response.statusCode == 200) {
-      showShortToast(data['message'], bgColor: Colors.green);
-      return data['success'];
-    }else {
-      showErrorToast(data['message']);
+      var data = json.decode(response.body);
 
-      return data['success'];
+      printLog(data);
+      if (response.statusCode == 200) {
+        showShortToast(data['message'], bgColor: Colors.green);
+        return data['success'];
+      } else {
+        showErrorToast(data['message']);
+        return data['success'];
+      }
+    }catch(e){
+      print(e);
+      return true;
     }
   }
 
@@ -860,9 +865,6 @@ class Repository {
   //Home Container
   Future<HomeDataModel> getHomeScreenData() async {
     String? token = LocalDataHelper().getUserToken();
-    print("AAA");
-    print(token);
-    print("AAA");
 
     var url = "${NetworkService.apiUrl}/home-screen?$langCurrCode&token=$token";
     final response = await _service.fetchJsonData(url);

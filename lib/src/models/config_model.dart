@@ -205,8 +205,10 @@ class AppConfig {
     couponSystem = json['coupon_system'];
     disableOtp = json['disable_otp'];
     disableGuest = json['disable_guest'];
+    // print(disableGuest);
     disableEmail = json['disable_email'];
     defaultCountry = json['default_country'];
+    print(defaultCountry);
   }
 
   Map<String, dynamic> toJson() {
