@@ -382,7 +382,8 @@ class _CartScreenState extends State<CartScreen> {
                               padding: EdgeInsets.all(5.r),
                               child: InkWell(
                                 onTap: () {
-                                  if(LocalDataHelper().getConfigData().data!.appConfig!.disableGuest!){
+                                  //LocalDataHelper().getConfigData().data!.appConfig!.disableGuest!
+                                  if(false){
                                     Get.toNamed(Routes.logIn);
                                   }else{
                                     Navigator.of(context).push(

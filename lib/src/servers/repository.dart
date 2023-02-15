@@ -361,7 +361,9 @@ class Repository {
         'email': email,
         'password': password,
         'password_confirmation': confirmPassword,
-
+        'customer_type': 'customer',
+        'license':'any.pdf',
+        'vat_number':'any.pdf',
       };
       var url = Uri.parse("${NetworkService.apiUrl}/register?$langCurrCode");
       final response = await http.post(url, body: body, headers: headers);
