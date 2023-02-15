@@ -25,7 +25,7 @@ class PreSignUp extends StatelessWidget {
               callback: () => {
                 Get.toNamed(
                   Routes.signUp,
-                  arguments: AppTags.individualType,
+                  arguments: AppTags.customerType,
                 )
               },
             ),

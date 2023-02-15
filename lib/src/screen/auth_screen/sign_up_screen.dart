@@ -10,6 +10,7 @@ import '../../_route/routes.dart';
 import '../../controllers/auth_controller.dart';
 import 'package:TLSouq/src/utils/app_tags.dart';
 import '../../utils/app_theme_data.dart';
+import '../../utils/single_pdf_selector.dart';
 import '../../widgets/button_widget.dart';
 import 'package:TLSouq/src/utils/responsive.dart';
 import '../../widgets/loader/loader_widget.dart';
@@ -25,7 +26,6 @@ class SignupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    print(type);
     return Scaffold(
       body: SizedBox(
         height: size.height,
@@ -154,8 +154,19 @@ class SignupScreen extends StatelessWidget {
               height: 5.h,
             ),
             if (type == AppTags.companyType)
-              Padding(
-                padding: EdgeInsets.only(right: 15,left: 15),
+              SinglePdfSelector(
+                label: "Please Add Your License File",
+                authController: authController,
+                type: 0,
+              ),
+            if (type == AppTags.companyType)
+              SinglePdfSelector(
+                label: "Please Add Your VAT File",
+                authController: authController,
+                type: 1,
+              ),
+            /* Padding(
+                padding: EdgeInsets.only(right: 15, left: 15),
                 child: TextButton(
                   style: TextButton.styleFrom(
                     padding: EdgeInsets.only(left: 25),
@@ -171,8 +182,7 @@ class SignupScreen extends StatelessWidget {
                       allowedExtensions: ['pdf'],
                     );
                     if (result != null) {
-                      /*   File? file = File(result.files.single.path!);
-                    controller.uploadCertificate(file);*/
+                      File? file = File(result.files.single.path!);
                       pathFile = result.files.single.name;
                     } else {
                       return;
@@ -187,11 +197,19 @@ class SignupScreen extends StatelessWidget {
                               : 'Added successfully',
                         ),
                       ),
-                      Icon(Icons.upload),
+                      Container(
+                        padding: EdgeInsets.only(
+                          right: 17,
+                        ),
+                        child: Icon(
+                          color: Colors.grey[700],
+                          Icons.upload,
+                        ),
+                      ),
                     ],
                   ),
                 ),
-              ),
+              ),*/
             SizedBox(
               height: 34.h,
             ),
@@ -206,6 +224,7 @@ class SignupScreen extends StatelessWidget {
                     password: authController.passwordControllers.text,
                     confirmPassword:
                         authController.confirmPasswordController.text,
+                    type: type,
                   );
                 },
                 child: ButtonWidget(buttonTittle: AppTags.signUp.tr),
@@ -237,7 +256,7 @@ class SignupScreen extends StatelessWidget {
             SizedBox(
               height: 20.h,
             ),
-            if (type == AppTags.individualType)
+            if (type == AppTags.customerType)
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 60.r),
                 child: Row(

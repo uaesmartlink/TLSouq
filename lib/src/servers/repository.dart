@@ -62,7 +62,8 @@ class Repository {
   final NetworkService _service = NetworkService();
 
   String langCurrCode =
-      "lang=${LocalDataHelper().getLangCode()}&curr=${LocalDataHelper().getCurrCode()}";
+      "lang=${LocalDataHelper().getLangCode()}&curr=${LocalDataHelper()
+      .getCurrCode()}";
 
   //firebase auth
   Future<UserDataModel?> postFirebaseAuth({
@@ -110,7 +111,9 @@ class Repository {
   }
 
   //User Phone Login
-  Future<bool?> postPhoneLogin({String? phoneNumber,}) async {
+  Future<bool?> postPhoneLogin({
+    String? phoneNumber,
+  }) async {
     var headers = {"apiKey": Config.apiKey};
     String? loginOTPScreen = "loginOTPScreen";
     var body = {
@@ -121,7 +124,8 @@ class Repository {
 
     var data = json.decode(response.body);
     if (data['success']) {
-      Get.off(() => OtpScreen(
+      Get.off(() =>
+          OtpScreen(
             phoneNumber: phoneNumber.toString(),
             screen: loginOTPScreen,
           ));
@@ -132,19 +136,20 @@ class Repository {
     }
   }
 
-
   //send Otp Login
-  Future<bool?> sendOTPLogin(
-      {String? phoneNumber, String? otp}) async {
+  Future<bool?> sendOTPLogin({String? phoneNumber, String? otp}) async {
     var headers = {"apiKey": Config.apiKey};
-    var body =otp != null? {
+    var body = otp != null
+        ? {
       'phone': phoneNumber,
       'otp': otp,
-    }: {
+    }
+        : {
       'phone': phoneNumber,
     };
 
-    var url = Uri.parse("${NetworkService.apiUrl}/verify-login-otp?$langCurrCode");
+    var url =
+    Uri.parse("${NetworkService.apiUrl}/verify-login-otp?$langCurrCode");
     final response = await http.post(url, body: body, headers: headers);
 
     var data = json.decode(response.body);
@@ -173,7 +178,7 @@ class Repository {
     };
     printLog(body);
     var url =
-        Uri.parse("${NetworkService.apiUrl}/register-by-phone?$langCurrCode");
+    Uri.parse("${NetworkService.apiUrl}/register-by-phone?$langCurrCode");
     final response = await http.post(url, body: body, headers: headers);
 
     var data = json.decode(response.body);
@@ -190,25 +195,27 @@ class Repository {
       return false;
     }
   }
+
   //User Login Registration
-  Future<bool?> sendOtpRegistration({
-    String? phoneNumber,
+  Future<bool?> sendOtpRegistration({String? phoneNumber,
     String? otp,
     String? firstName,
     String? lastName}) async {
-
     var headers = {"apiKey": Config.apiKey};
-    var body =otp != null? {
+    var body = otp != null
+        ? {
       'phone': phoneNumber,
       'otp': otp,
       'first_name': firstName,
       'last_name': lastName,
-    }: {
+    }
+        : {
       'phone': phoneNumber,
       'first_name': firstName,
       'last_name': lastName,
     };
-    var url = Uri.parse("${NetworkService.apiUrl}/verify-registration-otp?$langCurrCode");
+    var url = Uri.parse(
+        "${NetworkService.apiUrl}/verify-registration-otp?$langCurrCode");
     final response = await http.post(url, body: body, headers: headers);
 
     var data = json.decode(response.body);
@@ -254,13 +261,16 @@ class Repository {
   // }
 
   //User Login
-  Future<bool> loginWithEmailPassword(String email, String password,String? trxId) async {
+  Future<bool> loginWithEmailPassword(String email, String password,
+      String? trxId) async {
     var headers = {"apiKey": Config.apiKey};
-    var body = trxId!=null? {
+    var body = trxId != null
+        ? {
       'email': email,
       'password': password,
-      'trx_id':trxId,
-    }:{
+      'trx_id': trxId,
+    }
+        : {
       'email': email,
       'password': password,
     };
@@ -291,7 +301,8 @@ class Repository {
     var data = json.decode(response.body);
     if (response.statusCode == 200) {
       ForgetPasswordModel forgetPassword = ForgetPasswordModel.fromJson(data);
-      LocalDataHelper().saveForgotPasswordCode(forgetPassword.data!.code.toString());
+      LocalDataHelper()
+          .saveForgotPasswordCode(forgetPassword.data!.code.toString());
       return forgetPassword;
     } else {
       showErrorToast(data['message']);
@@ -299,12 +310,10 @@ class Repository {
   }
 
   //Confirm OTP
-  Future<bool?> postForgetPasswordConfirmOTP({String? email,String? otp}) async {
+  Future<bool?> postForgetPasswordConfirmOTP(
+      {String? email, String? otp}) async {
     var headers = {"apiKey": Config.apiKey};
-    var body = {
-      'email': email,
-      'otp' :otp
-    };
+    var body = {'email': email, 'otp': otp};
     printLog("$email");
     var url = Uri.parse("${NetworkService.apiUrl}/verify-otp");
     final response = await http.post(url, body: body, headers: headers);
@@ -318,13 +327,11 @@ class Repository {
   }
 
   //User Forget Password Set
-  Future<bool?> postForgetPassword(
-      { String? code,
-        String? email,
-        String? password,
-        String? confirmPassword,
-        String? otp
-      }) async {
+  Future<bool?> postForgetPassword({String? code,
+    String? email,
+    String? password,
+    String? confirmPassword,
+    String? otp}) async {
     var headers = {"apiKey": Config.apiKey};
     var body = {
       'code': code,
@@ -334,7 +341,7 @@ class Repository {
       'password_confirmation': confirmPassword,
     };
     var url =
-        Uri.parse("${NetworkService.apiUrl}/create-password?$langCurrCode");
+    Uri.parse("${NetworkService.apiUrl}/create-password?$langCurrCode");
     final response = await http.post(url, body: body, headers: headers);
     var data = json.decode(response.body);
     if (response.statusCode == 200) {
@@ -347,12 +354,16 @@ class Repository {
   }
 
   //User SignUp
-  Future<bool> signUp(
-      {required String firstName,
-      required String lastName,
-      required String email,
-      required String password,
-      required String confirmPassword}) async {
+  Future<bool> signUp({
+    required String firstName,
+    required String lastName,
+    required String email,
+    required String password,
+    required String confirmPassword,
+    required String type,
+    File? licenseFile,
+    File? vatFile,
+  }) async {
     try {
       var headers = {"apiKey": Config.apiKey};
       var body = {
@@ -361,24 +372,35 @@ class Repository {
         'email': email,
         'password': password,
         'password_confirmation': confirmPassword,
-        'customer_type': 'customer',
-        'license':'any.pdf',
-        'vat_number':'any.pdf',
+        'customer_type': type,
       };
       var url = Uri.parse("${NetworkService.apiUrl}/register?$langCurrCode");
-      final response = await http.post(url, body: body, headers: headers);
-
-      var data = json.decode(response.body);
-
-      printLog(data);
-      if (response.statusCode == 200) {
-        showShortToast(data['message'], bgColor: Colors.green);
-        return data['success'];
-      } else {
-        showErrorToast(data['message']);
-        return data['success'];
+      // final response = await http.post(url, body: body, headers: headers);
+      var request = http.MultipartRequest('POST', url);
+      if (type == AppTags.companyType) {
+        request.files.add(await http.MultipartFile.fromPath(
+            'license', licenseFile!.path));
+        request.files
+            .add(
+          await http.MultipartFile.fromPath('vat_number', vatFile!.path,),);
       }
-    }catch(e){
+      request.fields.addAll(body);
+      var response = await request.send();
+      print("SSS: ${response.statusCode}");
+      // var data = json.decode(response);
+      //  printLog(data);
+      var responseData = await response.stream.toBytes();
+      var responseString = String.fromCharCodes(responseData);
+      print(responseString);
+      if (response.statusCode == 200) {
+        // showShortToast(data['message'], bgColor: Colors.green);
+        return true;
+      } else {
+        // showErrorToast(data['message']);
+        return false;
+      }
+      return false;
+    } catch (e) {
       print(e);
       return true;
     }
@@ -392,7 +414,8 @@ class Repository {
       'trx_id': LocalDataHelper().getCartTrxId()
     };
     var url = Uri.parse(
-        "${NetworkService.apiUrl}/apply-coupon?token=${LocalDataHelper().getUserToken()}&$langCurrCode");
+        "${NetworkService.apiUrl}/apply-coupon?token=${LocalDataHelper()
+            .getUserToken()}&$langCurrCode");
     final response = await http.post(url, body: body, headers: headers);
     var data = json.decode(response.body);
     if (response.statusCode == 200) {
@@ -411,7 +434,8 @@ class Repository {
       'trx_id': LocalDataHelper().getCartTrxId()
     };
     var url = Uri.parse(
-        "${NetworkService.apiUrl}/user/delete-coupon?token=${LocalDataHelper().getUserToken()}&$langCurrCode");
+        "${NetworkService.apiUrl}/user/delete-coupon?token=${LocalDataHelper()
+            .getUserToken()}&$langCurrCode");
     final response = await http.post(url, body: body, headers: headers);
     var data = json.decode(response.body);
 
@@ -431,7 +455,8 @@ class Repository {
       'reply': reply.toString(),
     };
     var url = Uri.parse(
-        "${NetworkService.apiUrl}/user/submit-reply?token=${LocalDataHelper().getUserToken()}&$langCurrCode");
+        "${NetworkService.apiUrl}/user/submit-reply?token=${LocalDataHelper()
+            .getUserToken()}&$langCurrCode");
     final response = await http.post(url, body: body, headers: headers);
 
     var data = json.decode(response.body);
@@ -453,15 +478,17 @@ class Repository {
   }) async {
     try {
       var url = Uri.parse(
-          "${NetworkService.apiUrl}/user/submit-review?token=${LocalDataHelper().getUserToken()}&$langCurrCode");
+          "${NetworkService.apiUrl}/user/submit-review?token=${LocalDataHelper()
+              .getUserToken()}&$langCurrCode");
       var requestBody = http.MultipartRequest('POST', url);
       requestBody.headers['apiKey'] = Config.apiKey;
       requestBody.fields['product_id'] = productId;
       requestBody.fields['title'] = title;
       requestBody.fields['comment'] = comment;
       requestBody.fields['rating'] = rating;
-      if(image!=null){
-        var stream = http.ByteStream(image.openRead())..cast();
+      if (image != null) {
+        var stream = http.ByteStream(image.openRead())
+          ..cast();
         var length = await image.length();
         var multipartFile = http.MultipartFile('image', stream, length,
             filename: basename(image.path));
@@ -484,11 +511,11 @@ class Repository {
   //Profile Update WithOut Image
   Future<UserDataModel?> postUpdateProfileWithOutImage(
       {required String firstName,
-      required String lastName,
-      required String phoneNumber,
-      required String emailAddress,
-      required String? gender,
-      required String dob}) async {
+        required String lastName,
+        required String phoneNumber,
+        required String emailAddress,
+        required String? gender,
+        required String dob}) async {
     var headers = {"apiKey": Config.apiKey};
     var body = {
       'first_name': firstName.toString(),
@@ -501,7 +528,8 @@ class Repository {
 
     printLog(body);
     var url = Uri.parse(
-        "${NetworkService.apiUrl}/user/update-profile?token=${LocalDataHelper().getUserToken()}&$langCurrCode");
+        "${NetworkService.apiUrl}/user/update-profile?token=${LocalDataHelper()
+            .getUserToken()}&$langCurrCode");
     final response = await http.post(url, body: body, headers: headers);
 
     var data = json.decode(response.body);
@@ -518,17 +546,18 @@ class Repository {
   }
 
   //Profile Update With Image
-  Future<UserDataModel?> postUpdateProfile(
-      {required String firstName,
-      required String lastName,
-      required String phoneNumber,
-      required String emailAddress,
-      required File image,
-      required String gender,
-      required String dob}) async {
+  Future<UserDataModel?> postUpdateProfile({required String firstName,
+    required String lastName,
+    required String phoneNumber,
+    required String emailAddress,
+    required File image,
+    required String gender,
+    required String dob}) async {
     try {
       var url = Uri.parse(
-          "${NetworkService.apiUrl}/user/update-profile?token=${LocalDataHelper().getUserToken()}&$langCurrCode");
+          "${NetworkService
+              .apiUrl}/user/update-profile?token=${LocalDataHelper()
+              .getUserToken()}&$langCurrCode");
       var requestBody = http.MultipartRequest('POST', url);
       requestBody.headers['apiKey'] = Config.apiKey;
       requestBody.fields['first_name'] = firstName;
@@ -537,7 +566,8 @@ class Repository {
       requestBody.fields['phone'] = phoneNumber;
       requestBody.fields['gender'] = gender.toString();
       requestBody.fields['date_of_birth'] = dob;
-      var stream = http.ByteStream(image.openRead())..cast();
+      var stream = http.ByteStream(image.openRead())
+        ..cast();
       var length = await image.length();
       var multipartFile = http.MultipartFile('image', stream, length,
           filename: basename(image.path));
@@ -569,7 +599,8 @@ class Repository {
       'confirm_password': confirmPass,
     };
     var url = Uri.parse(
-        "${NetworkService.apiUrl}/user/change-password?token=${LocalDataHelper().getUserToken()}&$langCurrCode");
+        "${NetworkService.apiUrl}/user/change-password?token=${LocalDataHelper()
+            .getUserToken()}&$langCurrCode");
     final response = await http.post(url, body: body, headers: headers);
 
     var data = json.decode(response.body);
@@ -605,12 +636,11 @@ class Repository {
   }
 
   //User AtToCart With TrxId
-  Future addToCartWithTrxId(
-      {String? productId,
-      String? quantity,
-      String? variantsIds,
-      String? variantsNames,
-      String? trxId}) async {
+  Future addToCartWithTrxId({String? productId,
+    String? quantity,
+    String? variantsIds,
+    String? variantsNames,
+    String? trxId}) async {
     var headers = {"apiKey": Config.apiKey};
     var body = {
       'product_id': productId.toString(),
@@ -626,7 +656,8 @@ class Repository {
     printLog("addToCart: trx_id $trxId");
 
     var url = Uri.parse(
-        "${NetworkService.apiUrl}/cart-store?token=${LocalDataHelper().getUserToken()}&$langCurrCode");
+        "${NetworkService.apiUrl}/cart-store?token=${LocalDataHelper()
+            .getUserToken()}&$langCurrCode");
     final response = await http.post(url, body: body, headers: headers);
 
     var data = json.decode(response.body);
@@ -654,7 +685,8 @@ class Repository {
       'variants_name': variantsNames.toString(),
     };
     var url = Uri.parse(
-        "${NetworkService.apiUrl}/cart-store?token=${LocalDataHelper().getUserToken()}&$langCurrCode");
+        "${NetworkService.apiUrl}/cart-store?token=${LocalDataHelper()
+            .getUserToken()}&$langCurrCode");
     final response = await http.post(url, body: body, headers: headers);
 
     var data = json.decode(response.body);
@@ -710,7 +742,9 @@ class Repository {
       'address': address.toString()
     };
     var url = Uri.parse(
-        "${NetworkService.apiUrl}/user/shipping-addresses?token=${LocalDataHelper().getUserToken()}&$langCurrCode");
+        "${NetworkService
+            .apiUrl}/user/shipping-addresses?token=${LocalDataHelper()
+            .getUserToken()}&$langCurrCode");
     final response = await http.post(url, body: bodyData, headers: headers);
     var data = json.decode(response.body);
     if (response.statusCode == 200) {
@@ -744,7 +778,9 @@ class Repository {
       'address': address.toString()
     };
     var url = Uri.parse(
-        "${NetworkService.apiUrl}/user/shipping-addresses/$addressId?token=${LocalDataHelper().getUserToken()}&$langCurrCode");
+        "${NetworkService
+            .apiUrl}/user/shipping-addresses/$addressId?token=${LocalDataHelper()
+            .getUserToken()}&$langCurrCode");
     final response = await http.post(url, body: bodyData, headers: headers);
     var data = json.decode(response.body);
     if (response.statusCode == 200) {
@@ -774,7 +810,9 @@ class Repository {
   Future deleteUserAddress({String? addressId}) async {
     var headers = {"apiKey": Config.apiKey};
     var url = Uri.parse(
-        "${NetworkService.apiUrl}/user/shipping-addresses/$addressId?token=${LocalDataHelper().getUserToken()}&$langCurrCode");
+        "${NetworkService
+            .apiUrl}/user/shipping-addresses/$addressId?token=${LocalDataHelper()
+            .getUserToken()}&$langCurrCode");
     final response = await http.delete(url, headers: headers);
     var data = json.decode(response.body);
     if (response.statusCode == 200) {
@@ -789,7 +827,9 @@ class Repository {
     EditViewModel editViewModel;
     var headers = {"apiKey": Config.apiKey};
     var url = Uri.parse(
-        "${NetworkService.apiUrl}/user/shipping-addresses/$addressId/edit?token=${LocalDataHelper().getUserToken()}&$langCurrCode");
+        "${NetworkService
+            .apiUrl}/user/shipping-addresses/$addressId/edit?token=${LocalDataHelper()
+            .getUserToken()}&$langCurrCode");
     final response = await http.get(url, headers: headers);
     var data = json.decode(response.body.toString());
     if (response.statusCode == 200) {
@@ -807,11 +847,14 @@ class Repository {
     Uri url;
     if (LocalDataHelper().getUserToken() == null) {
       url = Uri.parse(
-          "${NetworkService.apiUrl}/carts?trx_id=${LocalDataHelper().getCartTrxId()}&$langCurrCode");
+          "${NetworkService.apiUrl}/carts?trx_id=${LocalDataHelper()
+              .getCartTrxId()}&$langCurrCode");
     } else {
       printLog("userToken: ${LocalDataHelper().getUserToken()}");
       url = Uri.parse(
-          "${NetworkService.apiUrl}/carts?token=${LocalDataHelper().getUserToken()}&trx_id=${LocalDataHelper().getCartTrxId()}&$langCurrCode");
+          "${NetworkService.apiUrl}/carts?token=${LocalDataHelper()
+              .getUserToken()}&trx_id=${LocalDataHelper()
+              .getCartTrxId()}&$langCurrCode");
     }
     final response = await http.get(url, headers: headers);
     var data = json.decode(response.body.toString());
@@ -824,7 +867,9 @@ class Repository {
     TrackingOrderModel trackingOrderModel;
     var headers = {"apiKey": Config.apiKey};
     var url = Uri.parse(
-        "${NetworkService.apiUrl}/track-order?invoice_no=$trackId&token=${LocalDataHelper().getUserToken()}&$langCurrCode");
+        "${NetworkService
+            .apiUrl}/track-order?invoice_no=$trackId&token=${LocalDataHelper()
+            .getUserToken()}&$langCurrCode");
     final response = await http.get(url, headers: headers);
     var data = json.decode(response.body);
     printLog(data);
@@ -839,15 +884,15 @@ class Repository {
   //Order List
   Future<OrderListModel> getOrderList() async {
     var url =
-        "${NetworkService.apiUrl}/orders?token=${LocalDataHelper().getUserToken()}&$langCurrCode";
+        "${NetworkService.apiUrl}/orders?token=${LocalDataHelper()
+        .getUserToken()}&$langCurrCode";
     final response = await _service.fetchJsonData(url);
     return OrderListModel.fromJson(response);
   }
 
   //Guest Order List
   Future<OrderListModel> getGuestOrderList({String? trxId}) async {
-    var url =
-        "${NetworkService.apiUrl}/order-by-trx?trx_id=$trxId";
+    var url = "${NetworkService.apiUrl}/order-by-trx?trx_id=$trxId";
     final response = await _service.fetchJsonData(url);
     return OrderListModel.fromJson(response);
   }
@@ -883,67 +928,89 @@ class Repository {
   //Flash Sale
   Future<List<flash_sale.Data>> getFlashSaleProduct({required int page}) async {
     var url =
-        "${NetworkService.apiUrl}/get-flash-deals-products?page=$page&$langCurrCode";
+        "${NetworkService
+        .apiUrl}/get-flash-deals-products?page=$page&$langCurrCode";
     final response = await _service.fetchJsonData(url);
-    return flash_sale.FlashSaleModel.fromJson(response).data;
+    return flash_sale.FlashSaleModel
+        .fromJson(response)
+        .data;
   }
 
   //Best Selling Product
   Future<List<best_sell.Data>> getBestSellingProduct(
       {required int page}) async {
     var url =
-        "${NetworkService.apiUrl}/get-best-selling-products?page=$page&$langCurrCode";
+        "${NetworkService
+        .apiUrl}/get-best-selling-products?page=$page&$langCurrCode";
     final response = await _service.fetchJsonData(url);
-    return best_sell.BestSellingProductsModel.fromJson(response).data;
+    return best_sell.BestSellingProductsModel
+        .fromJson(response)
+        .data;
   }
 
   //Offer Ending Product
   Future<List<offer_ending.Data>> getOfferEndingProduct(
       {required int page}) async {
     var url =
-        "${NetworkService.apiUrl}/get-offer-ending-products?page=$page&$langCurrCode";
+        "${NetworkService
+        .apiUrl}/get-offer-ending-products?page=$page&$langCurrCode";
     final response = await _service.fetchJsonData(url);
-    return offer_ending.OfferEndingProductsModel.fromJson(response).data;
+    return offer_ending.OfferEndingProductsModel
+        .fromJson(response)
+        .data;
   }
 
   //All Product
   Future<List<all_product.Data>> getAllProduct({required int page}) async {
     var url = "${NetworkService.apiUrl}/get-products?page=$page&$langCurrCode";
     final response = await _service.fetchJsonData(url);
-    return all_product.AllProductModel.fromJson(response).data;
+    return all_product.AllProductModel
+        .fromJson(response)
+        .data;
   }
 
   //All Product
-  Future<List<video_shopping.Data>> allVideoShopping({required int page}) async {
-    var url = "${NetworkService.apiUrl}/video-shopping?page=$page&$langCurrCode";
+  Future<List<video_shopping.Data>> allVideoShopping(
+      {required int page}) async {
+    var url =
+        "${NetworkService.apiUrl}/video-shopping?page=$page&$langCurrCode";
     final response = await _service.fetchJsonData(url);
-    return video_shopping.VideoShoppingModel.fromJson(response).data!;
+    return video_shopping.VideoShoppingModel
+        .fromJson(response)
+        .data!;
   }
 
   // //Search Product
   Future<SearchProductModel> getSearchProducts(
       {required String searchKey}) async {
     var url =
-        "${NetworkService.apiUrl}/search?key=$searchKey&token=${LocalDataHelper().getUserToken()}&$langCurrCode";
+        "${NetworkService
+        .apiUrl}/search?key=$searchKey&token=${LocalDataHelper()
+        .getUserToken()}&$langCurrCode";
     final response = await _service.fetchJsonData(url);
     return SearchProductModel.fromJson(response);
   }
 
   //View Product
-  Future<List<recent_product.RecentViewedProductModelData>> getRecentViewedProduct(
-      {required int page}) async {
+  Future<List<recent_product.RecentViewedProductModelData>>
+  getRecentViewedProduct({required int page}) async {
     var url =
         "${NetworkService.apiUrl}/viewed-products?page=$page&$langCurrCode";
     final response = await _service.fetchJsonData(url);
-    return recent_product.RecentViewedProductModel.fromJson(response).data;
+    return recent_product.RecentViewedProductModel
+        .fromJson(response)
+        .data;
   }
 
   //Today Deal
   Future<List<today_deal.Data>> getTodayDealProduct({required int page}) async {
     var url =
-        "${NetworkService.apiUrl}/get-today-deals-products?page=$page&$langCurrCode";
+        "${NetworkService
+        .apiUrl}/get-today-deals-products?page=$page&$langCurrCode";
     final response = await _service.fetchJsonData(url);
-    return today_deal.TodayDealModel.fromJson(response).data;
+    return today_deal.TodayDealModel
+        .fromJson(response)
+        .data;
   }
 
   //Favorite Product
@@ -951,7 +1018,8 @@ class Repository {
     String? token = LocalDataHelper().getUserToken();
     if (token == null) return null;
     var url =
-        "${NetworkService.apiUrl}/user/favourite-products?token=$token&$langCurrCode";
+        "${NetworkService
+        .apiUrl}/user/favourite-products?token=$token&$langCurrCode";
     final response = await _service.fetchJsonData(url);
     return FavouriteData.fromJson(response);
   }
@@ -960,9 +1028,12 @@ class Repository {
   Future<List<brand.Data>> getProductByBrand(
       {int? id, required int page}) async {
     var url =
-        "${NetworkService.apiUrl}/products-by-brand/$id?page=$page&$langCurrCode";
+        "${NetworkService
+        .apiUrl}/products-by-brand/$id?page=$page&$langCurrCode";
     final response = await _service.fetchJsonData(url);
-    return brand.ProductByBrandModel.fromJson(response).data;
+    return brand.ProductByBrandModel
+        .fromJson(response)
+        .data;
   }
 
   //Product By Shop
@@ -985,9 +1056,12 @@ class Repository {
   Future<List<product.CategoryProductData>> getProductByCategoryItem(
       {int? id, required int page}) async {
     var url =
-        "${NetworkService.apiUrl}/products-by-category/$id?page=$page&$langCurrCode";
+        "${NetworkService
+        .apiUrl}/products-by-category/$id?page=$page&$langCurrCode";
     final response = await _service.fetchJsonData(url);
-    return product.ProductByCategoryModel.fromJson(response).data;
+    return product.ProductByCategoryModel
+        .fromJson(response)
+        .data;
   }
 
   //Product By Campaign
@@ -1020,7 +1094,9 @@ class Repository {
       if (page == 1) {
         allCategoryModel.data!.clear();
       }
-      allCategoryModel.data!.addAll(AllCategoryModel.fromJson(data).data!);
+      allCategoryModel.data!.addAll(AllCategoryModel
+          .fromJson(data)
+          .data!);
 
       return allCategoryModel;
     } else {
@@ -1040,30 +1116,39 @@ class Repository {
   Future<List<campaign.Data>> getAllCampaign({int page = 1}) async {
     var url = "${NetworkService.apiUrl}/get-campaigns?page=$page&$langCurrCode";
     final response = await _service.fetchJsonData(url);
-    return campaign.AllCampaignModel.fromJson(response).data!;
+    return campaign.AllCampaignModel
+        .fromJson(response)
+        .data!;
   }
 
   //All Brand
   Future<List<Brand>> getAllBrand({int page = 1}) async {
     var url = "${NetworkService.apiUrl}/all-brand?page=$page&$langCurrCode";
     final response = await _service.fetchJsonData(url);
-    return AllBrandModel.fromJson(response).brands;
+    return AllBrandModel
+        .fromJson(response)
+        .brands;
   }
 
   //All News
   Future<List<news.AllNewsDataModel>> getAllNews({int page = 1}) async {
     var url = "${NetworkService.apiUrl}/all-post/?page=$page&$langCurrCode";
     final response = await _service.fetchJsonData(url);
-    return news.AllNewsModel.fromJson(response).data;
+    return news.AllNewsModel
+        .fromJson(response)
+        .data;
   }
 
   //All Shop
   Future<List<all_shop.Data>> getAllShop({int page = 1}) async {
     String? token = LocalDataHelper().getUserToken();
     var url =
-        "${NetworkService.apiUrl}/all-shop?page=$page&$langCurrCode&token=$token";
+        "${NetworkService
+        .apiUrl}/all-shop?page=$page&$langCurrCode&token=$token";
     final response = await _service.fetchJsonData(url);
-    return all_shop.AllShopModel.fromJson(response).data;
+    return all_shop.AllShopModel
+        .fromJson(response)
+        .data;
   }
 
   //All Visit Shop
@@ -1092,18 +1177,24 @@ class Repository {
   Future<List<best_shop.BestShopModelData>> getBestShop({int page = 1}) async {
     String? token = LocalDataHelper().getUserToken();
     var url =
-        "${NetworkService.apiUrl}/best-shop?page=$page&$langCurrCode&token=$token";
+        "${NetworkService
+        .apiUrl}/best-shop?page=$page&$langCurrCode&token=$token";
     final response = await _service.fetchJsonData(url);
-    return best_shop.BestShopModel.fromJson(response).data;
+    return best_shop.BestShopModel
+        .fromJson(response)
+        .data;
   }
 
   //All Top Shop
   Future<List<top_shop.Data>> getTopShop({int page = 1}) async {
     String? token = LocalDataHelper().getUserToken();
     var url =
-        "${NetworkService.apiUrl}/top-shop?page=$page&$langCurrCode&token=$token";
+        "${NetworkService
+        .apiUrl}/top-shop?page=$page&$langCurrCode&token=$token";
     final response = await _service.fetchJsonData(url);
-    return top_shop.TopShopModel.fromJson(response).data;
+    return top_shop.TopShopModel
+        .fromJson(response)
+        .data;
   }
 
   //Product Details
@@ -1111,7 +1202,9 @@ class Repository {
     ProductDetailsModel detailsModel;
     var headers = {"apiKey": Config.apiKey};
     var url = Uri.parse(
-        "${NetworkService.apiUrl}/product-details/$productId?token=${LocalDataHelper().getUserToken()}&$langCurrCode");
+        "${NetworkService
+            .apiUrl}/product-details/$productId?token=${LocalDataHelper()
+            .getUserToken()}&$langCurrCode");
     final response = await http.get(url, headers: headers);
     try {
       var data = json.decode(response.body);
@@ -1123,16 +1216,20 @@ class Repository {
   }
 
   //Video Shopping Details
-  Future<VideoShoppingDetailsModel ?> videoShoppingDetails(String slug) async {
+  Future<VideoShoppingDetailsModel?> videoShoppingDetails(String slug) async {
     printLog("inside-video_shiopping");
     VideoShoppingDetailsModel videoShoppingDetailsModel;
     var headers = {"apiKey": Config.apiKey};
-    var url = Uri.parse("${NetworkService.apiUrl}/video-shops-details/$slug?token=${LocalDataHelper().getUserToken()}&$langCurrCode");
+    var url = Uri.parse(
+        "${NetworkService
+            .apiUrl}/video-shops-details/$slug?token=${LocalDataHelper()
+            .getUserToken()}&$langCurrCode");
     final response = await http.get(url, headers: headers);
     try {
       var data = json.decode(response.body);
       videoShoppingDetailsModel = VideoShoppingDetailsModel.fromJson(data);
-      printLog("Video Type => ${videoShoppingDetailsModel.data!.video!.videoType}");
+      printLog(
+          "Video Type => ${videoShoppingDetailsModel.data!.video!.videoType}");
       return videoShoppingDetailsModel;
     } catch (e) {
       return null;
@@ -1144,7 +1241,9 @@ class Repository {
     ShippingAddressModel shippingAddressModel;
     var headers = {"apiKey": Config.apiKey};
     var url = Uri.parse(
-        "${NetworkService.apiUrl}/user/shipping-addresses?token=${LocalDataHelper().getUserToken()}&$langCurrCode");
+        "${NetworkService
+            .apiUrl}/user/shipping-addresses?token=${LocalDataHelper()
+            .getUserToken()}&$langCurrCode");
     final response = await http.get(url, headers: headers);
 
     try {
@@ -1194,7 +1293,7 @@ class Repository {
     GetCityModel getCitisModel;
     var headers = {"apiKey": Config.apiKey};
     var url =
-        Uri.parse("${NetworkService.apiUrl}/get-cities/$stateId?$langCurrCode");
+    Uri.parse("${NetworkService.apiUrl}/get-cities/$stateId?$langCurrCode");
     final response = await http.get(url, headers: headers);
     try {
       var data = json.decode(response.body);
@@ -1209,7 +1308,9 @@ class Repository {
   Future<bool> addOrRemoveFromFavoriteList(var productId) async {
     var headers = {"apiKey": Config.apiKey};
     var url = Uri.parse(
-        "${NetworkService.apiUrl}/user/favourite/$productId?token=${LocalDataHelper().getUserToken()}&$langCurrCode");
+        "${NetworkService
+            .apiUrl}/user/favourite/$productId?token=${LocalDataHelper()
+            .getUserToken()}&$langCurrCode");
     final response = await http.get(url, headers: headers);
     var data = json.decode(response.body);
     return data["success"];
@@ -1219,7 +1320,9 @@ class Repository {
   Future<bool> followOrUnfollowShopList(var shopId) async {
     var headers = {"apiKey": Config.apiKey};
     var url = Uri.parse(
-        "${NetworkService.apiUrl}/user/followed-shop/$shopId?token=${LocalDataHelper().getUserToken()}&$langCurrCode");
+        "${NetworkService
+            .apiUrl}/user/followed-shop/$shopId?token=${LocalDataHelper()
+            .getUserToken()}&$langCurrCode");
     final response = await http.get(url, headers: headers);
     var data = json.decode(response.body);
     printLog("===${data["success"]}==");
@@ -1233,10 +1336,11 @@ class Repository {
       'review_id': reviewId.toString(),
     };
     var url = Uri.parse(
-        "${NetworkService.apiUrl}/user/like-unlike-review?token=${LocalDataHelper().getUserToken()}&$langCurrCode");
+        "${NetworkService
+            .apiUrl}/user/like-unlike-review?token=${LocalDataHelper()
+            .getUserToken()}&$langCurrCode");
     final response = await http.post(url, body: body, headers: headers);
-    if (response.statusCode == 200) {
-    } else {
+    if (response.statusCode == 200) {} else {
       return null;
     }
   }
@@ -1252,7 +1356,8 @@ class Repository {
   //Coupon list
   Future<CouponAppliedList> getAppliedCouponList() async {
     var url =
-        "${NetworkService.apiUrl}/applied-coupons?trx_id=${LocalDataHelper().getCartTrxId()}";
+        "${NetworkService.apiUrl}/applied-coupons?trx_id=${LocalDataHelper()
+        .getCartTrxId()}";
     final response = await _service.fetchJsonData(url);
     return CouponAppliedList.fromJson(response);
   }
@@ -1262,7 +1367,8 @@ class Repository {
     CouponListModel couponListModel;
     var headers = {"apiKey": Config.apiKey};
     var url = Uri.parse(
-        "${NetworkService.apiUrl}/coupons?token=${LocalDataHelper().getUserToken()}&$langCurrCode");
+        "${NetworkService.apiUrl}/coupons?token=${LocalDataHelper()
+            .getUserToken()}&$langCurrCode");
     final response = await http.get(url, headers: headers);
     var data = json.decode(response.body.toString());
     if (response.statusCode == 200) {
@@ -1277,7 +1383,8 @@ class Repository {
   Future logOut() async {
     var headers = {"apiKey": Config.apiKey};
     var url = Uri.parse(
-        "${NetworkService.apiUrl}/user/logout?token=${LocalDataHelper().getUserToken()}&$langCurrCode");
+        "${NetworkService.apiUrl}/user/logout?token=${LocalDataHelper()
+            .getUserToken()}&$langCurrCode");
     final response = await http.post(url, headers: headers);
     var data = json.decode(response.body.toString());
     if (response.statusCode == 200) {
@@ -1287,6 +1394,7 @@ class Repository {
     }
   }
 
+/*
   //Pdf Downloader(not use)
   getPDF() async {
     var headers = {"apiKey": Config.apiKey};
@@ -1308,6 +1416,7 @@ class Repository {
       throw Exception(e);
     }
   }
+*/
 
   // get all notifications
   Future<AllNotifications?> getAllNotifications(int page) async {
@@ -1317,11 +1426,13 @@ class Repository {
     } else {
       try {
         String url =
-            "${NetworkService.apiUrl}/user/notifications?page=$page&token=$token&$langCurrCode";
+            "${NetworkService
+            .apiUrl}/user/notifications?page=$page&token=$token&$langCurrCode";
         return _service.fetchJsonData(url).then((response) {
           if (response != null) return AllNotifications.fromJson(response);
         }).catchError(
-            (err) => printLog('All notification data fetching error: $err'));
+                (err) =>
+                printLog('All notification data fetching error: $err'));
       } catch (e) {
         throw Exception("Data not found");
       }
@@ -1336,12 +1447,13 @@ class Repository {
     } else {
       try {
         String url =
-            "${NetworkService.apiUrl}/user/my-wallet?token=$token&$langCurrCode";
+            "${NetworkService
+            .apiUrl}/user/my-wallet?token=$token&$langCurrCode";
         return _service.fetchJsonData(url).then((response) {
           printLog("---------getMyWallet: $response");
           if (response != null) return MyWalletModel.fromJson(response);
         }).catchError(
-            (err) => printLog('All my wallet data fetching error: $err'));
+                (err) => printLog('All my wallet data fetching error: $err'));
       } catch (e) {
         throw Exception("Data not found");
       }
@@ -1356,12 +1468,13 @@ class Repository {
     } else {
       try {
         String url =
-            "${NetworkService.apiUrl}/user/my-reward?token=$token&$langCurrCode";
+            "${NetworkService
+            .apiUrl}/user/my-reward?token=$token&$langCurrCode";
         return _service.fetchJsonData(url).then((response) {
           printLog("---------getMyReward: $response");
           if (response != null) return MyRewardModel.fromJson(response);
         }).catchError(
-            (err) => printLog('All my reward data fetching error: $err'));
+                (err) => printLog('All my reward data fetching error: $err'));
       } catch (e) {
         throw Exception("Data not found");
       }
@@ -1376,7 +1489,8 @@ class Repository {
       'converted_reward': reward,
     };
     var url = Uri.parse(
-        "${NetworkService.apiUrl}/user/convert-reward?token=$token&$langCurrCode");
+        "${NetworkService
+            .apiUrl}/user/convert-reward?token=$token&$langCurrCode");
     final response = await http.post(url, body: body, headers: headers);
 
     var data = json.decode(response.body);
@@ -1398,12 +1512,13 @@ class Repository {
     } else {
       try {
         String url =
-            "${NetworkService.apiUrl}/user/digital-product-order-list?token=$token&$langCurrCode";
+            "${NetworkService
+            .apiUrl}/user/digital-product-order-list?token=$token&$langCurrCode";
         return _service.fetchJsonData(url).then((response) {
           printLog("---------getMyDownload: $response");
           if (response != null) return MyDownloadModel.fromJson(response);
         }).catchError(
-            (err) => printLog('All my download data fetching error: $err'));
+                (err) => printLog('All my download data fetching error: $err'));
       } catch (e) {
         throw Exception("Data not found");
       }
@@ -1417,14 +1532,17 @@ class Repository {
     } else {
       try {
         String url =
-            "${NetworkService.apiUrl}/user/delete-notification/$id?token=${LocalDataHelper().getUserToken()}&$langCurrCode";
+            "${NetworkService
+            .apiUrl}/user/delete-notification/$id?token=${LocalDataHelper()
+            .getUserToken()}&$langCurrCode";
         return _service.fetchJsonData(url).then((response) {
           if (response != null) {
             if (response["success"]) return true;
           }
           return false;
         }).catchError(
-            (err) => printLog('All notification data fetching error: $err'));
+                (err) =>
+                printLog('All notification data fetching error: $err'));
       } catch (e) {
         throw Exception("Data not found");
       }
@@ -1438,14 +1556,17 @@ class Repository {
     } else {
       try {
         String url =
-            "${NetworkService.apiUrl}/user/delete-all-notifications?token=${LocalDataHelper().getUserToken()}&$langCurrCode";
+            "${NetworkService
+            .apiUrl}/user/delete-all-notifications?token=${LocalDataHelper()
+            .getUserToken()}&$langCurrCode";
         return _service.fetchJsonData(url).then((response) {
           if (response != null) {
             if (response["success"]) return true;
           }
           return false;
         }).catchError(
-            (err) => printLog('All notification data fetching error: $err'));
+                (err) =>
+                printLog('All notification data fetching error: $err'));
       } catch (e) {
         throw Exception("Data not found");
       }
@@ -1460,9 +1581,11 @@ class Repository {
     } else {
       try {
         String url =
-            "${NetworkService.apiUrl}/user/delete-account?token=${LocalDataHelper().getUserToken()}&$langCurrCode";
+            "${NetworkService
+            .apiUrl}/user/delete-account?token=${LocalDataHelper()
+            .getUserToken()}&$langCurrCode";
         return _service.fetchJsonData(url).then(
-          (response) {
+              (response) {
             if (response != null) {
               showShortToast(response["message"]);
               if (response["success"]) return true;

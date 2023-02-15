@@ -32,7 +32,7 @@ class AppTags {
   static const String signIn = "signIn";
   static const String signUp = "signUp";
   static const String companyType = "company";
-  static const String individualType = "individual";
+  static const String customerType = "customer";
   //Login page
   static const String welcome = "welcome";
   static const String loginToContinue = "loginToContinue";

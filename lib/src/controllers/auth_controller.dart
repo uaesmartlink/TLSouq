@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -23,18 +25,21 @@ class AuthController extends GetxController {
   final box = GetStorage();
 
   final _isLoggingIn = false.obs;
+
   bool get isLoggingIn => _isLoggingIn.value;
 
   //login screen
   TextEditingController? emailController;
   TextEditingController? passwordController;
   var isVisible = true.obs;
-  var isValue = LocalDataHelper().getRememberPass() != null ? true.obs : false.obs;
+  var isValue =
+      LocalDataHelper().getRememberPass() != null ? true.obs : false.obs;
   bool isLoading = false;
 
-  isValueUpdate(value){
+  isValueUpdate(value) {
     isValue.value = value!;
   }
+
   isVisibleUpdate() {
     isVisible.value = !isVisible.value;
   }
@@ -47,11 +52,14 @@ class AuthController extends GetxController {
   var confirmPasswordController = TextEditingController();
   var passwordVisible = true.obs;
   var confirmPasswordVisible = true.obs;
+  late File licenseFile;
+  late File vatFile;
 
-  isVisiblePasswordUpdate(){
+  isVisiblePasswordUpdate() {
     passwordVisible.value = !passwordVisible.value;
   }
-  isVisibleConfirmPasswordUpdate(){
+
+  isVisibleConfirmPasswordUpdate() {
     confirmPasswordVisible.value = !confirmPasswordVisible.value;
   }
 
@@ -74,7 +82,7 @@ class AuthController extends GetxController {
 
 //General LogIn
   void loginWithEmailPassword(
-      {required String email, required String password,String? trxId}) async {
+      {required String email, required String password, String? trxId}) async {
     _isLoggingIn(true);
     await Repository().loginWithEmailPassword(email, password, trxId).then(
       (value) {
@@ -85,33 +93,55 @@ class AuthController extends GetxController {
   }
 
   //General SignUp
-  Future signUp(
-      {required String firstName,
-        required String lastName,
-        required String email,
-        required String password,
-        required String confirmPassword}) async {
+  Future signUp({
+    required String firstName,
+    required String lastName,
+    required String email,
+    required String password,
+    required String confirmPassword,
+    required String type,
+  }) async {
     _isLoggingIn(true);
-    await Repository()
-        .signUp(
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      password: password,
-      confirmPassword: confirmPassword,
-    ).then((value) {
+    if (type == AppTags.companyType) {
+      await Repository()
+          .signUp(
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password,
+        confirmPassword: confirmPassword,
+        type: type,
+        licenseFile: licenseFile,
+        vatFile: vatFile,
+      )
+          .then((value) {
+        _isLoggingIn(false);
+      });
       _isLoggingIn(false);
-    });
-    _isLoggingIn(false);
+    }
+    else{
+      await Repository()
+          .signUp(
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password,
+        confirmPassword: confirmPassword,
+        type: type,
+      )
+          .then((value) {
+        _isLoggingIn(false);
+      });
+      _isLoggingIn(false);
+    }
   }
-
 
   //Google SignIn
   _setInitialScreenGoogle(GoogleSignInAccount? googleSignInAccount) {
     if (googleSignInAccount != null) {
       Get.offAll(() => DashboardScreen());
     } else {
-      Get.offAll(() =>  LoginScreen());
+      Get.offAll(() => LoginScreen());
     }
   }
 
@@ -130,13 +160,12 @@ class AuthController extends GetxController {
         final User? user = (await _auth.signInWithCredential(credential)).user;
         if (user != null) {
           UserDataModel? userDataModel = await Repository().postFirebaseAuth(
-            name: user.displayName.toString(),
-            email: user.providerData[0].email ?? "",
-            phone: user.phoneNumber??"",
-            image: user.photoURL??"",
-            providerId: "google.com",
-            uid: user.uid
-          );
+              name: user.displayName.toString(),
+              email: user.providerData[0].email ?? "",
+              phone: user.phoneNumber ?? "",
+              image: user.photoURL ?? "",
+              providerId: "google.com",
+              uid: user.uid);
           if (userDataModel != null) {
             printLog("---------google auth: success");
             Get.offAll(() => DashboardScreen());
@@ -179,13 +208,13 @@ class AuthController extends GetxController {
     if (user != null) {
       await Repository()
           .postFirebaseAuth(
-        name: user.displayName ?? "",
-        email: user.providerData[0].email ?? "",
-        phone: user.phoneNumber??"",
-        image: user.photoURL??"",
-        providerId: "facebook.com",
-        uid: user.uid
-      ).then((value) {
+              name: user.displayName ?? "",
+              email: user.providerData[0].email ?? "",
+              phone: user.phoneNumber ?? "",
+              image: user.photoURL ?? "",
+              providerId: "facebook.com",
+              uid: user.uid)
+          .then((value) {
         _isLoggingIn(false);
         if (value != null) {
           //go to home screen
@@ -209,6 +238,7 @@ class AuthController extends GetxController {
       );
     }
   }
+
   Future<UserCredential> _getFBCredential() async {
     // Trigger the sign-in flow
     final LoginResult loginResult = await FacebookAuth.instance.login();
@@ -220,19 +250,19 @@ class AuthController extends GetxController {
     // Once signed in, return the UserCredential
     return _auth.signInWithCredential(facebookAuthCredential);
   }
+
   Future<User?> _createFBLoginFlow() async {
     UserCredential credential = await _getFBCredential();
     User? user = credential.user;
     return user;
   }
 
-
   //apple Login
   //final FirebaseAuth _auth = FirebaseAuth.instance;
-  emailTrim(String email){
+  emailTrim(String email) {
     String delimiter = '@';
     int lastIndex = email.indexOf(delimiter);
-    String trimmed = email.substring(0,lastIndex);
+    String trimmed = email.substring(0, lastIndex);
     printLog(trimmed);
     return trimmed;
   }
@@ -250,17 +280,17 @@ class AuthController extends GetxController {
         accessToken: appleCredential.authorizationCode);
     final User? user = (await _auth.signInWithCredential(credential)).user;
 
-    if(user!.email!=null){
+    if (user!.email != null) {
       await Repository()
           .postFirebaseAuth(
-          name: user.displayName ??emailTrim(user.email!),
-          email: user.email.toString(),
-          phone: user.providerData[0].phoneNumber ?? "",
-          image: user.photoURL??"",
-          providerId: "apple.com",
-          uid: user.uid
-      ).then((value) => Get.offAll(() => DashboardScreen()));
-    }else{
+              name: user.displayName ?? emailTrim(user.email!),
+              email: user.email.toString(),
+              phone: user.providerData[0].phoneNumber ?? "",
+              image: user.photoURL ?? "",
+              providerId: "apple.com",
+              uid: user.uid)
+          .then((value) => Get.offAll(() => DashboardScreen()));
+    } else {
       Get.snackbar(
         AppTags.login.tr,
         AppTags.doNotMatchCredential.tr,
@@ -288,8 +318,12 @@ class AuthController extends GetxController {
     return user;
   }
 
-  int addonIndex({String? addonIndex}){
-    int index = LocalDataHelper().getConfigData().data!.addons!.indexWhere((element) => element.addonIdentifier==addonIndex);
+  int addonIndex({String? addonIndex}) {
+    int index = LocalDataHelper()
+        .getConfigData()
+        .data!
+        .addons!
+        .indexWhere((element) => element.addonIdentifier == addonIndex);
     printLog("-------------$index");
     return index;
   }
@@ -304,7 +338,7 @@ class AuthController extends GetxController {
         LocalDataHelper().box.remove("userToken");
         LocalDataHelper().box.remove("trxId");
         LocalDataHelper().box.remove('userModel');
-        Get.offAll(() =>  DashboardScreen());
+        Get.offAll(() => DashboardScreen());
       });
     } catch (e) {
       printLog(e.toString());
