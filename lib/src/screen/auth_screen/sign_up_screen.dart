@@ -10,7 +10,7 @@ import '../../_route/routes.dart';
 import '../../controllers/auth_controller.dart';
 import 'package:TLSouq/src/utils/app_tags.dart';
 import '../../utils/app_theme_data.dart';
-import '../../utils/single_pdf_selector.dart';
+import '../../widgets/single_pdf_selector.dart';
 import '../../widgets/button_widget.dart';
 import 'package:TLSouq/src/utils/responsive.dart';
 import '../../widgets/loader/loader_widget.dart';
