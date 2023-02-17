@@ -47,8 +47,8 @@ class DashboardScreen extends StatelessWidget {
                 activeIcon: _bottomNavIconBuilder(
                   isSelected: homeController.tabIndex.value == 0,
                   logo: "home",
-                  height: 25.w,
-                  width: 25.h,
+                  height: 21.w,
+                  width: 21.h,
                 ),
                 icon: _bottomNavIconBuilder(
                   isSelected: homeController.tabIndex.value == 0,
