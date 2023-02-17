@@ -20,7 +20,7 @@ class PreSignUp extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CustomCard(
-              title: "Individual",
+              title: "Individual".tr,
               icon: "individual",
               callback: () => {
                 Get.toNamed(
@@ -30,7 +30,7 @@ class PreSignUp extends StatelessWidget {
               },
             ),
             CustomCard(
-              title: "Company",
+              title: "Company".tr,
               icon: "company",
               callback: () => {
                 Get.toNamed(

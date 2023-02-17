@@ -17,7 +17,7 @@ class Config {
 
   static var supportedLanguageList = [
     const Locale("en", "US"),
-    const Locale("bn", "BD"),
+    // const Locale("bn", "BD"),
     const Locale("ar", "SA"),
   ];
   static const String initialCountrySelection = "US";

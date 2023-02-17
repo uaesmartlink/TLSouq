@@ -13,6 +13,8 @@ const Map<String, String> arSA = {
   "editProfile": "تعديل الملف الشخصي",
   "favorites": "المفضلة",
   "messages": "رسائل",
+  "Individual" : "شخصي",
+  "Company" : "شركة",
   "trackOrder": "ترتيب المسار",
   "orderHistory": "تاريخ الطلب",
   "changePassword": "تغيير كلمة السر",

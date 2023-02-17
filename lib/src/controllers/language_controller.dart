@@ -14,11 +14,11 @@ class LanguageController extends GetxController {
       'countryCode': 'US',
       'description': 'English'
     },
-    'bn_BD': {
+   /* 'bn_BD': {
       'languageCode': 'bn',
       'countryCode': 'BD',
       'description': 'বাংলা'
-    },
+    },*/
     'ar_SA': {
       'languageCode': 'ar',
       'countryCode': 'SA',
