@@ -16,7 +16,7 @@ class LanguageController extends GetxController {
     },
    /* 'bn_BD': {
       'languageCode': 'bn',
-      'countryCode': 'BD',
+      'countryCode': 'AE',
       'description': 'বাংলা'
     },*/
     'ar_SA': {

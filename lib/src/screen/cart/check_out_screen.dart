@@ -60,7 +60,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
     });
   }
 
-  String? phoneCode = "880";
+  String? phoneCode = "971";
   dynamic selectPickUpAddress;
   dynamic _selectedCountry; // Option 2
   dynamic _selectedState; // Option 2// Option 2
@@ -1334,7 +1334,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                 child: CountryPickerDropdown(
                                   isFirstDefaultIfInitialValueNotProvided:
                                       false,
-                                  initialValue: 'BD',
+                                  initialValue: 'AE',
                                   isExpanded: true,
                                   itemBuilder: (Country country) => Row(
                                     children: <Widget>[
@@ -1875,7 +1875,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                 child: CountryPickerDropdown(
                                   isFirstDefaultIfInitialValueNotProvided:
                                       false,
-                                  initialValue: 'BD',
+                                  initialValue: 'AE',
                                   isExpanded: true,
                                   itemBuilder: _buildDropdownItem,
                                   onValuePicked: (Country country) {

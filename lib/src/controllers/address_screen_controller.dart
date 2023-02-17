@@ -24,7 +24,7 @@ class AddressScreenController extends GetxController{
       billingIndex.value = index!;
   }
 
-  String? phoneCode = "880";
+  String? phoneCode = "971";
   dynamic selectPickUpAddress;
   dynamic selectedCountry; // Option 2
   dynamic selectedState; // Option 2// Option 2
