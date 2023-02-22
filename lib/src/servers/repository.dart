@@ -124,9 +124,9 @@ class Repository {
     var data = json.decode(response.body);
     if (data['success']) {
       Get.off(() => OtpScreen(
-            phoneNumber: phoneNumber.toString(),
-            screen: loginOTPScreen,
-          ));
+        phoneNumber: phoneNumber.toString(),
+        screen: loginOTPScreen,
+      ));
       return data['success'];
     } else {
       showErrorToast(data['message']);
@@ -139,15 +139,15 @@ class Repository {
     var headers = {"apiKey": Config.apiKey};
     var body = otp != null
         ? {
-            'phone': phoneNumber,
-            'otp': otp,
-          }
+      'phone': phoneNumber,
+      'otp': otp,
+    }
         : {
-            'phone': phoneNumber,
-          };
+      'phone': phoneNumber,
+    };
 
     var url =
-        Uri.parse("${NetworkService.apiUrl}/verify-login-otp?$langCurrCode");
+    Uri.parse("${NetworkService.apiUrl}/verify-login-otp?$langCurrCode");
     final response = await http.post(url, body: body, headers: headers);
 
     var data = json.decode(response.body);
@@ -176,7 +176,7 @@ class Repository {
     };
     printLog(body);
     var url =
-        Uri.parse("${NetworkService.apiUrl}/register-by-phone?$langCurrCode");
+    Uri.parse("${NetworkService.apiUrl}/register-by-phone?$langCurrCode");
     final response = await http.post(url, body: body, headers: headers);
 
     var data = json.decode(response.body);
@@ -197,22 +197,22 @@ class Repository {
   //User Login Registration
   Future<bool?> sendOtpRegistration(
       {String? phoneNumber,
-      String? otp,
-      String? firstName,
-      String? lastName}) async {
+        String? otp,
+        String? firstName,
+        String? lastName}) async {
     var headers = {"apiKey": Config.apiKey};
     var body = otp != null
         ? {
-            'phone': phoneNumber,
-            'otp': otp,
-            'first_name': firstName,
-            'last_name': lastName,
-          }
+      'phone': phoneNumber,
+      'otp': otp,
+      'first_name': firstName,
+      'last_name': lastName,
+    }
         : {
-            'phone': phoneNumber,
-            'first_name': firstName,
-            'last_name': lastName,
-          };
+      'phone': phoneNumber,
+      'first_name': firstName,
+      'last_name': lastName,
+    };
     var url = Uri.parse(
         "${NetworkService.apiUrl}/verify-registration-otp?$langCurrCode");
     final response = await http.post(url, body: body, headers: headers);
@@ -265,14 +265,14 @@ class Repository {
     var headers = {"apiKey": Config.apiKey};
     var body = trxId != null
         ? {
-            'email': email,
-            'password': password,
-            'trx_id': trxId,
-          }
+      'email': email,
+      'password': password,
+      'trx_id': trxId,
+    }
         : {
-            'email': email,
-            'password': password,
-          };
+      'email': email,
+      'password': password,
+    };
     var url = Uri.parse("${NetworkService.apiUrl}/login?$langCurrCode");
     final response = await http.post(url, body: body, headers: headers);
 
@@ -328,10 +328,10 @@ class Repository {
   //User Forget Password Set
   Future<bool?> postForgetPassword(
       {String? code,
-      String? email,
-      String? password,
-      String? confirmPassword,
-      String? otp}) async {
+        String? email,
+        String? password,
+        String? confirmPassword,
+        String? otp}) async {
     var headers = {"apiKey": Config.apiKey};
     var body = {
       'code': code,
@@ -341,7 +341,7 @@ class Repository {
       'password_confirmation': confirmPassword,
     };
     var url =
-        Uri.parse("${NetworkService.apiUrl}/create-password?$langCurrCode");
+    Uri.parse("${NetworkService.apiUrl}/create-password?$langCurrCode");
     final response = await http.post(url, body: body, headers: headers);
     var data = json.decode(response.body);
     if (response.statusCode == 200) {
@@ -514,11 +514,11 @@ class Repository {
   //Profile Update WithOut Image
   Future<UserDataModel?> postUpdateProfileWithOutImage(
       {required String firstName,
-      required String lastName,
-      required String phoneNumber,
-      required String emailAddress,
-      required String? gender,
-      required String dob}) async {
+        required String lastName,
+        required String phoneNumber,
+        required String emailAddress,
+        required String? gender,
+        required String dob}) async {
     var headers = {"apiKey": Config.apiKey};
     var body = {
       'first_name': firstName.toString(),
@@ -550,12 +550,12 @@ class Repository {
   //Profile Update With Image
   Future<UserDataModel?> postUpdateProfile(
       {required String firstName,
-      required String lastName,
-      required String phoneNumber,
-      required String emailAddress,
-      required File image,
-      required String gender,
-      required String dob}) async {
+        required String lastName,
+        required String phoneNumber,
+        required String emailAddress,
+        required File image,
+        required String gender,
+        required String dob}) async {
     try {
       var url = Uri.parse(
           "${NetworkService.apiUrl}/user/update-profile?token=${LocalDataHelper().getUserToken()}&$langCurrCode");
@@ -637,10 +637,10 @@ class Repository {
   //User AtToCart With TrxId
   Future addToCartWithTrxId(
       {String? productId,
-      String? quantity,
-      String? variantsIds,
-      String? variantsNames,
-      String? trxId}) async {
+        String? quantity,
+        String? variantsIds,
+        String? variantsNames,
+        String? trxId}) async {
     var headers = {"apiKey": Config.apiKey};
     var body = {
       'product_id': productId.toString(),
@@ -970,7 +970,7 @@ class Repository {
 
   //View Product
   Future<List<recent_product.RecentViewedProductModelData>>
-      getRecentViewedProduct({required int page}) async {
+  getRecentViewedProduct({required int page}) async {
     var url =
         "${NetworkService.apiUrl}/viewed-products?page=$page&$langCurrCode";
     final response = await _service.fetchJsonData(url);
@@ -1235,7 +1235,7 @@ class Repository {
     GetCityModel getCitisModel;
     var headers = {"apiKey": Config.apiKey};
     var url =
-        Uri.parse("${NetworkService.apiUrl}/get-cities/$stateId?$langCurrCode");
+    Uri.parse("${NetworkService.apiUrl}/get-cities/$stateId?$langCurrCode");
     final response = await http.get(url, headers: headers);
     try {
       var data = json.decode(response.body);
@@ -1364,7 +1364,7 @@ class Repository {
         return _service.fetchJsonData(url).then((response) {
           if (response != null) return AllNotifications.fromJson(response);
         }).catchError(
-            (err) => printLog('All notification data fetching error: $err'));
+                (err) => printLog('All notification data fetching error: $err'));
       } catch (e) {
         throw Exception("Data not found");
       }
@@ -1384,7 +1384,7 @@ class Repository {
           printLog("---------getMyWallet: $response");
           if (response != null) return MyWalletModel.fromJson(response);
         }).catchError(
-            (err) => printLog('All my wallet data fetching error: $err'));
+                (err) => printLog('All my wallet data fetching error: $err'));
       } catch (e) {
         throw Exception("Data not found");
       }
@@ -1404,7 +1404,7 @@ class Repository {
           printLog("---------getMyReward: $response");
           if (response != null) return MyRewardModel.fromJson(response);
         }).catchError(
-            (err) => printLog('All my reward data fetching error: $err'));
+                (err) => printLog('All my reward data fetching error: $err'));
       } catch (e) {
         throw Exception("Data not found");
       }
@@ -1446,7 +1446,7 @@ class Repository {
           printLog("---------getMyDownload: $response");
           if (response != null) return MyDownloadModel.fromJson(response);
         }).catchError(
-            (err) => printLog('All my download data fetching error: $err'));
+                (err) => printLog('All my download data fetching error: $err'));
       } catch (e) {
         throw Exception("Data not found");
       }
@@ -1467,7 +1467,7 @@ class Repository {
           }
           return false;
         }).catchError(
-            (err) => printLog('All notification data fetching error: $err'));
+                (err) => printLog('All notification data fetching error: $err'));
       } catch (e) {
         throw Exception("Data not found");
       }
@@ -1488,7 +1488,7 @@ class Repository {
           }
           return false;
         }).catchError(
-            (err) => printLog('All notification data fetching error: $err'));
+                (err) => printLog('All notification data fetching error: $err'));
       } catch (e) {
         throw Exception("Data not found");
       }
@@ -1505,7 +1505,7 @@ class Repository {
         String url =
             "${NetworkService.apiUrl}/user/delete-account?token=${LocalDataHelper().getUserToken()}&$langCurrCode";
         return _service.fetchJsonData(url).then(
-          (response) {
+              (response) {
             if (response != null) {
               showShortToast(response["message"]);
               if (response["success"]) return true;
