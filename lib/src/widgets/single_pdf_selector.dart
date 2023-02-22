@@ -10,8 +10,7 @@ class SinglePdfSelector extends StatefulWidget {
   final int type;
 
   const SinglePdfSelector(
-      {required this.label, required this.authController, required this.type})
-      : super();
+      {super.key, required this.label, required this.authController, required this.type});
 
   @override
   _SinglePdfSelectorState createState() => _SinglePdfSelectorState();

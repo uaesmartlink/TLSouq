@@ -54,7 +54,6 @@ class PaymentScreen extends GetView<PaymentController> {
                           url: token.isNotEmpty? Uri.parse("${NetworkService.apiUrl}/payment?trx_id=$trxId&token=$token&$langCurrCode"
                           ):Uri.parse("${NetworkService.apiUrl}/payment?trx_id=$trxId&$langCurrCode"
                           ),
-
                         ),
                         initialUserScripts:
                             UnmodifiableListView<UserScript>([]),

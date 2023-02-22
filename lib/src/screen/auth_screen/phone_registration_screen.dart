@@ -24,7 +24,7 @@ class PhoneRegistrationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String phoneCode = "880";
+    String phoneCode = "971";
     return Scaffold(
       body: SizedBox(
         width: 375.w,
@@ -91,7 +91,7 @@ class PhoneRegistrationScreen extends StatelessWidget {
                           isFirstDefaultIfInitialValueNotProvided: false,
                           initialValue:
                           LocalDataHelper().getConfigData().data!.appConfig!.defaultCountry!.isNotEmpty?
-                          LocalDataHelper().getConfigData().data!.appConfig!.defaultCountry!:'BD',
+                          LocalDataHelper().getConfigData().data!.appConfig!.defaultCountry!:'AE',
                           isExpanded: true,
                           itemBuilder: (Country country) => Row(
                             children: <Widget>[
