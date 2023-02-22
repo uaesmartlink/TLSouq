@@ -115,11 +115,15 @@ class AuthController extends GetxController {
         vatFile: vatFile,
       )
           .then((value) {
+        if (value == true) {
+          Get.offAll(
+            LoginScreen(),
+          );
+        }
         _isLoggingIn(false);
       });
       _isLoggingIn(false);
-    }
-    else{
+    } else {
       await Repository()
           .signUp(
         firstName: firstName,
@@ -130,6 +134,11 @@ class AuthController extends GetxController {
         type: type,
       )
           .then((value) {
+        if (value == true) {
+          Get.offAll(
+            LoginScreen(),
+          );
+        }
         _isLoggingIn(false);
       });
       _isLoggingIn(false);
