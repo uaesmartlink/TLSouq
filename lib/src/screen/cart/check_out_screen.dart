@@ -19,6 +19,7 @@ import '../../servers/repository.dart';
 import 'package:TLSouq/src/utils/app_tags.dart';
 import '../../data/local_data_helper.dart';
 import '../../utils/app_theme_data.dart';
+import '../../utils/constants.dart';
 import '../../widgets/button_widget.dart';
 import '../../../../config.dart';
 import 'package:TLSouq/src/utils/responsive.dart';
@@ -580,6 +581,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                 onTap: () async {
                                   if (shippingAddressModel
                                           .data!.addresses!.isNotEmpty && isSelectPickup ==false) {
+                                    print("AA");
                                     await postConfirmOrder().then(
                                       (value) => Get.toNamed(
                                         Routes.paymentScreen,
@@ -592,6 +594,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                       ),
                                     );
                                   } else if(isSelectPickup && selectPickUpAddress!=null) {
+                                    print("BB");
                                   await postConfirmOrder().then((value) => Get.toNamed(
                                     Routes.paymentScreen,
                                     parameters: {
@@ -1163,13 +1166,15 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
       url = Uri.parse(
           "${NetworkService.apiUrl}/confirm-order?token=${LocalDataHelper().getUserToken()}");
     }
+    print("bodyData: $bodyData"); 
     final response = await http.post(
       url,
       body: bodyData,
       headers: headers,
     );
+    printLog("response.body: ${response.body}");
     if (response.statusCode == 200) {
-      //showShortToast(data["message"].toString());
+      // showShortToast(data["message"].toString());
     } else {
       showShortToast("No response");
     }

@@ -152,7 +152,7 @@ const Map<String, String> arSA = {
   "termsCondition": "شروط الشرط",
   "apply": "يتقدم",
   "productDeleted": "المنتج محذوف من عربة التسوق الخاصة بك.",
-  "proceedToPayment": "براشر هي الدفع",
+  "proceedToPayment": "الانتقال للدفع",
   "send": "إرسال",
   "verify": "يؤكد",
   "verifyNumber": "تحقق من الرقم",
