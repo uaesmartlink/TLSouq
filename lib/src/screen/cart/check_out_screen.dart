@@ -25,6 +25,8 @@ import '../../../../config.dart';
 import 'package:TLSouq/src/utils/responsive.dart';
 import '../../utils/validators.dart';
 import '../../widgets/loader/loader_widget.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
 
 
 class CheckOutScreen extends StatefulWidget {
@@ -1166,18 +1168,26 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
       url = Uri.parse(
           "${NetworkService.apiUrl}/confirm-order?token=${LocalDataHelper().getUserToken()}");
     }
-    print("bodyData: $bodyData"); 
+    _write("bodyData: $bodyData");
     final response = await http.post(
       url,
       body: bodyData,
       headers: headers,
     );
-    printLog("response.body: ${response.body}");
+    print("response.body: ${response.body}");
     if (response.statusCode == 200) {
+      print("TESt");
       // showShortToast(data["message"].toString());
     } else {
       showShortToast("No response");
     }
+  }
+
+  _write(String text) async {
+    final Directory directory = await getApplicationDocumentsDirectory();
+    final File file = File('${directory.path}/my_file.txt');
+    print(file.path);
+    await file.writeAsString(text);
   }
 
   //Create Address
