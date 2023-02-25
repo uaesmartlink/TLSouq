@@ -1,50 +1,41 @@
 {
   "project_info": {
-    "project_number": "858468987379",
-    "project_id": "TLSouq-ecommerce",
-    "storage_bucket": "TLSouq-ecommerce.appspot.com"
+    "project_number": "581531780015",
+    "project_id": "tl-souq",
+    "storage_bucket": "tl-souq.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:858468987379:android:7b34f664705fb937012286",
+        "mobilesdk_app_id": "1:581531780015:android:4e5080ff267859698d255a",
         "android_client_info": {
-          "package_name": "com.spagreen.TLSouq"
+          "package_name": "com.smartlink.TLSouq"
         }
       },
       "oauth_client": [
         {
-          "client_id": "858468987379-677muvn6j4urfj6tv8e34vaeo36illon.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.spagreen.TLSouq",
-            "certificate_hash": "05405d13dd1e8e5e6e66a163cbfac6893cd70968"
-          }
-        },
-        {
-          "client_id": "858468987379-j2qb6vco6uknva98hap11c89o9dn3naj.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.spagreen.TLSouq",
-            "certificate_hash": "bb2e8d96d01f59011c509387d9f59ac8c139120d"
-          }
-        },
-        {
-          "client_id": "858468987379-ulhpemk54i753jdrc4vmff5vl52c8946.apps.googleusercontent.com",
+          "client_id": "581531780015-v76t9vuaj4qq0sgv0ld0gjg1jrsiq8gk.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD7vAFkMRVOiw9fORy7_7ZpAlHYUfAALDY"
+          "current_key": "AIzaSyBtpq8_lCwHykXu6dsZneuHotzIZ27gLzA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "858468987379-ulhpemk54i753jdrc4vmff5vl52c8946.apps.googleusercontent.com",
+              "client_id": "581531780015-qe50hp5npl1ftdrorrb5srb2po6kgun2.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "581531780015-2ibhoah7hfh27jml0knnb1jt5h77252s.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.smartlink.TLSouq"
+              }
             }
           ]
         }

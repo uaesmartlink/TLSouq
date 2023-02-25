@@ -904,9 +904,11 @@ class Repository {
   //Home Container
   Future<HomeDataModel> getHomeScreenData() async {
     String? token = LocalDataHelper().getUserToken();
-
+    print("token $token");
     var url = "${NetworkService.apiUrl}/home-screen?$langCurrCode&token=$token";
+    print("url: $url");
     final response = await _service.fetchJsonData(url);
+    print("response $response");
     return HomeDataModel.fromJson(response);
   }
 

@@ -1,4 +1,4 @@
-package com.spagreen.TLSouq
+package com.smartlink.TLSouq
 
 import io.flutter.embedding.android.FlutterActivity
 

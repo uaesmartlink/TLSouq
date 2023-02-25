@@ -155,18 +155,27 @@ class AuthController extends GetxController {
   }
 
   void signInWithGoogle() async {
+    print("Google1");
     _isLoggingIn(true);
     try {
+      print("Google2");
       GoogleSignInAccount? googleSignInAccount = await _googleSign.signIn();
+      print("Google3");
       if (googleSignInAccount != null) {
         GoogleSignInAuthentication googleSignInAuthentication =
             await googleSignInAccount.authentication;
+        print("Google!");
 
         AuthCredential credential = GoogleAuthProvider.credential(
           accessToken: googleSignInAuthentication.accessToken,
           idToken: googleSignInAuthentication.idToken,
         );
         final User? user = (await _auth.signInWithCredential(credential)).user;
+        print("Google");
+        print(user!.displayName.toString());
+        print(user.providerData[0].email);
+        print(user.phoneNumber);
+        print("Google");
         if (user != null) {
           UserDataModel? userDataModel = await Repository().postFirebaseAuth(
               name: user.displayName.toString(),

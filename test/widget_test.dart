@@ -16,7 +16,7 @@ import 'package:TLSouq/src/utils/constants.dart';
 
 void main() {
   test('', () async {
-    final response = await http.get(Uri.parse("https://TLSouq.spagreen.net/api/v100/video-shops-details/asd?token=null&lang=null&curr=null"));
+    final response = await http.get(Uri.parse("https://TLSouq.smartlink.net/api/v100/video-shops-details/asd?token=null&lang=null&curr=null"));
     try {
       var data = json.decode(response.body);
       var videoShoppingDetailsModel = VideoShoppingDetailsModel.fromJson(data);

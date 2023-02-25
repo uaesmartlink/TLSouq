@@ -62,7 +62,7 @@
 	<dict>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>TLSouq.spagreen.net</key>
+			<key>TLSouq.smartlink.net</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
 				<true/>
