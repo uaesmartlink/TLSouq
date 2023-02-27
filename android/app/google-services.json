@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "581531780015-qb0t9mvmethtit59te64v3emjb2s4ojo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.smartlink.TLSouq",
+            "certificate_hash": "ce5baf551deda8e29732e155ccbdd0b46d695d5e"
+          }
+        },
+        {
           "client_id": "581531780015-v76t9vuaj4qq0sgv0ld0gjg1jrsiq8gk.apps.googleusercontent.com",
           "client_type": 3
         }

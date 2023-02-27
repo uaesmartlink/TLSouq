@@ -160,6 +160,11 @@ class AuthController extends GetxController {
     try {
       print("Google2");
       GoogleSignInAccount? googleSignInAccount = await _googleSign.signIn();
+      print(googleSignInAccount!.id);
+      print(googleSignInAccount.email);
+      print(googleSignInAccount.displayName);
+      print(googleSignInAccount.toString());
+
       print("Google3");
       if (googleSignInAccount != null) {
         GoogleSignInAuthentication googleSignInAuthentication =
