@@ -761,7 +761,6 @@ class DetailsPage extends StatelessWidget {
                               ],
                             ),
                             SizedBox(height: 13.h),
-
                             detailsModel.data!.isClassified!
                                 ? Container(
                                     alignment: Alignment.center,
@@ -1853,6 +1852,7 @@ class DetailsPage extends StatelessWidget {
                                                               .titleTextStyleTab),
                                                 ],
                                               ),
+
                                               Row(
                                                 children: [
                                                   Text(AppTags.price.tr,

@@ -95,7 +95,7 @@ class CategoryScreen extends StatelessWidget {
                                                         ),
                                                       */
 /*    :Icon( MdiIcons.fromString("checkbox-multiple-blank-outline"),size: 30.r,
-                                                        color: AppThemeData.headlineTextColor,),*//*
+                                                        color: AppThemeData.headlineTextColor,),*/ /*
 
                                                       SizedBox(height: 5.h),
                                                       Text(
@@ -774,78 +774,82 @@ class CategoryScreen extends StatelessWidget {
                                 children: [
                                   index == 0
                                       ? InkWell(
-                                    onTap: () {
-                                      _catController
-                                          .updateFeaturedIndexData(true);
-                                    },
-                                    child: Container(
-                                      height: 70.h,
-                                      color: _catController
-                                          .featuredIndex.value
-                                          ? AppThemeData.buttonTextColor
-                                          : AppThemeData.categoryColor,
-                                      alignment: Alignment.center,
-                                      child: Row(
-                                        children: [
-                                          Expanded(
-                                            child: Column(
-                                              mainAxisAlignment:
-                                              MainAxisAlignment
-                                                  .center,
-                                              crossAxisAlignment:
-                                              CrossAxisAlignment
-                                                  .center,
+                                          onTap: () {
+                                            _catController
+                                                .updateFeaturedIndexData(true);
+                                          },
+                                          child: Container(
+                                            height: 70.h,
+                                            color: _catController
+                                                    .featuredIndex.value
+                                                ? AppThemeData.buttonTextColor
+                                                : AppThemeData.categoryColor,
+                                            alignment: Alignment.center,
+                                            child: Row(
                                               children: [
-                                                _catController
-                                                    .featuredCategory
-                                                    .value
-                                                    .icon!
-                                                    .isNotEmpty
-                                                    ? Icon(
-                                                  MdiIcons
-                                                      .fromString(
-                                                    _catController
-                                                        .featuredCategory
-                                                        .value
-                                                        .icon!
-                                                        .substring(
-                                                        8),
+                                                Expanded(
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      _catController
+                                                              .featuredCategory
+                                                              .value
+                                                              .icon!
+                                                              .isNotEmpty
+                                                          ? Icon(
+                                                              MdiIcons
+                                                                  .fromString(
+                                                                _catController
+                                                                    .featuredCategory
+                                                                    .value
+                                                                    .icon!
+                                                                    .substring(
+                                                                        8),
+                                                              ),
+                                                              size: 30.r,
+                                                              color: AppThemeData
+                                                                  .headlineTextColor,
+                                                            )
+                                                          : Icon(
+                                                              MdiIcons.fromString(
+                                                                  "checkbox-multiple-blank-outline"),
+                                                              size: 30.r,
+                                                              color: AppThemeData
+                                                                  .headlineTextColor,
+                                                            ),
+                                                      SizedBox(height: 5.h),
+                                                      Expanded(
+                                                        child: Text(
+                                                          _catController
+                                                              .featuredCategory
+                                                              .value
+                                                              .title
+                                                              .toString()
+                                                              .replaceAll(
+                                                                  "Category",
+                                                                  ""),
+                                                          style: isMobile(
+                                                                  context)
+                                                              ? AppThemeData
+                                                                  .categoryTitleTextStyle_12
+                                                              : AppThemeData
+                                                                  .categoryTitleTextStyle_9Tab,
+                                                          // overflow: TextOverflow
+                                                          //     .ellipsis,
+                                                        ),
+                                                      )
+                                                    ],
                                                   ),
-                                                  size: 30.r,
-                                                  color: AppThemeData
-                                                      .headlineTextColor,
-                                                )
-                                                    : Icon(
-                                                  MdiIcons.fromString(
-                                                      "checkbox-multiple-blank-outline"),
-                                                  size: 30.r,
-                                                  color: AppThemeData
-                                                      .headlineTextColor,
                                                 ),
-                                                SizedBox(height: 5.h),
-                                                Text(
-                                                  _catController
-                                                      .featuredCategory
-                                                      .value
-                                                      .title
-                                                      .toString()
-                                                      .replaceAll(
-                                                      "Category", ""),
-                                                  style: isMobile(context)
-                                                      ? AppThemeData
-                                                      .categoryTitleTextStyle_12
-                                                      : AppThemeData
-                                                      .categoryTitleTextStyle_9Tab,
-                                                  overflow: TextOverflow
-                                                      .ellipsis,
-                                                )
                                               ],
                                             ),
                                           ),
-                                        ],
-                                      ),
-                                    ),
-                                  )
+                                        )
                                       : _categoryContent(index - 1, context),
                                 ],
                               );
@@ -856,8 +860,8 @@ class CategoryScreen extends StatelessWidget {
                         //pagination progress
                         _catController.isMoreDataLoading.value
                             ? const Center(
-                          // child: CircularProgressIndicator(),
-                        )
+                                // child: CircularProgressIndicator(),
+                                )
                             : const SizedBox()
                       ],
                     ),
@@ -877,7 +881,7 @@ class CategoryScreen extends StatelessWidget {
                     //color: Colors.green,
                     child: Column(
                       children: [
-                        Container(
+                        /*  Container(
                           height: 100.h,
                           decoration: BoxDecoration(
                             color: const Color(0xffDBE8C2),
@@ -900,17 +904,16 @@ class CategoryScreen extends StatelessWidget {
                               )
                             ],
                           ),
-                        ),
+                        ),*/
                         SizedBox(height: 15.h),
-                        Row(
-                          children: [
-                            Text(
-                              AppTags.featuredCategories.tr,
-                              style: isMobile(context)
-                                  ? AppThemeData.priceTextStyle_14
-                                  : AppThemeData.titleTextStyle_11Tab,
-                            ),
-                          ],
+                        Container(
+                          alignment: Alignment.center,
+                          child: Text(
+                            AppTags.featuredCategories.tr,
+                            style: isMobile(context)
+                                ? AppThemeData.priceTextStyle_14
+                                : AppThemeData.titleTextStyle_11Tab,
+                          ),
                         ),
                         SizedBox(height: 10.h),
                         Expanded(
@@ -922,9 +925,9 @@ class CategoryScreen extends StatelessWidget {
                             itemCount: _catController.featuredCategory.value
                                 .featuredSubCategories!.length,
                             gridDelegate:
-                            SliverGridDelegateWithFixedCrossAxisCount(
+                                SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount:
-                              (orientation == Orientation.portrait) ? 3 : 3,
+                                  (orientation == Orientation.portrait) ? 3 : 3,
                               crossAxisSpacing: 15,
                               mainAxisSpacing: 16,
                               childAspectRatio: 0.5,
@@ -984,20 +987,22 @@ class CategoryScreen extends StatelessWidget {
                                           ),
                                         ),
                                         Center(
-                                          child: Text(
-                                            _catController
-                                                .featuredCategory
-                                                .value
-                                                .featuredSubCategories![index]
-                                                .title
-                                                .toString(),
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: isMobile(context)
-                                                ? AppThemeData
-                                                .categoryTitleTextStyle_12
-                                                : AppThemeData
-                                                .categoryTitleTextStyle_9Tab,
+                                          child: Expanded(
+                                            child: Text(
+                                              _catController
+                                                  .featuredCategory
+                                                  .value
+                                                  .featuredSubCategories![index]
+                                                  .title
+                                                  .toString(),
+                                              maxLines: 1,
+                                              // overflow: TextOverflow.ellipsis,
+                                              style: isMobile(context)
+                                                  ? AppThemeData
+                                                      .categoryTitleTextStyle_12
+                                                  : AppThemeData
+                                                      .categoryTitleTextStyle_9Tab,
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -1050,206 +1055,325 @@ class CategoryScreen extends StatelessWidget {
                           height: 20.h,
                         ),
                         _catController.categoryList[_catController.index.value]
-                            .subCategories!.isNotEmpty
+                                .subCategories!.isNotEmpty
                             ? Container(
-                          height: 250,
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: _catController
-                                .categoryList[_catController.index.value]
-                                .subCategories!
-                                .length,
-                            itemBuilder: (_, subCtIndex) {
-                              return _catController
-                                  .categoryList[
-                              _catController.index.value]
-                                  .subCategories![subCtIndex]
-                                  .childCategories!
-                                  .isNotEmpty
-                                  ? InkWell(
-                                  onTap: () {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (_) =>
-                                            ProductByCategory(
-                                              id: _catController
-                                                  .categoryList[
-                                              _catController
-                                                  .index.value]
-                                                  .subCategories![
-                                              subCtIndex]
-                                                  .id,
-                                              title: _catController
-                                                  .categoryList[
-                                              _catController
-                                                  .index.value]
-                                                  .subCategories![
-                                              subCtIndex]
-                                                  .title,
-                                            ),
-                                      ),
-                                    );
-                                  },
-                                  child: ListView(
-                                    shrinkWrap: true,
-                                    primary: false,
-                                    children: [
-                                      SizedBox(height: 15.h),
-                                      Text(
-                                        _catController
+                                height: 250,
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: _catController
+                                      .categoryList[_catController.index.value]
+                                      .subCategories!
+                                      .length,
+                                  itemBuilder: (_, subCtIndex) {
+                                    return _catController
                                             .categoryList[
-                                        _catController
-                                            .index.value]
-                                            .subCategories![
-                                        subCtIndex]
-                                            .title
-                                            .toString(),
-                                        style: isMobile(context)
-                                            ? AppThemeData
-                                            .priceTextStyle_14
-                                            : AppThemeData
-                                            .titleTextStyle_11Tab,
-                                      ),
-                                      SizedBox(height: 10.h),
-                                      GridView.builder(
-                                        physics:
-                                        const NeverScrollableScrollPhysics(),
-                                        scrollDirection:
-                                        Axis.vertical,
-                                        shrinkWrap: true,
-                                        itemCount: _catController
-                                            .categoryList[
-                                        _catController
-                                            .index.value]
-                                            .subCategories![
-                                        subCtIndex]
+                                                _catController.index.value]
+                                            .subCategories![subCtIndex]
                                             .childCategories!
-                                            .length,
-                                        gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
-                                          crossAxisCount:
-                                          orientation ==
-                                              Orientation
-                                                  .portrait
-                                              ? 3
-                                              : 3,
-                                          crossAxisSpacing: 15,
-                                          mainAxisSpacing: 16,
-                                          childAspectRatio: 0.73,
-                                        ),
-                                        itemBuilder:
-                                            (context, childIndex) {
-                                          return InkWell(
+                                            .isNotEmpty
+                                        ? InkWell(
                                             onTap: () {
-                                              Navigator.of(context)
-                                                  .push(
+                                              Navigator.of(context).push(
                                                 MaterialPageRoute(
                                                   builder: (_) =>
                                                       ProductByCategory(
-                                                        id: _catController
-                                                            .categoryList[
-                                                        _catController
-                                                            .index
-                                                            .value]
-                                                            .subCategories![
-                                                        subCtIndex]
-                                                            .childCategories![
-                                                        childIndex]
-                                                            .id,
-                                                        title: _catController
-                                                            .categoryList[
-                                                        _catController
-                                                            .index
-                                                            .value]
-                                                            .subCategories![
-                                                        subCtIndex]
-                                                            .childCategories![
-                                                        childIndex]
-                                                            .title,
-                                                      ),
+                                                    id: _catController
+                                                        .categoryList[
+                                                            _catController
+                                                                .index.value]
+                                                        .subCategories![
+                                                            subCtIndex]
+                                                        .id,
+                                                    title: _catController
+                                                        .categoryList[
+                                                            _catController
+                                                                .index.value]
+                                                        .subCategories![
+                                                            subCtIndex]
+                                                        .title,
+                                                  ),
                                                 ),
                                               );
                                             },
-                                            child: Container(
-                                              alignment:
-                                              Alignment.center,
-                                              decoration:
-                                              BoxDecoration(
-                                                color: AppThemeData
-                                                    .buttonTextColor,
-                                                borderRadius:
-                                                BorderRadius.all(
-                                                  Radius.circular(
-                                                      10.r),
+                                            child: ListView(
+                                              shrinkWrap: true,
+                                              primary: false,
+                                              children: [
+                                                SizedBox(height: 15.h),
+                                                Text(
+                                                  _catController
+                                                      .categoryList[
+                                                          _catController
+                                                              .index.value]
+                                                      .subCategories![
+                                                          subCtIndex]
+                                                      .title
+                                                      .toString(),
+                                                  style: isMobile(context)
+                                                      ? AppThemeData
+                                                          .priceTextStyle_14
+                                                      : AppThemeData
+                                                          .titleTextStyle_11Tab,
                                                 ),
-                                                border: Border.all(
-                                                  color: const Color(
-                                                      0xFFEEEEEE),
-                                                  width: 1,
-                                                ),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    spreadRadius:
-                                                    30.r,
-                                                    blurRadius: 1,
-                                                    color: const Color(
-                                                        0xff404040)
-                                                        .withOpacity(
-                                                        0.01),
-                                                    offset:
-                                                    const Offset(
-                                                        0, 15),
+                                                SizedBox(height: 10.h),
+                                                GridView.builder(
+                                                  physics:
+                                                      const NeverScrollableScrollPhysics(),
+                                                  scrollDirection:
+                                                      Axis.vertical,
+                                                  shrinkWrap: true,
+                                                  itemCount: _catController
+                                                      .categoryList[
+                                                          _catController
+                                                              .index.value]
+                                                      .subCategories![
+                                                          subCtIndex]
+                                                      .childCategories!
+                                                      .length,
+                                                  gridDelegate:
+                                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                                    crossAxisCount:
+                                                        orientation ==
+                                                                Orientation
+                                                                    .portrait
+                                                            ? 3
+                                                            : 3,
+                                                    crossAxisSpacing: 15,
+                                                    mainAxisSpacing: 16,
+                                                    childAspectRatio: 0.73,
                                                   ),
-                                                ],
-                                              ),
-                                              child: Padding(
-                                                padding: EdgeInsets
-                                                    .symmetric(
-                                                  horizontal: 8.w,
-                                                  vertical: 9.h,
-                                                ),
-                                                child: Column(
-                                                  children: [
-                                                    Expanded(
-                                                      child: Image
-                                                          .network(
-                                                        _catController
-                                                            .categoryList[_catController
-                                                            .index
-                                                            .value]
-                                                            .subCategories![
-                                                        subCtIndex]
-                                                            .childCategories![
-                                                        childIndex]
-                                                            .image
-                                                            .toString(),
+                                                  itemBuilder:
+                                                      (context, childIndex) {
+                                                    return InkWell(
+                                                      onTap: () {
+                                                        Navigator.of(context)
+                                                            .push(
+                                                          MaterialPageRoute(
+                                                            builder: (_) =>
+                                                                ProductByCategory(
+                                                              id: _catController
+                                                                  .categoryList[
+                                                                      _catController
+                                                                          .index
+                                                                          .value]
+                                                                  .subCategories![
+                                                                      subCtIndex]
+                                                                  .childCategories![
+                                                                      childIndex]
+                                                                  .id,
+                                                              title: _catController
+                                                                  .categoryList[
+                                                                      _catController
+                                                                          .index
+                                                                          .value]
+                                                                  .subCategories![
+                                                                      subCtIndex]
+                                                                  .childCategories![
+                                                                      childIndex]
+                                                                  .title,
+                                                            ),
+                                                          ),
+                                                        );
+                                                      },
+                                                      child: Container(
+                                                        alignment:
+                                                            Alignment.center,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: AppThemeData
+                                                              .buttonTextColor,
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                            Radius.circular(
+                                                                10.r),
+                                                          ),
+                                                          border: Border.all(
+                                                            color: const Color(
+                                                                0xFFEEEEEE),
+                                                            width: 1,
+                                                          ),
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              spreadRadius:
+                                                                  30.r,
+                                                              blurRadius: 1,
+                                                              color: const Color(
+                                                                      0xff404040)
+                                                                  .withOpacity(
+                                                                      0.01),
+                                                              offset:
+                                                                  const Offset(
+                                                                      0, 15),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        child: Padding(
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                            horizontal: 8.w,
+                                                            vertical: 9.h,
+                                                          ),
+                                                          child: Column(
+                                                            children: [
+                                                              Expanded(
+                                                                child: Image
+                                                                    .network(
+                                                                  _catController
+                                                                      .categoryList[_catController
+                                                                          .index
+                                                                          .value]
+                                                                      .subCategories![
+                                                                          subCtIndex]
+                                                                      .childCategories![
+                                                                          childIndex]
+                                                                      .image
+                                                                      .toString(),
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                height: 6.h,
+                                                              ),
+                                                              Center(
+                                                                child: Text(
+                                                                  _catController
+                                                                      .categoryList[_catController
+                                                                          .index
+                                                                          .value]
+                                                                      .subCategories![
+                                                                          subCtIndex]
+                                                                      .childCategories![
+                                                                          childIndex]
+                                                                      .title
+                                                                      .toString(),
+                                                                  maxLines: 1,
+                                                                  style: isMobile(
+                                                                          context)
+                                                                      ? AppThemeData
+                                                                          .categoryTitleTextStyle_12
+                                                                      : AppThemeData
+                                                                          .categoryTitleTextStyle_9Tab,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
                                                       ),
+                                                    );
+                                                  },
+                                                )
+                                              ],
+                                            ))
+                                        : InkWell(
+                                            onTap: () {
+                                              Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                  builder: (_) =>
+                                                      ProductByCategory(
+                                                    id: _catController
+                                                        .categoryList[
+                                                            _catController
+                                                                .index.value]
+                                                        .subCategories![
+                                                            subCtIndex]
+                                                        .id!,
+                                                    title: _catController
+                                                        .categoryList[
+                                                            _catController
+                                                                .index.value]
+                                                        .subCategories![
+                                                            subCtIndex]
+                                                        .title,
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                            child: Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                vertical: 10.h,
+                                              ),
+                                              child: Container(
+                                                height: 80.h,
+                                                decoration: BoxDecoration(
+                                                  color: AppThemeData
+                                                      .buttonTextColor,
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                    Radius.circular(10.r),
+                                                  ),
+                                                  border: Border.all(
+                                                    color:
+                                                        const Color(0xFFEEEEEE),
+                                                    width: 1.w,
+                                                  ),
+                                                ),
+                                                child: Row(
+                                                  children: [
+                                                    Column(
+                                                      children: [
+                                                        Expanded(
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    8.r),
+                                                            child:
+                                                                Image.network(
+                                                              _catController
+                                                                  .categoryList[
+                                                                      _catController
+                                                                          .index
+                                                                          .value]
+                                                                  .subCategories![
+                                                                      subCtIndex]
+                                                                  .banner!,
+                                                            ),
+                                                          ),
+                                                        )
+                                                      ],
                                                     ),
-                                                    SizedBox(
-                                                      height: 6.h,
-                                                    ),
-                                                    Center(
-                                                      child: Text(
-                                                        _catController
-                                                            .categoryList[_catController
-                                                            .index
-                                                            .value]
-                                                            .subCategories![
-                                                        subCtIndex]
-                                                            .childCategories![
-                                                        childIndex]
-                                                            .title
-                                                            .toString(),
-                                                        maxLines: 1,
-                                                        overflow:
-                                                        TextOverflow
-                                                            .ellipsis,
-                                                        style: isMobile(
-                                                            context)
-                                                            ? AppThemeData
-                                                            .categoryTitleTextStyle_12
-                                                            : AppThemeData
-                                                            .categoryTitleTextStyle_9Tab,
+                                                    Expanded(
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            _catController
+                                                                .categoryList[
+                                                                    _catController
+                                                                        .index
+                                                                        .value]
+                                                                .subCategories![
+                                                                    subCtIndex]
+                                                                .title
+                                                                .toString(),
+                                                            style: TextStyle(
+                                                                fontSize: isMobile(
+                                                                        context)
+                                                                    ? 12.sp
+                                                                    : 10.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                fontFamily:
+                                                                    "Poppins_Medium"),
+                                                          ),
+                                                          Text(
+                                                            "${AppTags.totalProduct.tr}: ${_catController.categoryList[_catController.index.value].subCategories![subCtIndex].childCategories!.length}",
+                                                            style: TextStyle(
+                                                              fontSize: isMobile(
+                                                                      context)
+                                                                  ? 12.sp
+                                                                  : 10.sp,
+                                                              fontFamily:
+                                                                  "Poppins",
+                                                              color: const Color(
+                                                                  0xFF666666),
+                                                            ),
+                                                          ),
+                                                        ],
                                                       ),
                                                     ),
                                                   ],
@@ -1257,135 +1381,13 @@ class CategoryScreen extends StatelessWidget {
                                               ),
                                             ),
                                           );
-                                        },
-                                      )
-                                    ],
-                                  ))
-                                  : InkWell(
-                                onTap: () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (_) =>
-                                          ProductByCategory(
-                                            id: _catController
-                                                .categoryList[
-                                            _catController
-                                                .index.value]
-                                                .subCategories![
-                                            subCtIndex]
-                                                .id!,
-                                            title: _catController
-                                                .categoryList[
-                                            _catController
-                                                .index.value]
-                                                .subCategories![
-                                            subCtIndex]
-                                                .title,
-                                          ),
-                                    ),
-                                  );
-                                },
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(
-                                    vertical: 10.h,
-                                  ),
-                                  child: Container(
-                                    height: 80.h,
-                                    decoration: BoxDecoration(
-                                      color: AppThemeData
-                                          .buttonTextColor,
-                                      borderRadius:
-                                      BorderRadius.all(
-                                        Radius.circular(10.r),
-                                      ),
-                                      border: Border.all(
-                                        color:
-                                        const Color(0xFFEEEEEE),
-                                        width: 1.w,
-                                      ),
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        Column(
-                                          children: [
-                                            Expanded(
-                                              child: Padding(
-                                                padding:
-                                                EdgeInsets.all(
-                                                    8.r),
-                                                child:
-                                                Image.network(
-                                                  _catController
-                                                      .categoryList[
-                                                  _catController
-                                                      .index
-                                                      .value]
-                                                      .subCategories![
-                                                  subCtIndex]
-                                                      .banner!,
-                                                ),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                        Expanded(
-                                          child: Column(
-                                            mainAxisAlignment:
-                                            MainAxisAlignment
-                                                .center,
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment
-                                                .start,
-                                            children: [
-                                              Text(
-                                                _catController
-                                                    .categoryList[
-                                                _catController
-                                                    .index
-                                                    .value]
-                                                    .subCategories![
-                                                subCtIndex]
-                                                    .title
-                                                    .toString(),
-                                                style: TextStyle(
-                                                    fontSize: isMobile(
-                                                        context)
-                                                        ? 12.sp
-                                                        : 10.sp,
-                                                    fontWeight:
-                                                    FontWeight
-                                                        .w600,
-                                                    fontFamily:
-                                                    "Poppins_Medium"),
-                                              ),
-                                              Text(
-                                                "${AppTags.totalProduct.tr}: ${_catController.categoryList[_catController.index.value].subCategories![subCtIndex].childCategories!.length}",
-                                                style: TextStyle(
-                                                  fontSize: isMobile(
-                                                      context)
-                                                      ? 12.sp
-                                                      : 10.sp,
-                                                  fontFamily:
-                                                  "Poppins",
-                                                  color: const Color(
-                                                      0xFF666666),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
+                                  },
                                 ),
-                              );
-                            },
-                          ),
-                        )
+                              )
                             : const Text(
-                          "No Sub-Categories",
-                          style: TextStyle(fontWeight: FontWeight.w500),
-                        ),
+                                "No Sub-Categories",
+                                style: TextStyle(fontWeight: FontWeight.w500),
+                              ),
                         SizedBox(
                           height: 20,
                         ),
@@ -1402,10 +1404,10 @@ class CategoryScreen extends StatelessWidget {
                                 if (snapshot.data!.isNotEmpty) {
                                   return SizedBox(
                                     height: _catController
-                                        .categoryList[
-                                    _catController.index.value]
-                                        .subCategories!
-                                        .isNotEmpty
+                                            .categoryList[
+                                                _catController.index.value]
+                                            .subCategories!
+                                            .isNotEmpty
                                         ? 300
                                         : 500,
                                     child: Scrollbar(
@@ -1416,7 +1418,7 @@ class CategoryScreen extends StatelessWidget {
                                         itemCount: snapshot.data!.length,
                                         itemBuilder: (context, index) {
                                           CategoryProductData product =
-                                          snapshot.data![index];
+                                              snapshot.data![index];
                                           return CategoryProductCard(
                                             dataModel: product,
                                             index: index,
@@ -1452,9 +1454,12 @@ class CategoryScreen extends StatelessWidget {
         _catController.updateIndex(index);
       },
       child: Container(
-        height: 70.h,
+        height: 80.h,
+        margin: const EdgeInsets.only(
+          top: 5,
+        ),
         color: _catController.index.value == index &&
-            !_catController.featuredIndex.value
+                !_catController.featuredIndex.value
             ? AppThemeData.buttonTextColor
             : AppThemeData.categoryColor,
         alignment: Alignment.center,
@@ -1466,26 +1471,29 @@ class CategoryScreen extends StatelessWidget {
                 children: [
                   _catController.categoryList[index].icon!.isNotEmpty
                       ? Icon(
-                    MdiIcons.fromString(
-                      _catController.categoryList[index].icon!
-                          .substring(8),
-                    ),
-                    size: 30.r,
-                    color: AppThemeData.headlineTextColor,
-                  )
+                          MdiIcons.fromString(
+                            _catController.categoryList[index].icon!
+                                .substring(8),
+                          ),
+                          size: 30.r,
+                          color: AppThemeData.headlineTextColor,
+                        )
                       : Icon(
-                    MdiIcons.fromString(
-                        "checkbox-multiple-blank-outline"),
-                    size: 30.r,
-                    color: AppThemeData.headlineTextColor,
-                  ),
-                  SizedBox(height: 5.h),
-                  Text(
-                    _catController.categoryList[index].title.toString(),
-                    overflow: TextOverflow.ellipsis,
-                    style: isMobile(context)
-                        ? AppThemeData.categoryTitleTextStyle_12
-                        : AppThemeData.categoryTitleTextStyle_9Tab,
+                          MdiIcons.fromString(
+                              "checkbox-multiple-blank-outline"),
+                          size: 30.r,
+                          color: AppThemeData.headlineTextColor,
+                        ),
+                  SizedBox(height: 6.h),
+                  Expanded(
+                    child: Text(
+                      _catController.categoryList[index].title.toString(),
+                      // overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center,
+                      style: isMobile(context)
+                          ? AppThemeData.categoryTitleTextStyle_12
+                          : AppThemeData.categoryTitleTextStyle_9Tab,
+                    ),
                   )
                 ],
               ),
