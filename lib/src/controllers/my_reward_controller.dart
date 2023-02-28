@@ -8,8 +8,6 @@ class MyRewardController extends GetxController {
   late Rx<MyRewardModel> myRewardModel = MyRewardModel().obs;
   final TextEditingController?  convertRewardController = TextEditingController();
   var convertedReward = '0.0'.obs;
-
-
   var isLoading=false.obs;
 
   Future getMyReward() async {

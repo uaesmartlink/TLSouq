@@ -221,13 +221,13 @@ class HomeProductCard extends StatelessWidget {
               ),
               Config.groceryCartMode?
               dataModel![index].hasVariant ? const SizedBox(): Obx(() => Positioned(
-                bottom: isMobile(context)? 50.h:52.h,
+                bottom: isMobile(context)? 60.h:60.h,
                   right: 10,
                   child: Container(
-                    height: isMobile(context)?26.h:30.h,
+                    height: isMobile(context)?30.h:30.h,
                    // width: _cartController.incrementProduct(dataModel![index].id)!=-1 ? isMobile(context)?90.w:55.w:isMobile(context)?35.w:20.w,
                     decoration: BoxDecoration(
-                      color: Colors.grey.withOpacity(0.25),
+                      color: Colors.grey.withOpacity(0.2),
                       borderRadius: BorderRadius.all(
                         Radius.circular(28.r),
                       ),

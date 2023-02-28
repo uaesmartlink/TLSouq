@@ -13,7 +13,7 @@ class Config {
   static const bool enableGoogleLogin = true;
   static const bool enableFacebookLogin = true;
   // if "groceryCartMode = true" then product will be added to cart directly
-  static const bool groceryCartMode = false;
+  static const bool groceryCartMode = true;
 
   static var supportedLanguageList = [
     const Locale("en", "US"),
