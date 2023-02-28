@@ -655,7 +655,7 @@ class Repository {
     printLog("addToCart: variants_ids ${variantsIds.toString()}");
     printLog("addToCart: variants_name ${variantsNames.toString()}");
     printLog("addToCart: trx_id $trxId");
-
+    printLog("LocalDataHelper().getUserToken() ${LocalDataHelper().getUserToken()}");
     var url = Uri.parse(
         "${NetworkService.apiUrl}/cart-store?token=${LocalDataHelper().getUserToken()}&$langCurrCode");
     final response = await http.post(url, body: body, headers: headers);
@@ -715,6 +715,8 @@ class Repository {
     print("url: ${url}");
     final response = await http.post(url, body: body, headers: headers);
     print("response: ${response.body}");
+    printLog("LocalDataHelper().getUserToken() ${LocalDataHelper().getUserToken()}");
+
     var data = json.decode(response.body);
     if (response.statusCode == 200) {
       showShortToast(data["message"]);

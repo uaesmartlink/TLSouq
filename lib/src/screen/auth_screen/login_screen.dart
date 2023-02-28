@@ -284,6 +284,7 @@ class LoginScreen extends StatelessWidget {
                             ),
                           )
                         : const SizedBox(),
+
                     LocalDataHelper().isPhoneLoginEnabled()
                         ? Container(
                             height: 48.h,

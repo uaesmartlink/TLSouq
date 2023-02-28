@@ -86,9 +86,9 @@ class PhoneLoginScreen extends StatelessWidget {
                         padding: EdgeInsets.only(left: 20.w),
                         child: CountryPickerDropdown(
                           isFirstDefaultIfInitialValueNotProvided: false,
-                          initialValue:
-                          LocalDataHelper().getConfigData().data!.appConfig!.defaultCountry!.isNotEmpty?
-                          LocalDataHelper().getConfigData().data!.appConfig!.defaultCountry!:'AE',
+                          initialValue:'AE',
+                          // LocalDataHelper().getConfigData().data!.appConfig!.defaultCountry!.isNotEmpty?
+                          // LocalDataHelper().getConfigData().data!.appConfig!.defaultCountry!:'AE',
                           isExpanded: true,
                           itemBuilder: (Country country) => Row(
                             children: <Widget>[

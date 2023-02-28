@@ -263,27 +263,27 @@ class _ProfileContentState extends State<ProfileContent> {
             ),
           ) : const SizedBox(),
           //My reward
-          for (int i = 0; i < addons.length; i++)
-            addons[i].addonIdentifier == "reward" && addons[i].status == true
-                ? InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => MyRewardScreen(
-                        userDataModel: userDataModel,
-                        conversionRate: addons[i].addonData!.conversionRate.toString(),
-                      ),
-                    ),
-                  );
-                },
-                child: mobileViewTile("reward",AppTags.myRewards.tr)
-            ) : const SizedBox(),
+          // for (int i = 0; i < addons.length; i++)
+          //   addons[i].addonIdentifier == "reward" && addons[i].status == true
+          //       ? InkWell(
+          //       onTap: () {
+          //         Navigator.of(context).push(
+          //           MaterialPageRoute(
+          //             builder: (context) => MyRewardScreen(
+          //               userDataModel: userDataModel,
+          //               conversionRate: addons[i].addonData!.conversionRate.toString(),
+          //             ),
+          //           ),
+          //         );
+          //       },
+          //       child: mobileViewTile("reward",AppTags.myRewards.tr)
+          //   ) : const SizedBox(),
 
-          for (int i = 0; i < addons.length;i++)
-            addons[i].addonIdentifier == "reward" &&
-                addons[i].status == true
-                ? divider()
-                : const SizedBox(),
+          // for (int i = 0; i < addons.length;i++)
+          //   addons[i].addonIdentifier == "reward" &&
+          //       addons[i].status == true
+          //       ? divider()
+          //       : const SizedBox(),
 
           InkWell(
               onTap: () {
@@ -424,27 +424,27 @@ class _ProfileContentState extends State<ProfileContent> {
               ? divider()
               : const SizedBox(),
           //My reward
-          for (int i = 0; i < addons.length; i++)
-            addons[i].addonIdentifier == "reward" && addons[i].status == true
-                ? InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => MyRewardScreen(
-                        userDataModel: userDataModel,
-                        conversionRate: addons[i]
-                            .addonData!
-                            .conversionRate
-                            .toString(),
-                      ),
-                    ),
-                  );
-                },
-                child: tabViewTile("reward",AppTags.myRewards.tr))
-                : const SizedBox(),
-          for (int i = 0; i < addons.length; i++)
-            addons[i].addonIdentifier == "reward" && addons[i].status == true
-                ? divider() : const SizedBox(),
+          // for (int i = 0; i < addons.length; i++)
+          //   addons[i].addonIdentifier == "reward" && addons[i].status == true
+          //       ? InkWell(
+          //       onTap: () {
+          //         Navigator.of(context).push(
+          //           MaterialPageRoute(
+          //             builder: (context) => MyRewardScreen(
+          //               userDataModel: userDataModel,
+          //               conversionRate: addons[i]
+          //                   .addonData!
+          //                   .conversionRate
+          //                   .toString(),
+          //             ),
+          //           ),
+          //         );
+          //       },
+          //       child: tabViewTile("reward",AppTags.myRewards.tr))
+          //       : const SizedBox(),
+          // for (int i = 0; i < addons.length; i++)
+          //   addons[i].addonIdentifier == "reward" && addons[i].status == true
+          //       ? divider() : const SizedBox(),
 
           InkWell(
               onTap: () {

@@ -789,7 +789,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          AppTags.home_.tr,
+                          shippingAddressModel.data!.addresses![index].name!,
                           style: AppThemeData.headerTextStyle_14,
                         ),
                         InkWell(
@@ -831,13 +831,6 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                       ],
                     ),
                     SizedBox(height: 10.h),
-                    Text(
-                      "${AppTags.name.tr}: ${shippingAddressModel.data!.addresses![index].name.toString()}",
-                      style: isMobile(context)
-                          ? AppThemeData.profileTextStyle_13
-                          : AppThemeData.profileTextStyle_10Tab,
-                    ),
-                    SizedBox(height: 8.h),
                     Text(
                         "${AppTags.email.tr}: ${shippingAddressModel.data!.addresses![index].email.toString()}",
                         style: isMobile(context)
@@ -997,7 +990,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          AppTags.home_.tr,
+                          shippingAddressModel.data!.addresses![index].name!,
                           style: AppThemeData.headerTextStyle_14,
                         ),
                         InkWell(
@@ -1039,13 +1032,6 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                       ],
                     ),
                     SizedBox(height: 10.h),
-                    Text(
-                      "${AppTags.name.tr}: ${shippingAddressModel.data!.addresses![index].name.toString()}",
-                      style: isMobile(context)
-                          ? AppThemeData.profileTextStyle_13
-                          : AppThemeData.profileTextStyle_10Tab,
-                    ),
-                    SizedBox(height: 8.h),
                     Text(
                         "${AppTags.email.tr}: ${shippingAddressModel.data!.addresses![index].email.toString()}",
                         style: isMobile(context)
@@ -1562,6 +1548,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                               onChanged: (newValue) {
                                 setState(() {
                                   _selectedCountry = newValue;
+                                  cityModel.data!.cities = [];
                                 });
                               },
                               items: countryListModel.data!.countries!
@@ -1611,7 +1598,11 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                     onChanged: (newValue) {
                                       setState(
                                         () {
+                                          print("_selectedCity $_selectedCity");
                                           _selectedState = newValue!;
+                                          _selectedCity = null;
+                                          cityModel.data!.cities = [];
+
                                         },
                                       );
                                     },
@@ -1651,7 +1642,11 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                     onChanged: (newValue) {
                                       setState(
                                         () {
+                                          print("@@@ _selectedCity $_selectedCity");
                                           _selectedState = newValue!;
+                                          _selectedCity = null;
+                                          cityModel.data!.cities = [];
+
                                         },
                                       );
                                     },
@@ -1709,7 +1704,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                     ),
                                   )
                                 : Container(
-                                    height: 42.h,
+                                    height: 50.h,
                                     alignment: Alignment.center,
                                     padding:
                                         EdgeInsets.only(left: 12.w, right: 4.w),
@@ -2067,7 +2062,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                           style: AppThemeData.titleTextStyle_13,
                         ),
                         SizedBox(
-                          height: 8.h,
+                          height: 16.h,
                         ),
                         Container(
                           height: 42.h,
@@ -2122,244 +2117,172 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                         ),
                         stateListModel.data != null
                             ? Container(
-                                height: 42.h,
-                                alignment: Alignment.center,
-                                padding: EdgeInsets.symmetric(horizontal: 4.w),
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  border: Border.all(
-                                      color: const Color(0xffF4F4F4)),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(5.r),
-                                  ),
-                                ),
-                                child: DropdownButtonHideUnderline(
-                                  child: DropdownButton(
-                                    isExpanded: true,
-                                    hint: Padding(
-                                      padding: EdgeInsets.only(left: 6.w),
-                                      child: Text(
-                                        editViewModel.data!.address!.state!
-                                            .toString(),
-                                        style: AppThemeData.hintTextStyle_13,
-                                      ),
-                                    ),
-                                    value: _selectedState,
-                                    onChanged: (newValue) {
-                                      setState(
-                                        () {
-                                          _selectedState = newValue!;
-                                        },
-                                      );
-                                    },
-                                    items: stateListModel.data!.states!
-                                        .map((state) {
-                                      return DropdownMenuItem(
-                                        onTap: () async {
-                                          await getCityList(state.id);
-                                          setState(() {});
-                                        },
-                                        value: state.id,
-                                        child: Text(state.name.toString()),
-                                      );
-                                    }).toList(),
-                                  ),
-                                ),
-                              )
-                            : Container(
-                                height: 42.h,
-                                alignment: Alignment.center,
-                                padding: EdgeInsets.symmetric(horizontal: 4.h),
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  border: Border.all(
-                                      color: const Color(0xffF4F4F4)),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(5.r),
-                                  ),
-                                ),
-                                child: DropdownButtonHideUnderline(
-                                  child: DropdownButton(
-                                    isExpanded: true,
-                                    hint: Padding(
-                                      padding: EdgeInsets.only(left: 6.w),
-                                      child: Text(
-                                        editViewModel.data!.address!.state!
-                                            .toString(),
-                                        style: AppThemeData.hintTextStyle_13,
-                                      ),
-                                    ),
-                                    // Not necessary for Option 1
-                                    value: _selectedState,
-                                    onChanged: (newValue) {
-                                      setState(
-                                        () {
-                                          _selectedState = newValue!;
-                                        },
-                                      );
-                                    },
-                                    items: null,
-                                  ),
-                                ),
-                              ),
-                        SizedBox(height: 16.h),
-                        SizedBox(
-                          height: 73.h,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      AppTags.city.tr,
-                                      style: AppThemeData.titleTextStyle_13,
-                                    ),
-                                    SizedBox(
-                                      height: 8.h,
-                                    ),
-                                    cityModel.data != null
-                                        ? Container(
-                                            height: 42.h,
-                                            alignment: Alignment.center,
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 4.w),
-                                            decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              border: Border.all(
-                                                  color:
-                                                      const Color(0xffF4F4F4)),
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(5.r),
-                                              ),
-                                            ),
-                                            child: DropdownButtonHideUnderline(
-                                              child: DropdownButton(
-                                                isExpanded: true,
-                                                hint: Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 6.w),
-                                                  child: Text(
-                                                    editViewModel
-                                                        .data!.address!.city!
-                                                        .toString(),
-                                                    style: AppThemeData
-                                                        .hintTextStyle_13,
-                                                  ),
-                                                ),
-                                                value: _selectedCity,
-                                                onChanged: (newValue) {
-                                                  setState(() {
-                                                    _selectedCity = newValue;
-                                                  });
-                                                },
-                                                items: cityModel.data!.cities!
-                                                    .map((city) {
-                                                  return DropdownMenuItem(
-                                                    onTap: () {},
-                                                    value: city.id,
-                                                    child: Text(
-                                                        city.name.toString()),
-                                                  );
-                                                }).toList(),
-                                              ),
-                                            ),
-                                          )
-                                        : Container(
-                                            height: 42.h,
-                                            alignment: Alignment.center,
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 4.w),
-                                            decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              border: Border.all(
-                                                  color:
-                                                      const Color(0xffF4F4F4)),
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(5.r),
-                                              ),
-                                            ),
-                                            child: DropdownButtonHideUnderline(
-                                              child: DropdownButton(
-                                                  isExpanded: true,
-                                                  hint: Padding(
-                                                    padding:
-                                                        EdgeInsets.all(6.r),
-                                                    child: Text(
-                                                      editViewModel
-                                                          .data!.address!.city!
-                                                          .toString(),
-                                                      style: AppThemeData
-                                                          .hintTextStyle_13,
-                                                    ),
-                                                  ),
-                                                  value: _selectedCity,
-                                                  onChanged: (newValue) {
-                                                    setState(() {
-                                                      _selectedCity = newValue;
-                                                    });
-                                                  },
-                                                  items: null),
-                                            ),
-                                          ),
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                  flex: 0,
-                                  child: SizedBox(
-                                    width: 15.w,
-                                  )),
-                              /* Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      AppTags.postalCode.tr,
-                                      style: AppThemeData.titleTextStyle_13,
-                                    ),
-                                    SizedBox(
-                                      height: 8.h,
-                                    ),
-                                  */ /*  Container(
-                                      height: 42.h,
-                                      alignment: Alignment.center,
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 4.w),
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        border: Border.all(
-                                            color: const Color(0xffF4F4F4)),
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(5.r),
-                                        ),
-                                      ),
-                                      child: TextField(
-                                        controller: postalCodeController,
-                                        maxLines: 1,
-                                        textAlign: TextAlign.left,
-                                        keyboardType: TextInputType.name,
-                                        decoration: InputDecoration(
-                                          border: InputBorder.none,
-                                          hintText: editViewModel
-                                              .data!.address!.postalCode!
-                                              .toString(),
-                                          hintStyle:
-                                              AppThemeData.hintTextStyle_13,
-                                          contentPadding: EdgeInsets.only(
-                                              left: 8.w,
-                                              right: 8.w,
-                                              bottom: 8.h
-                                          ),
-                                        ),
-                                      ),
-                                    ),*/ /*
-                                  ],
-                                ),
-                              ),*/
-                            ],
+                          height: 42.h,
+                          alignment: Alignment.center,
+                          padding:
+                          EdgeInsets.only(left: 12.w, right: 4.w),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(
+                                color: const Color(0xffF4F4F4)),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(5.r),
+                            ),
                           ),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton(
+                              isExpanded: true,
+                              hint: Text(
+                                AppTags.selectState.tr,
+                                style: AppThemeData.hintTextStyle_13,
+                              ),
+                              value: _selectedState,
+                              onChanged: (newValue) {
+                                setState(
+                                      () {
+                                    print("_selectedCity $_selectedCity");
+                                    _selectedState = newValue!;
+                                    _selectedCity = null;
+                                    cityModel.data!.cities = [];
+
+                                      },
+                                );
+                              },
+                              items: stateListModel.data!.states!
+                                  .map((state) {
+                                return DropdownMenuItem(
+                                  onTap: () async {
+                                    await getCityList(state.id);
+                                    setState(() {});
+                                  },
+                                  value: state.id,
+                                  child: Text(state.name.toString()),
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                        )
+                            : Container(
+                          height: 42.h,
+                          alignment: Alignment.center,
+                          padding:
+                          EdgeInsets.only(left: 12.w, right: 4.w),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(
+                                color: const Color(0xffF4F4F4)),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(5.r),
+                            ),
+                          ),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton(
+                              isExpanded: true,
+                              hint: Text(AppTags.selectState.tr,
+                                  style: AppThemeData.hintTextStyle_13),
+                              value: _selectedState,
+                              onChanged: (newValue) {
+                                setState(
+                                      () {
+                                    print("@@@ _selectedCity $_selectedCity");
+                                    _selectedState = newValue!;
+                                    _selectedCity = null;
+                                    cityModel.data!.cities = [];
+                                  },
+                                );
+                              },
+                              items: null,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 16.r),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              AppTags.city.tr,
+                              style: AppThemeData.titleTextStyle_13,
+                            ),
+                            SizedBox(
+                              height: 8.h,
+                            ),
+                            cityModel.data != null
+                                ? Container(
+                              height: 42.h,
+                              alignment: Alignment.center,
+                              padding:
+                              EdgeInsets.only(left: 12.w, right: 4.w),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(
+                                    color: const Color(0xffF4F4F4)),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(5.r),
+                                ),
+                              ),
+                              child: DropdownButtonHideUnderline(
+                                child: DropdownButton(
+                                  isExpanded: true,
+                                  hint: Text(
+                                    AppTags.selectCity.tr,
+                                    style: AppThemeData.hintTextStyle_13,
+                                  ),
+                                  value: _selectedCity,
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      _selectedCity = newValue;
+                                    });
+                                  },
+                                  items:
+                                  cityModel.data!.cities!.map((city) {
+                                    return DropdownMenuItem(
+                                      onTap: () {},
+                                      value: city.id,
+                                      child: Text(city.name.toString()),
+                                    );
+                                  }).toList(),
+                                ),
+                              ),
+                            )
+                                : Container(
+                              height: 50.h,
+                              alignment: Alignment.center,
+                              padding:
+                              EdgeInsets.only(left: 12.w, right: 4.w),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(
+                                    color: const Color(0xffF4F4F4)),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(5.r),
+                                ),
+                              ),
+                              child: DropdownButtonHideUnderline(
+                                child: DropdownButton(
+                                    isExpanded: true,
+                                    hint: Text(AppTags.selectCity.tr,
+                                        style: AppThemeData
+                                            .hintTextStyle_13),
+                                    value: _selectedCity,
+                                    onChanged: (newValue) {
+                                      setState(() {
+                                        _selectedCity = newValue;
+                                      });
+                                    },
+                                    items: null),
+                              ),
+                            ),
+                          ],
+                        ),
+                        /*         SizedBox(
+                          height: 16.h,
+                        ),
+                        Text(
+                          AppTags.postalCode.tr,
+                          style: AppThemeData.titleTextStyle_13,
+                        ),*/
+                        SizedBox(
+                          height: 8.h,
                         ),
                         SizedBox(
                           height: 16.h,
@@ -2372,7 +2295,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                           height: 8.h,
                         ),
                         Container(
-                          height: 42.h,
+                          height: 30.h,
                           alignment: Alignment.center,
                           padding: EdgeInsets.symmetric(
                               horizontal: 4.w, vertical: 4.h),
@@ -2448,7 +2371,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                         },
                         child: Container(
                           alignment: Alignment.bottomRight,
-                          width: 80.w,
+                          width: 42.w,
                           height: 42.h,
                           decoration: BoxDecoration(
                             color: Colors.white,
