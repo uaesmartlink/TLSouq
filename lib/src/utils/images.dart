@@ -24,7 +24,8 @@ class Images {
   static String get like => 'like'.svg;
   static String get linkedin => 'linkedin'.svg;
   static String get iIcon => 'i_icon'.svg;
-
+  static String get setting => 'setting'.svg;
+  static String get settings_profile_wl => 'settings_profile_wl'.svg;
   static String get heartOn => 'heart_on'.svg;
   static String get heartOff => 'heart_off'.svg;
   static String get dUser => 'd_user'.svg;

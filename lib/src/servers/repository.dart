@@ -733,7 +733,7 @@ class Repository {
     required int countryId,
     required int stateId,
     required int cityId,
-    required String postalCode,
+    String? postalCode,
     required String address,
   }) async {
     var headers = {"apiKey": Config.apiKey};
@@ -766,7 +766,7 @@ class Repository {
     required int countryId,
     required int stateId,
     required int cityId,
-    required String postalCode,
+    String? postalCode,
     required String address,
     required int addressId,
   }) async {
@@ -1403,6 +1403,7 @@ class Repository {
       try {
         String url =
             "${NetworkService.apiUrl}/user/my-reward?token=$token&$langCurrCode";
+        print("url $url");
         return _service.fetchJsonData(url).then((response) {
           printLog("---------getMyReward: $response");
           if (response != null) return MyRewardModel.fromJson(response);

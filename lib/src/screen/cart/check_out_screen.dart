@@ -28,9 +28,9 @@ import '../../widgets/loader/loader_widget.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 
-
 class CheckOutScreen extends StatefulWidget {
   final AddToCartListModel? addToCartListModel;
+
   const CheckOutScreen({Key? key, this.addToCartListModel}) : super(key: key);
 
   @override
@@ -43,13 +43,15 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
-  final postalCodeController = TextEditingController();
+
+  // final postalCodeController = TextEditingController();
   final addressController = TextEditingController();
   final currencyConverterController = Get.find<CurrencyConverterController>();
   bool isSelectPickup = false;
-  bool isSelectBilling = false;
+  bool isSelectBilling = true;
   int? shippingIndex = 0;
   String? token = LocalDataHelper().getUserToken();
+
   void onShippingTapped(int? index) {
     setState(() {
       shippingIndex = index!;
@@ -57,6 +59,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
   }
 
   int? billingIndex = 0;
+
   void onBillingTapped(int? index) {
     setState(() {
       billingIndex = index!;
@@ -78,30 +81,35 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
   }
 
   ShippingAddressModel shippingAddressModel = ShippingAddressModel();
+
   Future getShippingAddress() async {
     shippingAddressModel = await Repository().getShippingAddress();
     setState(() {});
   }
 
   CountryListModel countryListModel = CountryListModel();
+
   Future getCountryList() async {
     countryListModel = await Repository().getCountryList();
     setState(() {});
   }
 
   StateListModel stateListModel = StateListModel();
+
   Future getStateList(int? countryId) async {
     stateListModel = await Repository().getStateList(countryId: countryId);
     setState(() {});
   }
 
   GetCityModel cityModel = GetCityModel();
+
   Future getCityList(int? stateId) async {
     cityModel = await Repository().getCityList(stateId: stateId);
     setState(() {});
   }
 
   EditViewModel editViewModel = EditViewModel();
+
   Future getEditViewAddress(int addressId) async {
     editViewModel = await Repository().getEditViewAddress(addressId);
     setState(() {});
@@ -112,7 +120,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
     nameController.dispose();
     emailController.dispose();
     phoneController.dispose();
-    postalCodeController.dispose();
+    // postalCodeController.dispose();
     addressController.dispose();
     super.dispose();
   }
@@ -123,354 +131,437 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
     return shippingAddressModel.data != null
         ? Scaffold(
             key: _scaffoldkey,
-            appBar: isMobile(context)? AppBar(
-              backgroundColor: Colors.white,
-              elevation: 0,
-              //toolbarHeight: 50.h,
-              leading: IconButton(
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: Colors.black,
-                  size: 20.r,
-                ),
+            appBar: isMobile(context)
+                ? AppBar(
+                    backgroundColor: Colors.white,
+                    elevation: 0,
+                    //toolbarHeight: 50.h,
+                    leading: IconButton(
+                      icon: Icon(
+                        Icons.arrow_back,
+                        color: Colors.black,
+                        size: 20.r,
+                      ),
 
-                onPressed: () {
-                  Get.back();
-                }, // null disables the button
-              ),
-              centerTitle: false,
-              title: Text(
-                AppTags.billingShippingAddress.tr,
-                style:AppThemeData.headerTextStyle_16,
-              ),
-              actions: [
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10.h),
-                  child: TextButton(
-                    child: Text(
-                      "+ ${AppTags.add.tr}",
-                      style: AppThemeData.addAddressTextStyle_13,
+                      onPressed: () {
+                        Get.back();
+                      }, // null disables the button
                     ),
-                    onPressed: () {
-                      if (token != null) {
-                        createAddress();
-                      } else {
-                        Get.snackbar(
-                          AppTags.login.tr,
-                          AppTags.pleaseLoginFirst.tr,
-                          snackPosition: SnackPosition.BOTTOM,
-                          duration: const Duration(seconds: 3),
-                          colorText: Colors.white,
-                          backgroundColor: Colors.black,
-                          forwardAnimationCurve: Curves.decelerate,
-                          shouldIconPulse: false,
-                        );
-                      }
-                    },
-                  ),
-                )
-              ],
-            ):AppBar(
-              backgroundColor: Colors.white,
-              elevation: 0,
-              toolbarHeight: 60.h,
-              leadingWidth: 40.w,
-              leading: IconButton(
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: Colors.black,
-                  size: 20.r,
-                ),
+                    centerTitle: false,
+                    title: Text(
+                      AppTags.billingShippingAddress.tr,
+                      style: AppThemeData.headerTextStyle_16,
+                    ),
+                    actions: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 10.h),
+                        child: TextButton(
+                          child: Text(
+                            "+ ${AppTags.add.tr}",
+                            style: AppThemeData.addAddressTextStyle_13,
+                          ),
+                          onPressed: () {
+                            if (token != null) {
+                              createAddress();
+                            } else {
+                              Get.snackbar(
+                                AppTags.login.tr,
+                                AppTags.pleaseLoginFirst.tr,
+                                snackPosition: SnackPosition.BOTTOM,
+                                duration: const Duration(seconds: 3),
+                                colorText: Colors.white,
+                                backgroundColor: Colors.black,
+                                forwardAnimationCurve: Curves.decelerate,
+                                shouldIconPulse: false,
+                              );
+                            }
+                          },
+                        ),
+                      )
+                    ],
+                  )
+                : AppBar(
+                    backgroundColor: Colors.white,
+                    elevation: 0,
+                    toolbarHeight: 60.h,
+                    leadingWidth: 40.w,
+                    leading: IconButton(
+                      icon: Icon(
+                        Icons.arrow_back,
+                        color: Colors.black,
+                        size: 20.r,
+                      ),
 
-                onPressed: () {
-                  Get.back();
-                }, // null disables the button
-              ),
-              centerTitle: false,
-              title: Text(
-                AppTags.billingShippingAddress.tr,
-                style: AppThemeData.headerTextStyle_14,
-              ),
-              actions: [
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10.h),
-                  child: TextButton(
-                    child: Text(
-                      "+ ${AppTags.add.tr}",
-                      style: AppThemeData.addAddressTextStyle_10Tab,
+                      onPressed: () {
+                        Get.back();
+                      }, // null disables the button
                     ),
-                    onPressed: () {
-                      if (token != null) {
-                        createAddress();
-                      } else {
-                        Get.snackbar(
-                          AppTags.login.tr,
-                          AppTags.pleaseLoginFirst.tr,
-                          snackPosition: SnackPosition.BOTTOM,
-                          duration: const Duration(seconds: 3),
-                          colorText: Colors.white,
-                          backgroundColor: Colors.black,
-                          forwardAnimationCurve: Curves.decelerate,
-                          shouldIconPulse: false,
-                        );
-                      }
-                    },
+                    centerTitle: false,
+                    title: Text(
+                      AppTags.billingShippingAddress.tr,
+                      style: AppThemeData.headerTextStyle_14,
+                    ),
+                    actions: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 10.h),
+                        child: TextButton(
+                          child: Text(
+                            "+ ${AppTags.add.tr}",
+                            style: AppThemeData.addAddressTextStyle_10Tab,
+                          ),
+                          onPressed: () {
+                            if (token != null) {
+                              createAddress();
+                            } else {
+                              Get.snackbar(
+                                AppTags.login.tr,
+                                AppTags.pleaseLoginFirst.tr,
+                                snackPosition: SnackPosition.BOTTOM,
+                                duration: const Duration(seconds: 3),
+                                colorText: Colors.white,
+                                backgroundColor: Colors.black,
+                                forwardAnimationCurve: Curves.decelerate,
+                                shouldIconPulse: false,
+                              );
+                            }
+                          },
+                        ),
+                      )
+                    ],
                   ),
-                )
-              ],
-            ),
             body: SizedBox(
               height: size.height,
               width: size.width,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(
-                    child: ListView(
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      children: [
-                        //PickUp Point
-                        shippingAddressModel.data!.pickupHubs!.isNotEmpty? Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 15.w, vertical: 7.5.h),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10.r),
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                    spreadRadius: 30,
-                                    blurRadius: 5,
-                                    color: const Color(0xffEEEEEE)
-                                        .withOpacity(0.01),
-                                    offset: const Offset(0, 15))
-                              ],
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: Row(
-                                children: [
-                                  InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        isSelectPickup = !isSelectPickup;
-                                      });
-                                    },
-                                    child: isSelectPickup
-                                        ? Container(
-                                            height: 18.h,
-                                            width: 18.w,
-                                            alignment: Alignment.center,
-                                            decoration: const BoxDecoration(
-                                              color: Color(0xff56A8C7),
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(5),
+                  (shippingAddressModel.data!.addresses!.isNotEmpty)
+                      ? Expanded(
+                          child: ListView(
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            children: [
+                              //PickUp Point
+                              shippingAddressModel.data!.pickupHubs!.isNotEmpty
+                                  ? Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 15.w, vertical: 7.5.h),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(10.r),
+                                          ),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                spreadRadius: 30,
+                                                blurRadius: 5,
+                                                color: const Color(0xffEEEEEE)
+                                                    .withOpacity(0.01),
+                                                offset: const Offset(0, 15))
+                                          ],
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(12.0),
+                                          child: Row(
+                                            children: [
+                                              InkWell(
+                                                onTap: () {
+                                                  setState(() {
+                                                    isSelectPickup =
+                                                        !isSelectPickup;
+                                                  });
+                                                },
+                                                child: isSelectPickup
+                                                    ? Container(
+                                                        height: 18.h,
+                                                        width: 18.w,
+                                                        alignment:
+                                                            Alignment.center,
+                                                        decoration:
+                                                            const BoxDecoration(
+                                                          color:
+                                                              Color(0xff56A8C7),
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                            Radius.circular(5),
+                                                          ),
+                                                        ),
+                                                        child: Padding(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  2.5.r),
+                                                          child: Icon(
+                                                            Icons.check,
+                                                            size: 14.r,
+                                                            color: Colors.white,
+                                                          ),
+                                                        ))
+                                                    : Container(
+                                                        height: 18.h,
+                                                        width: 18.w,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          border: Border.all(
+                                                              color: const Color(
+                                                                  0xffE1E1E1)),
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                            Radius.circular(
+                                                                5.r),
+                                                          ),
+                                                        ),
+                                                      ),
                                               ),
-                                            ),
-                                            child: Padding(
-                                              padding: EdgeInsets.all(2.5.r),
-                                              child: Icon(
-                                                Icons.check,
-                                                size: 14.r,
-                                                color: Colors.white,
+                                              SizedBox(
+                                                width: 10.w,
                                               ),
-                                            ))
-                                        : Container(
-                                            height: 18.h,
-                                            width: 18.w,
+                                              Text(AppTags.iWantToPickup.tr,
+                                                  style: isMobile(context)
+                                                      ? AppThemeData
+                                                          .headerTextStyle_14
+                                                      : AppThemeData
+                                                          .titleTextStyleTab)
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  : const SizedBox(),
+                              isSelectPickup
+                                  ? Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(
+                                          height: 26.h,
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 15.h),
+                                          child: Text(AppTags.pickupPoint.tr),
+                                        ),
+                                        SizedBox(
+                                          height: 11.h,
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 15.w),
+                                          child: Container(
+                                            height: 50.h,
                                             decoration: BoxDecoration(
+                                              color: Colors.white,
                                               border: Border.all(
                                                   color:
-                                                      const Color(0xffE1E1E1)),
+                                                      const Color(0xffEEEEEE)),
                                               borderRadius: BorderRadius.all(
-                                                Radius.circular(5.r),
+                                                  Radius.circular(5.r)),
+                                            ),
+                                            child: DropdownButtonHideUnderline(
+                                              child: Padding(
+                                                padding: EdgeInsets.only(
+                                                    left: 10.w, right: 10.w),
+                                                child: DropdownButton(
+                                                  isExpanded: true,
+                                                  hint: Text(
+                                                      AppTags
+                                                          .selectPickupPoint.tr,
+                                                      style: AppThemeData
+                                                          .hintTextStyle_13),
+                                                  // Not necessary for Option 1
+                                                  value: selectPickUpAddress,
+                                                  style: isMobile(context)
+                                                      ? AppThemeData
+                                                          .titleTextStyle_13
+                                                      : AppThemeData
+                                                          .titleTextStyleTab,
+                                                  onChanged: (newValue) {
+                                                    setState(() {
+                                                      selectPickUpAddress =
+                                                          newValue;
+                                                    });
+                                                  },
+                                                  items: shippingAddressModel
+                                                      .data!.pickupHubs!
+                                                      .map((pickUp) {
+                                                    return DropdownMenuItem(
+                                                      value: pickUp.id,
+                                                      child: Text(
+                                                        pickUp.address
+                                                            .toString(),
+                                                        style: isMobile(context)
+                                                            ? AppThemeData
+                                                                .titleTextStyle_13
+                                                            : AppThemeData
+                                                                .titleTextStyleTab,
+                                                      ),
+                                                    );
+                                                  }).toList(),
+                                                ),
                                               ),
                                             ),
                                           ),
-                                  ),
-                                  SizedBox(
-                                    width: 10.w,
-                                  ),
-                                  Text(AppTags.iWantToPickup.tr,
-                                      style: isMobile(context) ? AppThemeData.headerTextStyle_14:AppThemeData.titleTextStyleTab
+                                        ),
+                                      ],
+                                    )
+                                  : const SizedBox(),
+                              isSelectPickup
+                                  ? const SizedBox()
+                                  : token != null
+                                      ? Column(
+                                          children: [
+                                            shippingAddress(),
+                                            shippingAddressModel
+                                                    .data!.addresses!.isNotEmpty
+                                                ? Padding(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 15.w,
+                                                            vertical: 7.5.h),
+                                                    child: Container(
+                                                      decoration: BoxDecoration(
+                                                        color: const Color(
+                                                            0xffFFFFFF),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                          Radius.circular(10.r),
+                                                        ),
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                              spreadRadius: 30,
+                                                              blurRadius: 5,
+                                                              color: const Color(
+                                                                      0xff404040)
+                                                                  .withOpacity(
+                                                                      0.01),
+                                                              offset:
+                                                                  const Offset(
+                                                                      0, 15))
+                                                        ],
+                                                      ),
+                                                      child: Padding(
+                                                        padding: EdgeInsets.all(
+                                                            12.r),
+                                                        child: Row(
+                                                          children: [
+                                                            InkWell(
+                                                              onTap: () {
+                                                                setState(() {
+                                                                  isSelectBilling =
+                                                                      !isSelectBilling;
+                                                                });
+                                                              },
+                                                              child: isSelectBilling
+                                                                  ? Container(
+                                                                      height: 18.h,
+                                                                      width: 18.w,
+                                                                      alignment: Alignment.center,
+                                                                      decoration: BoxDecoration(
+                                                                        color: const Color(
+                                                                            0xff56A8C7),
+                                                                        borderRadius:
+                                                                            BorderRadius.all(
+                                                                          Radius.circular(
+                                                                              5.r),
+                                                                        ),
+                                                                      ),
+                                                                      child: Padding(
+                                                                        padding:
+                                                                            EdgeInsets.all(2.5.r),
+                                                                        child:
+                                                                            Icon(
+                                                                          Icons
+                                                                              .check,
+                                                                          size:
+                                                                              14.r,
+                                                                          color:
+                                                                              Colors.white,
+                                                                        ),
+                                                                      ))
+                                                                  : Container(
+                                                                      height:
+                                                                          18.h,
+                                                                      width:
+                                                                          18.w,
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        border: Border.all(
+                                                                            color:
+                                                                                const Color(0xffE1E1E1)),
+                                                                        borderRadius:
+                                                                            BorderRadius.all(
+                                                                          Radius.circular(
+                                                                              5.r),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                            ),
+                                                            SizedBox(
+                                                              width: 10.w,
+                                                            ),
+                                                            Text(
+                                                                AppTags
+                                                                    .billToTheSameAddress
+                                                                    .tr,
+                                                                style: isMobile(
+                                                                        context)
+                                                                    ? AppThemeData
+                                                                        .headerTextStyle_14
+                                                                    : AppThemeData
+                                                                        .titleTextStyleTab)
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  )
+                                                : const SizedBox(),
+                                            isSelectBilling
+                                                ? const SizedBox()
+                                                : billingAddress(),
+                                          ],
+                                        )
+                                      : const SizedBox(),
+                            ],
+                          ),
+                        )
+                      : Padding(
+                          padding: const EdgeInsets.only(
+                            top: 10,
+                          ),
+                          child: InkWell(
+                            onTap: () => {
+                              if (token != null)
+                                {createAddress()}
+                              else
+                                {
+                                  Get.snackbar(
+                                    AppTags.login.tr,
+                                    AppTags.pleaseLoginFirst.tr,
+                                    snackPosition: SnackPosition.BOTTOM,
+                                    duration: const Duration(seconds: 3),
+                                    colorText: Colors.white,
+                                    backgroundColor: Colors.black,
+                                    forwardAnimationCurve: Curves.decelerate,
+                                    shouldIconPulse: false,
                                   )
-                                ],
+                                }
+                            },
+                            child: const Text(
+                              "Add address",
+                              style: TextStyle(
+                                color: Colors.blue,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 14,
+                                fontFamily: 'Poppins',
                               ),
                             ),
                           ),
-                        ):const SizedBox(),
-                        isSelectPickup
-                            ? Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    height: 26.h,
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 15.h),
-                                    child: Text(AppTags.pickupPoint.tr),
-                                  ),
-                                  SizedBox(
-                                    height: 11.h,
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 15.w),
-                                    child: Container(
-                                      height: 50.h,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        border: Border.all(
-                                            color: const Color(0xffEEEEEE)),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(5.r)),
-                                      ),
-                                      child: DropdownButtonHideUnderline(
-                                        child: Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 10.w, right: 10.w),
-                                          child: DropdownButton(
-                                            isExpanded: true,
-                                            hint: Text(
-                                                AppTags.selectPickupPoint.tr,
-                                                style: AppThemeData
-                                                    .hintTextStyle_13),
-                                            // Not necessary for Option 1
-                                            value: selectPickUpAddress,
-                                            style:
-                                                isMobile(context) ? AppThemeData.titleTextStyle_13:AppThemeData.titleTextStyleTab,
-                                            onChanged: (newValue) {
-                                              setState(() {
-                                                selectPickUpAddress = newValue;
-                                              });
-                                            },
-                                            items: shippingAddressModel
-                                                .data!.pickupHubs!
-                                                .map((pickUp) {
-                                              return DropdownMenuItem(
-                                                value: pickUp.id,
-                                                child: Text(
-                                                  pickUp.address.toString(),
-                                                  style:  isMobile(context) ? AppThemeData.titleTextStyle_13:AppThemeData.titleTextStyleTab,
-                                                ),
-                                              );
-                                            }).toList(),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              )
-                            : const SizedBox(),
-                        isSelectPickup
-                            ? const SizedBox()
-                            : token != null
-                                ? Column(
-                                    children: [
-                                      shippingAddress(),
-                                      shippingAddressModel.data!.addresses!.isNotEmpty?Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 15.w, vertical: 7.5.h),
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            color: const Color(0xffFFFFFF),
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(10.r),
-                                            ),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                  spreadRadius: 30,
-                                                  blurRadius: 5,
-                                                  color: const Color(0xff404040)
-                                                      .withOpacity(0.01),
-                                                  offset: const Offset(0, 15))
-                                            ],
-                                          ),
-                                          child: Padding(
-                                            padding: EdgeInsets.all(12.r),
-                                            child: Row(
-                                              children: [
-                                                InkWell(
-                                                  onTap: () {
-                                                    setState(() {
-                                                      isSelectBilling =
-                                                          !isSelectBilling;
-                                                    });
-                                                  },
-                                                  child: isSelectBilling
-                                                      ? Container(
-                                                          height: 18.h,
-                                                          width: 18.w,
-                                                          alignment:
-                                                              Alignment.center,
-                                                          decoration: BoxDecoration(
-                                                            color: const Color(
-                                                                0xff56A8C7),
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .all(
-                                                              Radius.circular(
-                                                                  5.r),
-                                                            ),
-                                                          ),
-                                                          child: Padding(
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    2.5.r),
-                                                            child: Icon(
-                                                              Icons.check,
-                                                              size: 14.r,
-                                                              color:
-                                                                  Colors.white,
-                                                            ),
-                                                          ))
-                                                      : Container(
-                                                          height: 18.h,
-                                                          width: 18.w,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            border: Border.all(
-                                                                color: const Color(
-                                                                    0xffE1E1E1)),
-                                                            borderRadius: BorderRadius
-                                                                    .all(
-                                                              Radius.circular(
-                                                                  5.r),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                ),
-                                                SizedBox(
-                                                  width: 10.w,
-                                                ),
-                                                Text(AppTags
-                                                    .billToTheSameAddress.tr,
-                                                   style: isMobile(context) ? AppThemeData.headerTextStyle_14:AppThemeData.titleTextStyleTab
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ):const SizedBox(),
-                                      isSelectBilling
-                                          ? const SizedBox()
-                                          : billingAddress(),
-                                    ],
-                                  )
-                                : const SizedBox(),
-                      ],
-                    ),
-                  ),
-
-                  //Calculate Card
+                        ),
                   Padding(
-                    padding: EdgeInsets.only(right: 15.w, left: 15.w, bottom: 15.h),
+                    padding:
+                        EdgeInsets.only(right: 15.w, left: 15.w, bottom: 15.h),
                     child: Container(
                       decoration: BoxDecoration(
                         color: const Color(0xffFFFFFF),
@@ -494,34 +585,44 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                               children: [
                                 Text(
                                   AppTags.subTotal.tr,
-                                  style: isMobile(context)? AppThemeData.titleTextStyle_14 : AppThemeData.titleTextStyle_11Tab,
+                                  style: isMobile(context)
+                                      ? AppThemeData.titleTextStyle_14
+                                      : AppThemeData.titleTextStyle_11Tab,
                                 ),
                                 Text(
                                     currencyConverterController.convertCurrency(
                                         widget.addToCartListModel!.data!
                                             .calculations!.formattedSubTotal
                                             .toString()),
-                                    style: isMobile(context)? AppThemeData.titleTextStyle_14 : AppThemeData.titleTextStyle_11Tab),
+                                    style: isMobile(context)
+                                        ? AppThemeData.titleTextStyle_14
+                                        : AppThemeData.titleTextStyle_11Tab),
                               ],
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(AppTags.discount.tr,
-                                    style: isMobile(context)? AppThemeData.titleTextStyle_14 : AppThemeData.titleTextStyle_11Tab),
+                                    style: isMobile(context)
+                                        ? AppThemeData.titleTextStyle_14
+                                        : AppThemeData.titleTextStyle_11Tab),
                                 Text(
                                     currencyConverterController.convertCurrency(
                                         widget.addToCartListModel!.data!
                                             .calculations!.formattedDiscount
                                             .toString()),
-                                    style: isMobile(context)? AppThemeData.titleTextStyle_14 : AppThemeData.titleTextStyle_11Tab),
+                                    style: isMobile(context)
+                                        ? AppThemeData.titleTextStyle_14
+                                        : AppThemeData.titleTextStyle_11Tab),
                               ],
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(AppTags.deliveryCharge.tr,
-                                    style: isMobile(context)? AppThemeData.titleTextStyle_14 : AppThemeData.titleTextStyle_11Tab),
+                                    style: isMobile(context)
+                                        ? AppThemeData.titleTextStyle_14
+                                        : AppThemeData.titleTextStyle_11Tab),
                                 Text(
                                     currencyConverterController.convertCurrency(
                                       isSelectPickup
@@ -532,20 +633,26 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                               .calculations!
                                               .formattedShippingCost,
                                     ),
-                                    style: isMobile(context)? AppThemeData.titleTextStyle_14 : AppThemeData.titleTextStyle_11Tab),
+                                    style: isMobile(context)
+                                        ? AppThemeData.titleTextStyle_14
+                                        : AppThemeData.titleTextStyle_11Tab),
                               ],
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(AppTags.tax.tr,
-                                    style: isMobile(context)? AppThemeData.titleTextStyle_14 : AppThemeData.titleTextStyle_11Tab),
+                                    style: isMobile(context)
+                                        ? AppThemeData.titleTextStyle_14
+                                        : AppThemeData.titleTextStyle_11Tab),
                                 Text(
                                     currencyConverterController.convertCurrency(
                                       widget.addToCartListModel!.data!
                                           .calculations!.formattedTax,
                                     ),
-                                    style: isMobile(context)? AppThemeData.titleTextStyle_14 : AppThemeData.titleTextStyle_11Tab),
+                                    style: isMobile(context)
+                                        ? AppThemeData.titleTextStyle_14
+                                        : AppThemeData.titleTextStyle_11Tab),
                               ],
                             ),
                             const Divider(),
@@ -553,7 +660,9 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(AppTags.total.tr,
-                                    style:isMobile(context)? AppThemeData.titleTextStyle_14 : AppThemeData.titleTextStyle_11Tab),
+                                    style: isMobile(context)
+                                        ? AppThemeData.titleTextStyle_14
+                                        : AppThemeData.titleTextStyle_11Tab),
                                 Text(
                                     currencyConverterController.convertCurrency(
                                       isSelectPickup
@@ -571,7 +680,9 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                           : widget.addToCartListModel!.data!
                                               .calculations!.formattedTotal,
                                     ),
-                                    style: isMobile(context)? AppThemeData.titleTextStyle_14 : AppThemeData.titleTextStyle_11Tab),
+                                    style: isMobile(context)
+                                        ? AppThemeData.titleTextStyle_14
+                                        : AppThemeData.titleTextStyle_11Tab),
                               ],
                             ),
                             SizedBox(
@@ -582,33 +693,43 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                               child: InkWell(
                                 onTap: () async {
                                   if (shippingAddressModel
-                                          .data!.addresses!.isNotEmpty && isSelectPickup ==false) {
+                                          .data!.addresses!.isNotEmpty &&
+                                      isSelectPickup == false) {
                                     print("AA");
                                     await postConfirmOrder().then(
                                       (value) => Get.toNamed(
                                         Routes.paymentScreen,
                                         parameters: {
                                           'trxId': LocalDataHelper()
-                                                  .getCartTrxId() ?? "",
+                                                  .getCartTrxId() ??
+                                              "",
                                           'token': LocalDataHelper()
-                                                  .getUserToken() ?? ""
+                                                  .getUserToken() ??
+                                              ""
                                         },
                                       ),
                                     );
-                                  } else if(isSelectPickup && selectPickUpAddress!=null) {
+                                  } else if (isSelectPickup &&
+                                      selectPickUpAddress != null) {
                                     print("BB");
-                                  await postConfirmOrder().then((value) => Get.toNamed(
-                                    Routes.paymentScreen,
-                                    parameters: {
-                                      'trxId': LocalDataHelper().getCartTrxId() ?? "",
-                                      'token': LocalDataHelper().getUserToken() ?? ""
-                                    },
-                                  ),
-                                  );
-                                  }else{
+                                    await postConfirmOrder().then(
+                                      (value) => Get.toNamed(
+                                        Routes.paymentScreen,
+                                        parameters: {
+                                          'trxId': LocalDataHelper()
+                                                  .getCartTrxId() ??
+                                              "",
+                                          'token': LocalDataHelper()
+                                                  .getUserToken() ??
+                                              ""
+                                        },
+                                      ),
+                                    );
+                                  } else {
                                     Get.snackbar(
                                       AppTags.selectAddress.tr,
-                                      AppTags.pleaseSelectBullingOrPickupAddress.tr,
+                                      AppTags.pleaseSelectBullingOrPickupAddress
+                                          .tr,
                                       snackPosition: SnackPosition.BOTTOM,
                                       duration: const Duration(seconds: 3),
                                       colorText: Colors.white,
@@ -643,8 +764,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
         itemCount: shippingAddressModel.data!.addresses!.length,
         itemBuilder: (context, index) {
           return Padding(
-            padding:
-                 EdgeInsets.symmetric(horizontal: 15.w, vertical: 7.5.h),
+            padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 7.5.h),
             child: Container(
               decoration: BoxDecoration(
                 color: const Color(0xffFFFFFF),
@@ -682,13 +802,13 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                   height: 18.h,
                                   width: 18.w,
                                   alignment: Alignment.center,
-                                  decoration:  BoxDecoration(
+                                  decoration: BoxDecoration(
                                     color: const Color(0xffD16D86),
                                     borderRadius: BorderRadius.all(
                                       Radius.circular(5.r),
                                     ),
                                   ),
-                                  child:  Padding(
+                                  child: Padding(
                                     padding: EdgeInsets.all(2.5.r),
                                     child: Icon(
                                       Icons.check,
@@ -702,7 +822,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                   decoration: BoxDecoration(
                                     border: Border.all(
                                         color: const Color(0xffE1E1E1)),
-                                    borderRadius:  BorderRadius.all(
+                                    borderRadius: BorderRadius.all(
                                       Radius.circular(5.r),
                                     ),
                                   ),
@@ -713,20 +833,28 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                     SizedBox(height: 10.h),
                     Text(
                       "${AppTags.name.tr}: ${shippingAddressModel.data!.addresses![index].name.toString()}",
-                      style: isMobile(context)? AppThemeData.profileTextStyle_13:AppThemeData.profileTextStyle_10Tab,
+                      style: isMobile(context)
+                          ? AppThemeData.profileTextStyle_13
+                          : AppThemeData.profileTextStyle_10Tab,
                     ),
                     SizedBox(height: 8.h),
                     Text(
                         "${AppTags.email.tr}: ${shippingAddressModel.data!.addresses![index].email.toString()}",
-                        style: isMobile(context)? AppThemeData.profileTextStyle_13:AppThemeData.profileTextStyle_10Tab),
+                        style: isMobile(context)
+                            ? AppThemeData.profileTextStyle_13
+                            : AppThemeData.profileTextStyle_10Tab),
                     SizedBox(height: 8.h),
                     Text(
                         "${AppTags.phone.tr}: ${shippingAddressModel.data!.addresses![index].phoneNo.toString()}",
-                        style: isMobile(context)? AppThemeData.profileTextStyle_13:AppThemeData.profileTextStyle_10Tab),
+                        style: isMobile(context)
+                            ? AppThemeData.profileTextStyle_13
+                            : AppThemeData.profileTextStyle_10Tab),
                     SizedBox(height: 8.h),
                     Text(
                         "${AppTags.address.tr}: ${shippingAddressModel.data!.addresses![index].address.toString()}",
-                        style: isMobile(context)? AppThemeData.profileTextStyle_13:AppThemeData.profileTextStyle_10Tab),
+                        style: isMobile(context)
+                            ? AppThemeData.profileTextStyle_13
+                            : AppThemeData.profileTextStyle_10Tab),
                     SizedBox(height: 8.h),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -787,7 +915,9 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                             child: Padding(
                               padding: EdgeInsets.symmetric(vertical: 8.h),
                               child: Text(AppTags.delete.tr,
-                                  style: isMobile(context)?AppThemeData.buttonDltTextStyle_13 :AppThemeData.buttonDltTextStyle_10Tab),
+                                  style: isMobile(context)
+                                      ? AppThemeData.buttonDltTextStyle_13
+                                      : AppThemeData.buttonDltTextStyle_10Tab),
                             ),
                           ),
                         ),
@@ -818,7 +948,9 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                             child: Padding(
                               padding: EdgeInsets.symmetric(vertical: 8.h),
                               child: Text(AppTags.edit.tr,
-                                  style: isMobile(context)? AppThemeData.buttonTextStyle_13:AppThemeData.buttonTextStyle_10Tab),
+                                  style: isMobile(context)
+                                      ? AppThemeData.buttonTextStyle_13
+                                      : AppThemeData.buttonTextStyle_10Tab),
                             ),
                           ),
                         ),
@@ -909,20 +1041,28 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                     SizedBox(height: 10.h),
                     Text(
                       "${AppTags.name.tr}: ${shippingAddressModel.data!.addresses![index].name.toString()}",
-                      style: isMobile(context)? AppThemeData.profileTextStyle_13:AppThemeData.profileTextStyle_10Tab,
+                      style: isMobile(context)
+                          ? AppThemeData.profileTextStyle_13
+                          : AppThemeData.profileTextStyle_10Tab,
                     ),
                     SizedBox(height: 8.h),
                     Text(
                         "${AppTags.email.tr}: ${shippingAddressModel.data!.addresses![index].email.toString()}",
-                        style: isMobile(context)? AppThemeData.profileTextStyle_13:AppThemeData.profileTextStyle_10Tab),
-                   SizedBox(height: 8.h),
+                        style: isMobile(context)
+                            ? AppThemeData.profileTextStyle_13
+                            : AppThemeData.profileTextStyle_10Tab),
+                    SizedBox(height: 8.h),
                     Text(
                         "${AppTags.phone.tr}: ${shippingAddressModel.data!.addresses![index].phoneNo.toString()}",
-                        style: isMobile(context)? AppThemeData.profileTextStyle_13:AppThemeData.profileTextStyle_10Tab),
+                        style: isMobile(context)
+                            ? AppThemeData.profileTextStyle_13
+                            : AppThemeData.profileTextStyle_10Tab),
                     SizedBox(height: 8.h),
                     Text(
                         "${AppTags.address.tr}: ${shippingAddressModel.data!.addresses![index].address.toString()}",
-                        style: isMobile(context)? AppThemeData.profileTextStyle_13:AppThemeData.profileTextStyle_10Tab),
+                        style: isMobile(context)
+                            ? AppThemeData.profileTextStyle_13
+                            : AppThemeData.profileTextStyle_10Tab),
                     SizedBox(height: 15.h),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -983,7 +1123,9 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                             child: Padding(
                               padding: EdgeInsets.symmetric(vertical: 8.h),
                               child: Text(AppTags.delete.tr,
-                                  style: isMobile(context)?AppThemeData.buttonDltTextStyle_13 :AppThemeData.buttonDltTextStyle_10Tab),
+                                  style: isMobile(context)
+                                      ? AppThemeData.buttonDltTextStyle_13
+                                      : AppThemeData.buttonDltTextStyle_10Tab),
                             ),
                           ),
                         ),
@@ -1014,7 +1156,9 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                             child: Padding(
                               padding: EdgeInsets.symmetric(vertical: 8.h),
                               child: Text(AppTags.edit.tr,
-                                  style: isMobile(context)? AppThemeData.buttonTextStyle_13:AppThemeData.buttonTextStyle_10Tab),
+                                  style: isMobile(context)
+                                      ? AppThemeData.buttonTextStyle_13
+                                      : AppThemeData.buttonTextStyle_10Tab),
                             ),
                           ),
                         ),
@@ -1078,9 +1222,9 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
         'shipping_address[longitude]': shippingAddressModel
             .data!.addresses![shippingIndex!].longitude
             .toString(),
-        'shipping_address[postal_code]': shippingAddressModel
+        /*  'shipping_address[postal_code]': shippingAddressModel
             .data!.addresses![shippingIndex!].postalCode
-            .toString(),
+            .toString(),*/
         'billing_address[id]': isSelectBilling
             ? shippingAddressModel.data!.addresses![shippingIndex!].id
                 .toString()
@@ -1152,11 +1296,11 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                 .toString()
             : shippingAddressModel.data!.addresses![billingIndex!].longitude
                 .toString(),
-        'billing_address[postal_code]': isSelectBilling
+        /*'billing_address[postal_code]': isSelectBilling
             ? shippingAddressModel.data!.addresses![shippingIndex!].postalCode
                 .toString()
             : shippingAddressModel.data!.addresses![billingIndex!].postalCode
-                .toString(),
+                .toString(),*/
         'trx_id': LocalDataHelper().getCartTrxId().toString()
       };
     }
@@ -1447,7 +1591,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                 height: 42.h,
                                 alignment: Alignment.center,
                                 padding:
-                                     EdgeInsets.only(left: 12.w, right: 4.w),
+                                    EdgeInsets.only(left: 12.w, right: 4.w),
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   border: Border.all(
@@ -1489,7 +1633,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                 height: 42.h,
                                 alignment: Alignment.center,
                                 padding:
-                                     EdgeInsets.only(left: 12.w, right: 4.w),
+                                    EdgeInsets.only(left: 12.w, right: 4.w),
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   border: Border.all(
@@ -1530,8 +1674,8 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                 ? Container(
                                     height: 42.h,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.only(
-                                        left: 12.w, right: 4.w),
+                                    padding:
+                                        EdgeInsets.only(left: 12.w, right: 4.w),
                                     decoration: BoxDecoration(
                                       color: Colors.white,
                                       border: Border.all(
@@ -1567,8 +1711,8 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                 : Container(
                                     height: 42.h,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.only(
-                                        left: 12.w, right: 4.w),
+                                    padding:
+                                        EdgeInsets.only(left: 12.w, right: 4.w),
                                     decoration: BoxDecoration(
                                       color: Colors.white,
                                       border: Border.all(
@@ -1594,17 +1738,17 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                   ),
                           ],
                         ),
-                        SizedBox(
+                        /*         SizedBox(
                           height: 16.h,
                         ),
                         Text(
                           AppTags.postalCode.tr,
                           style: AppThemeData.titleTextStyle_13,
-                        ),
+                        ),*/
                         SizedBox(
                           height: 8.h,
                         ),
-                        Container(
+                        /*    Container(
                           height: 42.h,
                           alignment: Alignment.center,
                           padding: EdgeInsets.symmetric(horizontal: 4.h),
@@ -1635,7 +1779,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                               ),
                             ),
                           ),
-                        ),
+                        ),*/
                         SizedBox(
                           height: 10.h,
                         ),
@@ -1687,11 +1831,12 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                 ),
                 actions: <Widget>[
                   Padding(
-                    padding: EdgeInsets.only(
-                        left: 15.w, bottom: 15.h, right: 15.w),
+                    padding:
+                        EdgeInsets.only(left: 15.w, bottom: 15.h, right: 15.w),
                     child: InkWell(
                       onTap: () async {
                         if (formKey.currentState!.validate()) {
+                          Get.back();
                           await Repository()
                               .postCreateAddress(
                                 name: nameController.text.toString(),
@@ -1701,12 +1846,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                 countryId: _selectedCountry,
                                 stateId: _selectedState,
                                 cityId: _selectedCity,
-                                postalCode:
-                                    postalCodeController.text.toString(),
+                                // postalCode: postalCodeController.text.toString(),
                                 address: addressController.text.toString(),
                               )
                               .then((value) => getShippingAddress());
-                          Get.back();
                         }
                       },
                       child: Container(
@@ -1724,7 +1867,9 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                           alignment: Alignment.center,
                           child: Text(
                             AppTags.add.tr,
-                            style: isMobile(context)? AppThemeData.buttonTextStyle_13:AppThemeData.buttonTextStyle_10Tab,
+                            style: isMobile(context)
+                                ? AppThemeData.buttonTextStyle_13
+                                : AppThemeData.buttonTextStyle_10Tab,
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -1781,8 +1926,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                 size: 12.r,
                                 color: Colors.white,
                               ),
-                            )
-                        ),
+                            )),
                       ),
                     ],
                   ),
@@ -1895,9 +2039,8 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                   itemBuilder: _buildDropdownItem,
                                   onValuePicked: (Country country) {
                                     setState(() {
-                                      phoneCode=country.phoneCode;
+                                      phoneCode = country.phoneCode;
                                     });
-
                                   },
                                 ),
                               ),
@@ -1981,8 +2124,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                             ? Container(
                                 height: 42.h,
                                 alignment: Alignment.center,
-                                padding:
-                                     EdgeInsets.symmetric(horizontal: 4.w),
+                                padding: EdgeInsets.symmetric(horizontal: 4.w),
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   border: Border.all(
@@ -2027,8 +2169,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                             : Container(
                                 height: 42.h,
                                 alignment: Alignment.center,
-                                padding:
-                                     EdgeInsets.symmetric(horizontal: 4.h),
+                                padding: EdgeInsets.symmetric(horizontal: 4.h),
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   border: Border.all(
@@ -2082,15 +2223,14 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                         ? Container(
                                             height: 42.h,
                                             alignment: Alignment.center,
-                                            padding:  EdgeInsets.symmetric(
+                                            padding: EdgeInsets.symmetric(
                                                 horizontal: 4.w),
                                             decoration: BoxDecoration(
                                               color: Colors.white,
                                               border: Border.all(
                                                   color:
                                                       const Color(0xffF4F4F4)),
-                                              borderRadius:
-                                                   BorderRadius.all(
+                                              borderRadius: BorderRadius.all(
                                                 Radius.circular(5.r),
                                               ),
                                             ),
@@ -2098,9 +2238,8 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                               child: DropdownButton(
                                                 isExpanded: true,
                                                 hint: Padding(
-                                                  padding:
-                                                       EdgeInsets.only(
-                                                          left: 6.w),
+                                                  padding: EdgeInsets.only(
+                                                      left: 6.w),
                                                   child: Text(
                                                     editViewModel
                                                         .data!.address!.city!
@@ -2137,8 +2276,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                               border: Border.all(
                                                   color:
                                                       const Color(0xffF4F4F4)),
-                                              borderRadius:
-                                                   BorderRadius.all(
+                                              borderRadius: BorderRadius.all(
                                                 Radius.circular(5.r),
                                               ),
                                             ),
@@ -2147,8 +2285,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                                   isExpanded: true,
                                                   hint: Padding(
                                                     padding:
-                                                         EdgeInsets.all(
-                                                            6.r),
+                                                        EdgeInsets.all(6.r),
                                                     child: Text(
                                                       editViewModel
                                                           .data!.address!.city!
@@ -2174,7 +2311,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                   child: SizedBox(
                                     width: 15.w,
                                   )),
-                              Expanded(
+                              /* Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -2185,7 +2322,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                     SizedBox(
                                       height: 8.h,
                                     ),
-                                    Container(
+                                  */ /*  Container(
                                       height: 42.h,
                                       alignment: Alignment.center,
                                       padding: EdgeInsets.symmetric(
@@ -2217,10 +2354,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                           ),
                                         ),
                                       ),
-                                    ),
+                                    ),*/ /*
                                   ],
                                 ),
-                              ),
+                              ),*/
                             ],
                           ),
                         ),
@@ -2269,21 +2406,42 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                   ),
                   actions: <Widget>[
                     Padding(
-                      padding:  EdgeInsets.only(
+                      padding: EdgeInsets.only(
                           left: 15.w, bottom: 15.h, right: 15.w),
                       child: InkWell(
                         onTap: () async {
                           await Repository()
                               .updateEditAddress(
-                            name: nameController.text.isNotEmpty?nameController.text.toString():editViewModel.data!.address!.name.toString(),
-                            email: emailController.text.isNotEmpty?emailController.text.toString():editViewModel.data!.address!.email.toString(),
-                            phoneNo: phoneController.text.isNotEmpty?"+$phoneCode ${phoneController.text.toString()}":editViewModel.data!.address!.phoneNo.toString(),
-                            countryId: _selectedCountry ?? int.parse(editViewModel.data!.address!.addressIds!.countryId.toString()),
-                            stateId: _selectedState ?? int.parse(editViewModel.data!.address!.addressIds!.stateId.toString()),
-                            cityId: _selectedCity ?? int.parse(editViewModel.data!.address!.addressIds!.cityId.toString()),
-                            postalCode: postalCodeController.text.isNotEmpty?postalCodeController.text.toString():editViewModel.data!.address!.postalCode.toString(),
-                            address: addressController.text.isNotEmpty?addressController.text.toString():editViewModel.data!.address!.address.toString(),
-                            addressId: addressId!,
+                                name: nameController.text.isNotEmpty
+                                    ? nameController.text.toString()
+                                    : editViewModel.data!.address!.name
+                                        .toString(),
+                                email: emailController.text.isNotEmpty
+                                    ? emailController.text.toString()
+                                    : editViewModel.data!.address!.email
+                                        .toString(),
+                                phoneNo: phoneController.text.isNotEmpty
+                                    ? "+$phoneCode ${phoneController.text.toString()}"
+                                    : editViewModel.data!.address!.phoneNo
+                                        .toString(),
+                                countryId: _selectedCountry ??
+                                    int.parse(editViewModel
+                                        .data!.address!.addressIds!.countryId
+                                        .toString()),
+                                stateId: _selectedState ??
+                                    int.parse(editViewModel
+                                        .data!.address!.addressIds!.stateId
+                                        .toString()),
+                                cityId: _selectedCity ??
+                                    int.parse(editViewModel
+                                        .data!.address!.addressIds!.cityId
+                                        .toString()),
+                                // postalCode: postalCodeController.text.isNotEmpty?postalCodeController.text.toString():editViewModel.data!.address!.postalCode.toString(),
+                                address: addressController.text.isNotEmpty
+                                    ? addressController.text.toString()
+                                    : editViewModel.data!.address!.address
+                                        .toString(),
+                                addressId: addressId!,
                               )
                               .then((value) => getShippingAddress());
                           Get.back();
@@ -2303,7 +2461,9 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                             alignment: Alignment.center,
                             child: Text(
                               AppTags.add.tr,
-                              style: isMobile(context)? AppThemeData.buttonTextStyle_13:AppThemeData.buttonTextStyle_10Tab,
+                              style: isMobile(context)
+                                  ? AppThemeData.buttonTextStyle_13
+                                  : AppThemeData.buttonTextStyle_10Tab,
                               textAlign: TextAlign.center,
                             ),
                           ),

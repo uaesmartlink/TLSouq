@@ -36,7 +36,7 @@ class _AddressesState extends State<Addresses> {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
-  final postalCodeController = TextEditingController();
+  // final postalCodeController = TextEditingController();
   final addressController = TextEditingController();
   final currencyConverterController = Get.find<CurrencyConverterController>();
   int? shippingIndex = 0;
@@ -103,7 +103,7 @@ class _AddressesState extends State<Addresses> {
     nameController.dispose();
     emailController.dispose();
     phoneController.dispose();
-    postalCodeController.dispose();
+    // postalCodeController.dispose();
     addressController.dispose();
     super.dispose();
   }
@@ -818,14 +818,14 @@ class _AddressesState extends State<Addresses> {
                             ),
                           ],
                         ),
-                        SizedBox(
+                     /*   SizedBox(
                           height: 16.h,
                         ),
                         Text(
                           AppTags.postalCode.tr,
                           style: isMobile(context)? AppThemeData.titleTextStyle_13:AppThemeData.titleTextStyleTab,
-                        ),
-                        SizedBox(
+                        ),*/
+                     /*   SizedBox(
                           height: 8.h,
                         ),
                         Container(
@@ -859,7 +859,7 @@ class _AddressesState extends State<Addresses> {
                               ),
                             ),
                           ),
-                        ),
+                        ),*/
                         SizedBox(
                           height: 10.h,
                         ),
@@ -925,8 +925,7 @@ class _AddressesState extends State<Addresses> {
                             countryId: _selectedCountry,
                             stateId: _selectedState,
                             cityId: _selectedCity,
-                            postalCode:
-                            postalCodeController.text.toString(),
+                            // postalCode: postalCodeController.text.toString(),
                             address: addressController.text.toString(),
                           )
                               .then((value) => getShippingAddress());
@@ -1392,7 +1391,7 @@ class _AddressesState extends State<Addresses> {
                                   child: SizedBox(
                                     width: 15.w,
                                   )),
-                              Expanded(
+                            /*  Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -1437,7 +1436,7 @@ class _AddressesState extends State<Addresses> {
                                     ),
                                   ],
                                 ),
-                              ),
+                              ),*/
                             ],
                           ),
                         ),
@@ -1498,7 +1497,7 @@ class _AddressesState extends State<Addresses> {
                             countryId: _selectedCountry ?? int.parse(editViewModel.data!.address!.addressIds!.countryId.toString()),
                             stateId: _selectedState ?? int.parse(editViewModel.data!.address!.addressIds!.stateId.toString()),
                             cityId: _selectedCity ?? int.parse(editViewModel.data!.address!.addressIds!.cityId.toString()),
-                            postalCode: postalCodeController.text.isNotEmpty?postalCodeController.text.toString():editViewModel.data!.address!.postalCode.toString(),
+                            // postalCode: postalCodeController.text.isNotEmpty?postalCodeController.text.toString():editViewModel.data!.address!.postalCode.toString(),
                             address: addressController.text.isNotEmpty?addressController.text.toString():editViewModel.data!.address!.address.toString(),
                             addressId: addressId!,
                           )

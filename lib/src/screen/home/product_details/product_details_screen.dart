@@ -48,6 +48,7 @@ class DetailsPage extends StatelessWidget {
   final _colorSelectionController = Get.put(ColorSelectionController());
 
   final productId = Get.parameters['productId'];
+
   void _shareOnWhatsApp(String url) async {
     url = url.split("text=")[1];
     final link = Uri.encodeFull(url);
@@ -59,6 +60,7 @@ class DetailsPage extends StatelessWidget {
       throw 'Could not launch $whatsappUrl';
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: GetBuilder<DetailsPageController>(
@@ -1530,20 +1532,20 @@ class DetailsPage extends StatelessWidget {
                                         ),
                                         SizedBox(width: 8.w),
                                         InkWell(
-                                          onTap:() => _shareOnWhatsApp( detailsModel
-                                                      .data!.links!.whatsapp
-                                                      .toString()),
-                                              // () {
+                                          onTap: () => _shareOnWhatsApp(
+                                              detailsModel.data!.links!.whatsapp
+                                                  .toString()),
+                                          // () {
 
-                                            // Get.toNamed(
-                                            //   Routes.wvScreen,
-                                            //   parameters: {
-                                            //     'url': detailsModel
-                                            //         .data!.links!.whatsapp
-                                            //         .toString(),
-                                            //     'title': "WhatsApp",
-                                            //   },
-                                            // );
+                                          // Get.toNamed(
+                                          //   Routes.wvScreen,
+                                          //   parameters: {
+                                          //     'url': detailsModel
+                                          //         .data!.links!.whatsapp
+                                          //         .toString(),
+                                          //     'title': "WhatsApp",
+                                          //   },
+                                          // );
                                           // },
                                           child: Container(
                                             height:
@@ -1867,7 +1869,6 @@ class DetailsPage extends StatelessWidget {
                                                               .titleTextStyleTab),
                                                 ],
                                               ),
-
                                               Row(
                                                 children: [
                                                   Text(AppTags.price.tr,
@@ -2418,76 +2419,124 @@ class DetailsPage extends StatelessWidget {
                           ),
                         ),
                       )
-                    : Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 15.w, vertical: 15.h),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Container(
-                                height: 48.h,
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(10.r),
+                    : Column(
+                        children: [
+                          Padding(padding: EdgeInsets.only(top:10),
+                              child: RichText(text: TextSpan(
+                                text: "${AppTags.total.tr}: ",
+                                style: isMobile(context)
+                                    ? AppThemeData
+                                    .detailsScreenTotalPrice
+                                    : AppThemeData
+                                    .detailsScreenTotalPriceTab,
+                                children: [
+                                  TextSpan(
+                                    text:
+                                    currencyConverterController
+                                        .convertCurrency(
+                                        detailsController
+                                            .totalPrice
+                                            .toString()),
+                                    style: isMobile(context)
+                                        ? AppThemeData
+                                        .detailsScreenTotalPrice
+                                        : AppThemeData
+                                        .detailsScreenTotalPriceTab,
                                   ),
-                                  border: Border.all(
-                                    color: AppThemeData.headlineTextColor,
-                                    width: 1.r,
-                                  ),
-                                ),
-                                child: Padding(
-                                  padding: EdgeInsets.all(4.r),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Obx(() => RichText(
-                                            text: TextSpan(
-                                              text: "${AppTags.total.tr}: ",
-                                              style: isMobile(context)
-                                                  ? AppThemeData
-                                                      .detailsScreenTotal
-                                                  : AppThemeData
-                                                      .detailsScreenTotalTab,
-                                              children: [
-                                                TextSpan(
-                                                  text:
-                                                      currencyConverterController
-                                                          .convertCurrency(
-                                                              detailsController
-                                                                  .totalPrice
-                                                                  .toString()),
-                                                  style: isMobile(context)
-                                                      ? AppThemeData
-                                                          .detailsScreenTotalPrice
-                                                      : AppThemeData
-                                                          .detailsScreenTotalPriceTab,
-                                                ),
-                                              ],
-                                            ),
-                                          ))
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(width: 15.w),
-                            Expanded(
-                              child: InkWell(
-                                onTap: () {
-                                  if (detailsModel.data!.hasVariant!) {
-                                    if (_colorSelectionController
-                                                .selectedAttrId.value !=
-                                            "" &&
-                                        _colorSelectionController
-                                                .selectedAttrName.value !=
-                                            "") {
-                                      if (!_colorSelectionController
-                                              .selectedAttrId.value
-                                              .contains("**") &&
-                                          !_colorSelectionController
-                                              .selectedAttrName.value
-                                              .contains("**")) {
+                                ],),),),
+                          // Expanded(
+                          //   child: Container(
+                          //     height: 48.h,
+                          //     alignment: Alignment.center,
+                          //     decoration: BoxDecoration(
+                          //       borderRadius: BorderRadius.all(
+                          //         Radius.circular(10.r),
+                          //       ),
+                          //       border: Border.all(
+                          //         color: AppThemeData.headlineTextColor,
+                          //         width: 1.r,
+                          //       ),
+                          //     ),
+                          //     child: Padding(
+                          //       padding: EdgeInsets.all(4.r),
+                          //       child: Row(
+                          //         mainAxisAlignment: MainAxisAlignment.center,
+                          //         children: [
+                          //           Obx(() => RichText(
+                          //             text: TextSpan(
+                          //               text: "${AppTags.total.tr}: ",
+                          //               style: isMobile(context)
+                          //                   ? AppThemeData
+                          //                   .detailsScreenTotal
+                          //                   : AppThemeData
+                          //                   .detailsScreenTotalTab,
+                          //               children: [
+                          //                 TextSpan(
+                          //                   text:
+                          //                   currencyConverterController
+                          //                       .convertCurrency(
+                          //                       detailsController
+                          //                           .totalPrice
+                          //                           .toString()),
+                          //                   style: isMobile(context)
+                          //                       ? AppThemeData
+                          //                       .detailsScreenTotalPrice
+                          //                       : AppThemeData
+                          //                       .detailsScreenTotalPriceTab,
+                          //                 ),
+                          //               ],
+                          //             ),
+                          //           ))
+                          //         ],
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
+                          SizedBox(width: 15.w),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 15.w, vertical: 15.h),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: InkWell(
+                                    onTap: () {
+                                      if (detailsModel.data!.hasVariant!) {
+                                        if (_colorSelectionController
+                                                    .selectedAttrId.value !=
+                                                "" &&
+                                            _colorSelectionController
+                                                    .selectedAttrName.value !=
+                                                "") {
+                                          if (!_colorSelectionController
+                                                  .selectedAttrId.value
+                                                  .contains("**") &&
+                                              !_colorSelectionController
+                                                  .selectedAttrName.value
+                                                  .contains("**")) {
+                                            _cartController.addToCart(
+                                              productId: productId.toString(),
+                                              quantity: detailsController
+                                                  .productQuantity
+                                                  .toString(),
+                                              variantsIds:
+                                                  _colorSelectionController
+                                                      .selectedAttrId.value,
+                                              variantsNames:
+                                                  _colorSelectionController
+                                                      .selectedAttrName.value,
+                                            );
+                                          } else {
+                                            showCustomSnackBar(
+                                                AppTags.selectAttr.tr,
+                                                isError: true);
+                                          }
+                                        } else {
+                                          showCustomSnackBar(
+                                              AppTags.selectAttr.tr,
+                                              isError: true);
+                                        }
+                                      } else {
                                         _cartController.addToCart(
                                           productId: productId.toString(),
                                           quantity: detailsController
@@ -2499,66 +2548,49 @@ class DetailsPage extends StatelessWidget {
                                               _colorSelectionController
                                                   .selectedAttrName.value,
                                         );
-                                      } else {
-                                        showCustomSnackBar(
-                                            AppTags.selectAttr.tr,
-                                            isError: true);
                                       }
-                                    } else {
-                                      showCustomSnackBar(AppTags.selectAttr.tr,
-                                          isError: true);
-                                    }
-                                  } else {
-                                    _cartController.addToCart(
-                                      productId: productId.toString(),
-                                      quantity: detailsController
-                                          .productQuantity
-                                          .toString(),
-                                      variantsIds: _colorSelectionController
-                                          .selectedAttrId.value,
-                                      variantsNames: _colorSelectionController
-                                          .selectedAttrName.value,
-                                    );
-                                  }
-                                },
-                                child: Container(
-                                  height: 48.h,
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    color: AppThemeData.headlineTextColor,
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(10.r),
-                                    ),
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsets.all(4.r),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.all(10.r),
-                                          child: SvgPicture.asset(
-                                            Images.shoppingBag,
-                                            height: 15.h,
-                                            width: 13.w,
-                                          ),
+                                    },
+                                    child: Container(
+                                      height: 48.h,
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                        color: AppThemeData.headlineTextColor,
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(10.r),
                                         ),
-                                        Text(
-                                          AppTags.addToCart.tr,
-                                          style: isMobile(context)
-                                              ? AppThemeData.buttonTextStyle_14
-                                              : AppThemeData
-                                                  .buttonTextStyle_11Tab,
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsets.all(4.r),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsets.all(10.r),
+                                              child: SvgPicture.asset(
+                                                Images.shoppingBag,
+                                                height: 15.h,
+                                                width: 13.w,
+                                              ),
+                                            ),
+                                            Text(
+                                              AppTags.addToCart.tr,
+                                              style: isMobile(context)
+                                                  ? AppThemeData
+                                                      .buttonTextStyle_14
+                                                  : AppThemeData
+                                                      .buttonTextStyle_11Tab,
+                                            ),
+                                          ],
                                         ),
-                                      ],
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
           ],
         ),

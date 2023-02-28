@@ -4,8 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class AppThemeData {
   //splash screen
   static const Color splashScreenColor = Color(0xffFFFDF5);
+
   //home
   static const Color homeAppBarColor = Color(0xffFCB800);
+
   //button Color
   static const Color buttonColor = Color(0xff333333);
   static const Color buttonTextColor = Color(0xffFFFFFF);
@@ -36,13 +38,11 @@ class AppThemeData {
   static const Color darkBackgroundBottomNavColor = Color(0xFF1F1C34);
   static const Color dividerColor = Color(0xFFF3F3F3);
 
-
   static const Color drawerBoxColor = Color(0xff1E2836);
   static const Color drawerIconColor = Color(0xff666666);
+
   //invoice
   static const Color invoiceDividerColor = Color(0xFFEEEEEE);
-
-
 
   //product
   static const Color boxShadowColor = Color(0xff404040);
@@ -55,7 +55,6 @@ class AppThemeData {
   //Cart Item
   static const Color cartItemBoxDecorationColor = Color(0xffFFFFFF);
   static const Color cartItemIconColor = Color(0xff333333);
-
 
   //status bar color
   static const Color statusBarLight = Colors.white;
@@ -72,6 +71,7 @@ class AppThemeData {
   static const double mediumTextSize = 18.0;
   static const double largeTextSize = 22.0;
   static const double extraLargeTextSize = 24.0;
+
   //text color
   static const textColorDark = Color(0xFFD3DDF6);
   static const textColorLight = Color(0xFF000000);
@@ -79,32 +79,39 @@ class AppThemeData {
   //intro btn color
   static const introBtnColorDark = Color(0xff1F1C34);
   static const introBtnColorLight = Color(0x605C5E61);
+
   //divider color
   static const dividerColorDark = Color(0xFF99A5C5);
   static const dividerColorLight = Color(0xFFDBDBDB);
+
   //category color
   static const categoryColorDark = Color(0xFF99A5C5);
   static const categoryColorLight = Color(0x70111029);
   static const productCategoryBorderColor = Color(0xFFEEEEEE);
+
   //socialIcon color
   static const socialIconColorDark = Color(0xFF99A5C5);
   static const socialIconColorLight = Color(0xFF111029);
+
   //card background color
   static const cardBackgroundColorDark = Color(0xff1F1C34);
   static const cardBackgroundColorLight = Colors.white;
+
   //details screen color
   static const Color borderColor = Color(0xff808080);
   static const Color borderSideColor = Color(0xfff4f4f4);
   static const Color detailsIconColor = Color(0xff999999);
-  static const colorWhite=0xffffffff;
-  static const colorBlack=0xff808080;
+  static const colorWhite = 0xffffffff;
+  static const colorBlack = 0xff808080;
+
   //tracking order
   static const Color actColor = Color(0xff21CC26);
   static Color inActColor = const Color(0xff21CC26).withOpacity(0.3);
   static const Color bgColor = Color(0xffFAFAFA);
   static const Color dashedLineConnectorColor = Color(0xFF6DBEA3);
   static Color trackingSelectorColor = const Color(0xff6DBEA3);
-  static Color trackingUnSelectorColor = const Color(0xff6DBEA3).withOpacity(0.3);
+  static Color trackingUnSelectorColor =
+      const Color(0xff6DBEA3).withOpacity(0.3);
 
   //my reward, my download and wallet
   static const Color myRewardAppBarColor = Color(0xffF8F8F8);
@@ -120,6 +127,7 @@ class AppThemeData {
 
   //Address
   static const Color addressBoxBorderColor = Color(0xffF4F4F4);
+
   //multiple Color
   static const List voucherMultipleColor = [
     Color(0xFF6DBEA3),
@@ -150,6 +158,7 @@ class AppThemeData {
   //padding
   static const double wholeScreenPadding = 8.0;
   static const double normalPadding = 8.0;
+
   //card border radius
   static const double cardBorderRadius = 8.0;
   static const double cardElevation = 2.0;
@@ -204,7 +213,9 @@ class AppThemeData {
   static final addressDefaultTextStyle_10 = TextStyle(
       color: const Color(0xff666666), fontFamily: "Poppins", fontSize: 10.sp);
   static final priceVideoTextStyle_14 = TextStyle(
-      color: const Color(0xffF51E46), fontFamily: "Poppins Medium", fontSize: 14.sp);
+      color: const Color(0xffF51E46),
+      fontFamily: "Poppins Medium",
+      fontSize: 14.sp);
   static final headerTextStyle = TextStyle(
       color: const Color(0xff333333),
       fontFamily: "Poppins Medium",
@@ -475,15 +486,15 @@ class AppThemeData {
     overflow: TextOverflow.ellipsis,
   );
   static final detailsScreenTotal = TextStyle(
-    color: const Color(0xFF333333),
-    fontFamily: "Poppins Medium",
-    fontSize: 13.sp,
-  );
+      color: const Color(0xFF333333),
+      fontFamily: "Poppins Medium",
+      fontSize: 15.sp,
+      fontWeight: FontWeight.w500);
   static final detailsScreenTotalTab = TextStyle(
-    color: const Color(0xFF333333),
-    fontFamily: "Poppins Medium",
-    fontSize: 10.sp,
-  );
+      color: const Color(0xFF333333),
+      fontFamily: "Poppins Medium",
+      fontSize: 15.sp,
+      fontWeight: FontWeight.w500);
   static final detailsScreenTotalPrice = TextStyle(
     color: const Color(0xFF333333),
     fontWeight: FontWeight.bold,

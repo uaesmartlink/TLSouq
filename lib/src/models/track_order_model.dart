@@ -285,7 +285,7 @@ class ShippingAddress {
     city = json['city'];
     latitude = json['latitude'];
     longitude = json['longitude'];
-    postalCode = json['postal_code'];
+    // postalCode = json['postal_code'];
   }
   String? id;
   String? name;
@@ -315,7 +315,7 @@ class ShippingAddress {
     map['city'] = city;
     map['latitude'] = latitude;
     map['longitude'] = longitude;
-    map['postal_code'] = postalCode;
+    // map['postal_code'] = postalCode;
     return map;
   }
 }
@@ -375,7 +375,7 @@ class BillingAddress {
     city = json['city'];
     latitude = json['latitude'];
     longitude = json['longitude'];
-    postalCode = json['postal_code'];
+    // postalCode = json['postal_code'];
   }
   String? id;
   String? name;
@@ -405,7 +405,7 @@ class BillingAddress {
     map['city'] = city;
     map['latitude'] = latitude;
     map['longitude'] = longitude;
-    map['postal_code'] = postalCode;
+    // map['postal_code'] = postalCode;
     return map;
   }
 }

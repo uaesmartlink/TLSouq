@@ -107,7 +107,7 @@ class Addresses {
     city = json['city'];
     latitude = json['latitude'];
     longitude = json['longitude'];
-    postalCode = json['postal_code'];
+    // postalCode = json['postal_code'];
     defaultShipping = json['default_shipping'];
     defaultBilling = json['default_billing'];
     createdAt = json['created_at'];
@@ -130,7 +130,7 @@ class Addresses {
     data['city'] = city;
     data['latitude'] = latitude;
     data['longitude'] = longitude;
-    data['postal_code'] = postalCode;
+    // data['postal_code'] = postalCode;
     data['default_shipping'] = defaultShipping;
     data['default_billing'] = defaultBilling;
     data['created_at'] = createdAt;

@@ -162,7 +162,8 @@ class ShippingAddress {
       this.city,
       this.latitude,
       this.longitude,
-      this.postalCode});
+      // this.postalCode,
+      });
 
   ShippingAddress.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -178,7 +179,7 @@ class ShippingAddress {
     city = json['city'];
     latitude = json['latitude'];
     longitude = json['longitude'];
-    postalCode = json['postal_code'];
+    // postalCode = json['postal_code'];
   }
 
   Map<String, dynamic> toJson() {
@@ -196,7 +197,7 @@ class ShippingAddress {
     data['city'] = city;
     data['latitude'] = latitude;
     data['longitude'] = longitude;
-    data['postal_code'] = postalCode;
+    // data['postal_code'] = postalCode;
     return data;
   }
 }

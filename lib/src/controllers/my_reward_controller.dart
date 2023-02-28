@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:TLSouq/src/models/my_reward_model.dart';
 import 'package:TLSouq/src/servers/repository.dart';
+import 'package:get_storage/get_storage.dart';
 
 class MyRewardController extends GetxController {
   late Rx<MyRewardModel> myRewardModel = MyRewardModel().obs;
@@ -13,7 +14,9 @@ class MyRewardController extends GetxController {
 
   Future getMyReward() async {
     await Repository().getMyReward().then((value) {
-      myRewardModel.value = value!;
+        if(value != null) {
+          myRewardModel.value = value;
+        }
     });
     update();
   }
