@@ -13,15 +13,19 @@ class WVScreen extends StatelessWidget {
   WVScreen({
     Key? key,
   }) : super(key: key);
+
   final wvController = Get.put(WVController());
 
   final String url = Get.parameters['url']!;
   final String title = Get.parameters['title']!;
 
+
+
+
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => Scaffold(
+          () => Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -36,7 +40,7 @@ class WVScreen extends StatelessWidget {
           ),
           centerTitle: true,
           title: Text(
-          title,
+            title,
             style: AppThemeData.headerTextStyle_16,
           ),
         ),
@@ -60,7 +64,7 @@ class WVScreen extends StatelessWidget {
                       initialUserScripts: UnmodifiableListView<UserScript>([]),
                       initialOptions: wvController.options,
                       pullToRefreshController:
-                          wvController.pullToRefreshController,
+                      wvController.pullToRefreshController,
                       onWebViewCreated: (controller) {
                         wvController.webViewController = controller;
                       },
@@ -81,22 +85,22 @@ class WVScreen extends StatelessWidget {
                         wvController.isLoadingUpdate(false);
                         wvController.webViewController!
                             .evaluateJavascript(
-                                source: "javascript:(function() { "
-                                    "var head = document.getElementsByTagName('header')[0];"
-                                    "head.parentNode.removeChild(head);"
-                                    "})()")
+                            source: "javascript:(function() { "
+                                "var head = document.getElementsByTagName('header')[0];"
+                                "head.parentNode.removeChild(head);"
+                                "})()")
                             .then((value) =>
-                                debugPrint('Page finished loading Javascript'))
+                            debugPrint('Page finished loading Javascript'))
                             .catchError((onError) => debugPrint('$onError'));
 
                         wvController.webViewController!
                             .evaluateJavascript(
-                                source: "javascript:(function() { "
-                                    "var footer = document.getElementsByTagName('footer')[0];"
-                                    "footer.parentNode.removeChild(footer);"
-                                    "})()")
+                            source: "javascript:(function() { "
+                                "var footer = document.getElementsByTagName('footer')[0];"
+                                "footer.parentNode.removeChild(footer);"
+                                "})()")
                             .then((value) =>
-                                debugPrint('Page finished loading Javascript'))
+                            debugPrint('Page finished loading Javascript'))
                             .catchError((onError) => debugPrint('$onError'));
                         wvController.isLoadingUpdate(false);
                         wvController.pullToRefreshController.endRefreshing();
@@ -114,10 +118,10 @@ class WVScreen extends StatelessWidget {
                           (controller, url, androidIsReload) {},
                       onConsoleMessage: (controller, consoleMessage) {},
                       gestureRecognizers: {}..add(
-                          Factory<VerticalDragGestureRecognizer>(
-                            () => VerticalDragGestureRecognizer(),
-                          ),
+                        Factory<VerticalDragGestureRecognizer>(
+                              () => VerticalDragGestureRecognizer(),
                         ),
+                      ),
                     ),
                     wvController.isLoading.value
                         ? const Center(child: LoaderWidget())

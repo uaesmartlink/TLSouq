@@ -7,7 +7,7 @@ class Config {
   static String apiKey = "5XI9GCLSIUSF8DKL";
 
   //enter onesignal app id below
-  static String oneSignalAppId = "fe15cb82-a45f-4ea7-8501-9dd973547563";
+  static String oneSignalAppId = "d9ab061b-22dd-4eb6-9beb-c972ef7a0736";
   // find your ios APP id from app store
   static const String iosAppId = "";
   static const bool enableGoogleLogin = true;

@@ -40,7 +40,7 @@ class WVController extends GetxController {
           },
         )
       ],
-      options: ContextMenuOptions(hideDefaultSystemContextMenuItems: false),
+      options: ContextMenuOptions(hideDefaultSystemContextMenuItems: true),
       onCreateContextMenu: (hitTestResult) async {},
       onHideContextMenu: () {},
       onContextMenuActionItemClicked: (contextMenuItemClicked) async {},
@@ -64,9 +64,9 @@ class WVController extends GetxController {
   Future<bool> popScope() async {
     if (await webViewController!.canGoBack()) {
       webViewController?.goBack();
-      return false;
+      return true;
     } else {
-      return false;
+      return true;
     }
   }
 

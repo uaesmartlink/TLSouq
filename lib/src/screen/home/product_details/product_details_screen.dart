@@ -30,6 +30,7 @@ import '../../dashboard/dashboard_screen.dart';
 import 'description_image_view.dart';
 import 'details_image_view_screen.dart';
 import 'product_description.dart';
+import 'package:whatsapp_share/whatsapp_share.dart';
 
 class DetailsPage extends StatelessWidget {
   DetailsPage({Key? key}) : super(key: key);
@@ -47,7 +48,17 @@ class DetailsPage extends StatelessWidget {
   final _colorSelectionController = Get.put(ColorSelectionController());
 
   final productId = Get.parameters['productId'];
+  void _shareOnWhatsApp(String url) async {
+    url = url.split("text=")[1];
+    final link = Uri.encodeFull(url);
+    final whatsappUrl = "https://wa.me/?text=$link";
 
+    if (await canLaunch(whatsappUrl)) {
+      await launch(whatsappUrl);
+    } else {
+      throw 'Could not launch $whatsappUrl';
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: GetBuilder<DetailsPageController>(
@@ -1519,17 +1530,21 @@ class DetailsPage extends StatelessWidget {
                                         ),
                                         SizedBox(width: 8.w),
                                         InkWell(
-                                          onTap: () {
-                                            Get.toNamed(
-                                              Routes.wvScreen,
-                                              parameters: {
-                                                'url': detailsModel
-                                                    .data!.links!.whatsapp
-                                                    .toString(),
-                                                'title': "WhatsApp",
-                                              },
-                                            );
-                                          },
+                                          onTap:() => _shareOnWhatsApp( detailsModel
+                                                      .data!.links!.whatsapp
+                                                      .toString()),
+                                              // () {
+
+                                            // Get.toNamed(
+                                            //   Routes.wvScreen,
+                                            //   parameters: {
+                                            //     'url': detailsModel
+                                            //         .data!.links!.whatsapp
+                                            //         .toString(),
+                                            //     'title': "WhatsApp",
+                                            //   },
+                                            // );
+                                          // },
                                           child: Container(
                                             height:
                                                 isMobile(context) ? 38.h : 40.h,

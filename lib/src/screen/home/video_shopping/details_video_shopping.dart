@@ -88,8 +88,7 @@ class  DetailsVideoShopping extends StatelessWidget {
           children: [
             HtmlWidget(
             "<p><iframe src=\"https://www.facebook.com/plugins/video.php?href=${videoShoppingDetailsModel.data!.video!.videoUrl}/\" style=\"border:none;overflow:hidden\" scrolling=\"no\" frameborder=\"0\" allowtransparency=\"false\" allowfullscreen=\"true\"></iframe></p>",
-              webView: true,
-              webViewJs: true,
+
             ),
             backButton(context),
           ],
