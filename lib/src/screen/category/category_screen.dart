@@ -1409,7 +1409,7 @@ class CategoryScreen extends StatelessWidget {
                                             .subCategories!
                                             .isNotEmpty
                                         ? 300
-                                        : 500,
+                                        : size.height - 150,
                                     child: Scrollbar(
                                       child: ListView.builder(
                                         controller: _catController
