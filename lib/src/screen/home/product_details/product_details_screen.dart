@@ -774,6 +774,33 @@ class DetailsPage extends StatelessWidget {
                               ],
                             ),
                             SizedBox(height: 13.h),
+                            Row( children: [
+                              Text(
+                                detailsModel.data!.category!.title,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 12,
+                                ),
+                              ),
+                              SizedBox(width: 3,),
+                              Text(
+                                '-',
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 12,
+                                ),
+                              ),
+                              SizedBox(width: 3,),
+
+                              Text(
+                                detailsModel.data!.brand!,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],),
+                            SizedBox(height: 10.h),
                             detailsModel.data!.isClassified!
                                 ? Container(
                                     alignment: Alignment.center,
@@ -2421,29 +2448,29 @@ class DetailsPage extends StatelessWidget {
                       )
                     : Column(
                         children: [
-                          Padding(padding: EdgeInsets.only(top:10),
-                              child: RichText(text: TextSpan(
+                          Padding(
+                            padding: EdgeInsets.only(top: 10),
+                            child: RichText(
+                              text: TextSpan(
                                 text: "${AppTags.total.tr}: ",
                                 style: isMobile(context)
-                                    ? AppThemeData
-                                    .detailsScreenTotalPrice
-                                    : AppThemeData
-                                    .detailsScreenTotalPriceTab,
+                                    ? AppThemeData.detailsScreenTotalPrice
+                                    : AppThemeData.detailsScreenTotalPriceTab,
                                 children: [
                                   TextSpan(
-                                    text:
-                                    currencyConverterController
-                                        .convertCurrency(
-                                        detailsController
+                                    text: currencyConverterController
+                                        .convertCurrency(detailsController
                                             .totalPrice
                                             .toString()),
                                     style: isMobile(context)
-                                        ? AppThemeData
-                                        .detailsScreenTotalPrice
+                                        ? AppThemeData.detailsScreenTotalPrice
                                         : AppThemeData
-                                        .detailsScreenTotalPriceTab,
+                                            .detailsScreenTotalPriceTab,
                                   ),
-                                ],),),),
+                                ],
+                              ),
+                            ),
+                          ),
                           // Expanded(
                           //   child: Container(
                           //     height: 48.h,
@@ -2658,6 +2685,7 @@ class DetailsPage extends StatelessWidget {
                             )
                           ],
                         ),
+                        Text("Hello"),
                         SizedBox(
                           height: 4.h,
                         ),

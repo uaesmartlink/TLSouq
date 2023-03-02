@@ -11,11 +11,14 @@ class MyRewardController extends GetxController {
   var isLoading=false.obs;
 
   Future getMyReward() async {
+    print("Hello getMyReward");
     await Repository().getMyReward().then((value) {
-        if(value != null) {
-          myRewardModel.value = value;
-        }
+        // if(value != null) {
+          myRewardModel.value = value!;
+          print(value);
+        // }
     });
+
     update();
   }
 
@@ -28,6 +31,7 @@ class MyRewardController extends GetxController {
 
   @override
   void onInit() {
+    print("Hello MyRewards");
     convertRewardController!.addListener(() {
       convertedReward.value=convertRewardController!.text;
     });

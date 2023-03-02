@@ -84,8 +84,11 @@ class Repository {
       "provider": providerId,
       "uid": uid,
     };
+    print("XXXXXXX");
     print("url $url");
     print("data: $data");
+    print("XXXXXXX");
+
     try {
       final response = await http.post(url,
           headers: headers, body: data, encoding: Encoding.getByName("utf-8"));
@@ -1156,6 +1159,8 @@ class Repository {
     var headers = {"apiKey": Config.apiKey};
     var url = Uri.parse(
         "${NetworkService.apiUrl}/product-details/$productId?token=${LocalDataHelper().getUserToken()}&$langCurrCode");
+    print('url $url');
+
     final response = await http.get(url, headers: headers);
     try {
       var data = json.decode(response.body);

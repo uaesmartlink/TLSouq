@@ -162,6 +162,7 @@ class DetailsPageController extends GetxController {
 
   Future<ProductDetailsModel> getProductDetails(int proId) async {
     return await Repository().getProductDetails(proId).then((value) {
+
       productDetail.value = value;
       _minimumOrderQuantity.value = value.data!.minimumOrderQuantity ?? 1;
       productQuantity.value = _minimumOrderQuantity.value;

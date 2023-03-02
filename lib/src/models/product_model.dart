@@ -1,3 +1,4 @@
+import './category_model.dart';
 class Product {
   int? id;
   String? name;
@@ -5,8 +6,9 @@ class Product {
   int quantity;
   String? image;
   String? description;
-
+  Category? category;
+  String? brand;
   Product(this.id, this.name, this.price, this.quantity, this.image,
-      this.description);
+      this.description, this.category,this.brand);
 
 }

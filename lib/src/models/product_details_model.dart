@@ -1,3 +1,4 @@
+import './category_model.dart';
 class ProductDetailsModel {
   bool? success;
   String? message;
@@ -60,7 +61,8 @@ class Data {
   List<WholesalePrices>? wholesalePrices;
   FormData? form;
   Links? links;
-
+  Category? category;
+  String? brand;
   ClassifiedContactInfo? classifiedContactInfo;
   String? catalogExternalLink;
 
@@ -104,6 +106,8 @@ class Data {
     this.links,
     this.catalogExternalLink,
     this.classifiedContactInfo,
+    this.category,
+    this.brand,
   });
 
   Data.fromJson(Map<String, dynamic> json) {
@@ -152,6 +156,13 @@ class Data {
         reviews!.add(Reviews.fromJson(v));
       });
     }
+    print("Farsha: ${json['category']['icon']}");
+    print("Farsha: ${json['category_language'][0]['title']}");
+    category = Category(icon: json['category']['icon'], title: json['category_language'][0]['title']);
+    print(category!.icon);
+    print(category!.title);
+    brand = json['brand']['title'];
+    print(brand);
     isReviewed = json['is_reviewed'];
     delivery = json['delivery'];
     returnData = json['return'];
@@ -188,6 +199,7 @@ class Data {
     data['reward'] = reward;
     data['total_images'] = totalImages;
     data['images'] = images;
+
     if (colors != null) {
       data['colors'] = colors!.map((v) => v.toJson()).toList();
     }
