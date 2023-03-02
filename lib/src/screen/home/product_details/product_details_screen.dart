@@ -27,6 +27,7 @@ import '../../../widgets/button_widget.dart';
 import '../../../widgets/loader/shimmer_details_page.dart';
 import '../../../widgets/wholesale_data_widget.dart';
 import '../../dashboard/dashboard_screen.dart';
+import '../category/product_by_category_screen.dart';
 import 'description_image_view.dart';
 import 'details_image_view_screen.dart';
 import 'product_description.dart';
@@ -774,32 +775,52 @@ class DetailsPage extends StatelessWidget {
                               ],
                             ),
                             SizedBox(height: 13.h),
-                            Row( children: [
-                              Text(
-                                detailsModel.data!.category!.title,
-                                style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 12,
+                            Row(
+                              children: [
+                                InkWell(
+                                  child: Text(
+                                    detailsModel.data!.category!.title,
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (_) => ProductByCategory(
+                                          id: int.parse(
+                                              detailsModel.data!.category!.id.toString()),
+                                          title: detailsModel
+                                              .data!.category!.title,
+                                        ),
+                                      ),
+                                    );
+                                  },
                                 ),
-                              ),
-                              SizedBox(width: 3,),
-                              Text(
-                                '-',
-                                style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 12,
+                                SizedBox(
+                                  width: 3,
                                 ),
-                              ),
-                              SizedBox(width: 3,),
-
-                              Text(
-                                detailsModel.data!.brand!,
-                                style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 12,
+                                const Text(
+                                  '-',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 12,
+                                  ),
                                 ),
-                              ),
-                            ],),
+                                SizedBox(
+                                  width: 3,
+                                ),
+                                Text(
+                                  detailsModel.data!.brand!,
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
+                            ),
                             SizedBox(height: 10.h),
                             detailsModel.data!.isClassified!
                                 ? Container(

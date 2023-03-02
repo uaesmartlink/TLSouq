@@ -1,4 +1,5 @@
 import './category_model.dart';
+
 class ProductDetailsModel {
   bool? success;
   String? message;
@@ -158,7 +159,14 @@ class Data {
     }
     print("Farsha: ${json['category']['icon']}");
     print("Farsha: ${json['category_language'][0]['title']}");
-    category = Category(icon: json['category']['icon'], title: json['category_language'][0]['title']);
+    print("Farsha: ${json['category']['id']}");
+    print("Farsha: ${json['category']['parent_id']}");
+    category = Category(
+      id: json['category']['id'],
+      parentId: json['category']['parent_id'],
+      icon: json['category']['icon'],
+      title: json['category_language'][0]['title'],
+    );
     print(category!.icon);
     print(category!.title);
     brand = json['brand']['title'];
@@ -256,6 +264,7 @@ class WholesalePrices {
     required this.createdAt,
     required this.updatedAt,
   });
+
   late final int id;
   late final int productStockId;
   late final int minQty;

@@ -695,7 +695,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                   if (shippingAddressModel
                                           .data!.addresses!.isNotEmpty &&
                                       isSelectPickup == false) {
-                                    print("AA");
+                                    print("AAAA");
                                     await postConfirmOrder().then(
                                       (value) => Get.toNamed(
                                         Routes.paymentScreen,
@@ -1162,13 +1162,14 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
   Future postConfirmOrder() async {
     var headers = {"apiKey": Config.apiKey};
     Map<String, String> bodyData;
-
+    print("Any");
     if (isSelectPickup) {
       bodyData = {
         'pick_hub_id': selectPickUpAddress.toString(),
         'trx_id': LocalDataHelper().getCartTrxId().toString()
       };
     } else {
+      print("SSS");
       bodyData = {
         'shipping_address[id]':
             shippingAddressModel.data!.addresses![shippingIndex!].id.toString(),
@@ -1298,13 +1299,14 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
       url = Uri.parse(
           "${NetworkService.apiUrl}/confirm-order?token=${LocalDataHelper().getUserToken()}");
     }
+    print("url confirm $url");
     _write("bodyData: $bodyData");
     final response = await http.post(
       url,
       body: bodyData,
       headers: headers,
     );
-    print("response.body: ${response.body}");
+    print("response.body-confirm-order: ${response.body}");
     if (response.statusCode == 200) {
       print("TESt");
       // showShortToast(data["message"].toString());
