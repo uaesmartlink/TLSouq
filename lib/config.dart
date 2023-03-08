@@ -11,7 +11,7 @@ class Config {
   // find your ios APP id from app store
   static const String iosAppId = "";
   static const bool enableGoogleLogin = true;
-  static const bool enableFacebookLogin = true;
+  static const bool enableFacebookLogin = false;
   // if "groceryCartMode = true" then product will be added to cart directly
   static const bool groceryCartMode = true;
 

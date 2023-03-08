@@ -250,7 +250,6 @@ class HomeProductCard extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: AppThemeData.cartItemBoxDecorationColor,
                           shape: BoxShape.circle,
-
                           boxShadow: [
                             BoxShadow(
                               spreadRadius: 3,
@@ -315,7 +314,6 @@ class HomeProductCard extends StatelessWidget {
                               ),
                             ),
                           ),
-
                           AnimatedSwitcher(
                             duration: const Duration(milliseconds: 500),
                             transitionBuilder:
@@ -335,7 +333,7 @@ class HomeProductCard extends StatelessWidget {
                               ),
                             ),
                           ),
-                       InkWell(
+                          InkWell(
                             onTap: () async {
                               int? indexProduct  = _cartController.incrementProduct(dataModel![index].id);
                               printLog(indexProduct);

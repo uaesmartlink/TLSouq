@@ -33,7 +33,7 @@ class CartContentController extends GetxController {
   }
 
 
-  int incrementProduct(int productId){
+  int incrementProduct(var productId){
    int index =  _addToCartListModel.value.data!.carts!.indexWhere((element) =>element.productId==productId);
    //printLog("index == $index");
    return index;

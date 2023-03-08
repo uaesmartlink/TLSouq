@@ -17,6 +17,7 @@ class DashboardScreen extends StatelessWidget {
   DashboardScreen({Key? key}) : super(key: key);
   final homeController = Get.find<DashboardController>();
   final cartContentController = Get.put(CartContentController());
+
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -38,7 +39,8 @@ class DashboardScreen extends StatelessWidget {
           onTap: homeController.changeTabIndex,
           currentIndex: homeController.tabIndex.value,
           selectedItemColor: AppThemeData.buttonColor,
-          selectedLabelStyle: const TextStyle(color: AppThemeData.headlineTextColor),
+          selectedLabelStyle:
+              const TextStyle(color: AppThemeData.headlineTextColor),
           elevation: 5.0,
           showSelectedLabels: false,
           showUnselectedLabels: false,
@@ -127,7 +129,6 @@ class DashboardScreen extends StatelessWidget {
     );
   }
 
-
   Widget _bottomNavIconBuilder({
     required bool isSelected,
     required String logo,
@@ -135,37 +136,45 @@ class DashboardScreen extends StatelessWidget {
     required double width,
     bool isCart = false,
   }) {
-    return isCart
-        ? badge.Badge(
-            badgeAnimation: const badge.BadgeAnimation.slide( animationDuration: Duration(milliseconds: 300)),
-            badgeContent: Text(
-              cartContentController.addToCartListModel.data != null
-                  ? cartContentController.addToCartListModel.data!.carts != null
-                      ? cartContentController
-                          .addToCartListModel.data!.carts!.length
-                          .toString()
-                      : "0"
-                  : "0",
-              style:  TextStyle(
-                color: Colors.white,
-                fontSize: 9.sp
-              ),
-            ),
-            child: SvgPicture.asset(
-              Images.cart,
-              width: width,
-              height: height,
-            ),
-          )
-        : SizedBox(
-            height: 35.h,
-            child: Center(
-              child: SvgPicture.asset(
-                "assets/icons/$logo.svg",
-                height: height,
-                width: width,
-              ),
-            ),
-          );
+    if (isCart) {
+      if (cartContentController.addToCartListModel.data != null &&
+          cartContentController.addToCartListModel.data!.carts != null &&
+          cartContentController.addToCartListModel.data!.carts!.isNotEmpty
+      ) {
+        return badge.Badge(
+          badgeAnimation: const badge.BadgeAnimation.slide(
+              animationDuration: Duration(milliseconds: 300)),
+          badgeContent: Text(
+            cartContentController.addToCartListModel.data!.carts!.length
+                .toString(),
+            style: TextStyle(color: Colors.white, fontSize: 9.sp),
+          ),
+          child: SvgPicture.asset(
+            Images.redCart,
+            width: width,
+            height: height,
+          ),
+        );
+        //       )
+      }else{
+        return SvgPicture.asset(
+          Images.redCart,
+          width: width,
+          height: height,
+        );
+      }
+    }
+
+    return SizedBox(
+      height: 35.h,
+      child: Center(
+        child: SvgPicture.asset(
+          "assets/icons/$logo.svg",
+          height: height,
+          width: width,
+        ),
+      ),
+    );
+
   }
 }

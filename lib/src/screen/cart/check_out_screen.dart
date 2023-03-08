@@ -873,6 +873,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                     ),
                                     TextButton(
                                       onPressed: () async {
+                                        Navigator.of(context,
+                                            rootNavigator: true)
+                                            .pop(
+                                            true);
                                         await Repository()
                                             .deleteUserAddress(
                                                 addressId: shippingAddressModel
@@ -882,10 +886,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                                 getShippingAddress());
                                         setState(() {});
                                         if (!mounted) return;
-                                        Navigator.of(context,
-                                                rootNavigator: true)
-                                            .pop(
-                                                true); // dismisses only the dialog and returns true
+                                        // dismisses only the dialog and returns true
                                       },
                                       child: Text(AppTags.yes.tr),
                                     ),
@@ -1074,6 +1075,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                     ),
                                     TextButton(
                                       onPressed: () async {
+                                        Navigator.of(context,
+                                            rootNavigator: true)
+                                            .pop(
+                                            true);
                                         await Repository()
                                             .deleteUserAddress(
                                                 addressId: shippingAddressModel

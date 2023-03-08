@@ -8,6 +8,8 @@ class Images {
   static String get phoneLogin => 'phone_login'.svg;
   static String get emptyCart => 'empty_cart'.svg;
   static String get noInternet => 'nointernet'.svg;
+  static String get redCart => 'red_cart'.svg;
+
   static String get campaignShopArrow => 'campaign_shop_arrow'.svg;
   static String get cart => 'cart'.svg;
   static String get exit => 'exit'.svg;

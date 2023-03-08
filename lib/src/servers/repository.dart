@@ -1314,6 +1314,7 @@ class Repository {
     var headers = {"apiKey": Config.apiKey};
     var url = Uri.parse(
         "${NetworkService.apiUrl}/coupons?token=${LocalDataHelper().getUserToken()}&$langCurrCode");
+    print("url $url");
     final response = await http.get(url, headers: headers);
     var data = json.decode(response.body.toString());
     if (response.statusCode == 200) {

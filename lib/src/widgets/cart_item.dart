@@ -14,6 +14,7 @@ class CartItem extends StatelessWidget {
   final currencyConverterController = Get.find<CurrencyConverterController>();
   late final AddToCartListModel cartList;
   late final Carts cart;
+
   // ignore: prefer_const_constructors_in_immutables
   CartItem({required cartList, required this.cart, Key? key}) : super(key: key);
 
@@ -81,7 +82,8 @@ class CartItem extends StatelessWidget {
                         Text(
                           cart.productName.toString(),
                           style: isMobile(context)
-                              ? AppThemeData.labelTextStyle_16.copyWith(fontSize: 14.sp)
+                              ? AppThemeData.labelTextStyle_16
+                                  .copyWith(fontSize: 14.sp)
                               : AppThemeData.todayDealDiscountPriceStyle,
                           textScaleFactor: 1.0,
                           maxLines: 2,
@@ -104,114 +106,138 @@ class CartItem extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  flex: 1,
+                  flex: 2,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Obx(
-                        () => InkWell(
-                          onTap: () async {
-                            int cartStock = cart.stock!;
-                            int cartMinOrder = cart.minimumOrder!;
-                            if (cartMinOrder < cartStock) {
-                              _cartController.updateCartProduct(
-                                  increasing: true,
-                                  cartId: cart.id.toString(),
-                                  quantity: 1);
-                            }
-                          },
-                          child: Container(
-                            height: 23.h,
-                            width: isMobile(context) ? 23.w : 15.w,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color: AppThemeData.cartItemBoxDecorationColor,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(30.r),
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  spreadRadius: 3,
-                                  blurRadius: 5,
-                                  color:
-                                      AppThemeData.boxShadowColor.withOpacity(0.1),
-                                  offset: const Offset(0, 0),
-                                )
-                              ],
-                            ),
-                            child: _cartController.isCartUpdating &&
-                                    _cartController.updatingCartId ==
-                                        cart.id.toString() &&
-                                    _cartController.isIncreasing
-                                ? const CircularProgressIndicator(
-                                    strokeWidth: 1)
-                                : Icon(
-                                    Icons.add,
-                                    size: 16.r,
-                                    color: AppThemeData.cartItemIconColor,
-                                  ),
-                          ),
-                        ),
-                      ),
-                      AnimatedSwitcher(
-                        duration: const Duration(milliseconds: 500),
-                        transitionBuilder:
-                            (Widget child, Animation<double> animation) {
-                          return ScaleTransition(
-                            scale: animation,
-                            child: child,
-                          );
+                      InkWell(
+                        splashColor: Colors.red, // Splash color
+                        onTap: () async {
+                          _cartController.deleteAProductFromCart(
+                              productId: cart.id.toString());
                         },
-                        child: Text(
-                          cart.quantity.toString(),
-                          style: isMobile(context)
-                              ? AppThemeData.priceTextStyle_14
-                              : AppThemeData.titleTextStyle_11Tab,
-                        ),
+                        child: const SizedBox(
+                            width: 16,
+                            height: 16,
+                            child: Icon(
+                              Icons.delete,
+                              color: Colors.grey,
+                            )),
                       ),
-                      Obx(
-                        () => InkWell(
-                          onTap: () async {
-                            int cartMinOrder = cart.minimumOrder!;
-                            if (1 <= cartMinOrder) {
-                              _cartController.updateCartProduct(
-                                  increasing: false,
-                                  cartId: cart.id.toString(),
-                                  quantity: -1);
-                            }
-                          },
-                          child: Container(
-                            height: 23.h,
-                            width: isMobile(context) ? 23.w : 15.w,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color: AppThemeData.cartItemBoxDecorationColor,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(30.r),
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                    spreadRadius: 3,
-                                    blurRadius: 5,
-                                    color: AppThemeData.boxShadowColor
-                                        .withOpacity(0.1),
-                                    offset: const Offset(0, 0))
-                              ],
-                            ),
-                            child: _cartController.isCartUpdating &&
+                      SizedBox(
+                        height: 60.h,
+                      ),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Obx(
+                                () => InkWell(
+                              onTap: () async {
+                                int cartMinOrder = cart.minimumOrder!;
+                                if (1 <= cartMinOrder) {
+                                  _cartController.updateCartProduct(
+                                      increasing: false,
+                                      cartId: cart.id.toString(),
+                                      quantity: -1);
+                                }
+                              },
+                              child: Container(
+                                height: 23.h,
+                                width: isMobile(context) ? 23.w : 15.w,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  color:
+                                  AppThemeData.cartItemBoxDecorationColor,
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(30.r),
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        spreadRadius: 3,
+                                        blurRadius: 5,
+                                        color: AppThemeData.boxShadowColor
+                                            .withOpacity(0.1),
+                                        offset: const Offset(0, 0))
+                                  ],
+                                ),
+                                child: _cartController.isCartUpdating &&
                                     _cartController.updatingCartId ==
                                         cart.id.toString() &&
                                     !_cartController.isIncreasing
-                                ? const CircularProgressIndicator(
+                                    ? const CircularProgressIndicator(
                                     strokeWidth: 1)
-                                : Icon(
-                                    Icons.remove,
-                                    size: 16.r,
-                                    color: AppThemeData.cartItemIconColor,
-                                  ),
+                                    : Icon(
+                                  Icons.remove,
+                                  size: 16.r,
+                                  color: AppThemeData.cartItemIconColor,
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
+                          AnimatedSwitcher(
+                            duration: const Duration(milliseconds: 500),
+                            transitionBuilder:
+                                (Widget child, Animation<double> animation) {
+                              return ScaleTransition(
+                                scale: animation,
+                                child: child,
+                              );
+                            },
+                            child: Text(
+                              cart.quantity.toString(),
+                              style: isMobile(context)
+                                  ? AppThemeData.priceTextStyle_14
+                                  : AppThemeData.titleTextStyle_11Tab,
+                            ),
+                          ),
+                          Obx(
+                                () => InkWell(
+                              onTap: () async {
+                                int cartStock = cart.stock!;
+                                int cartMinOrder = cart.minimumOrder!;
+                                if (cartMinOrder < cartStock) {
+                                  _cartController.updateCartProduct(
+                                      increasing: true,
+                                      cartId: cart.id.toString(),
+                                      quantity: 1);
+                                }
+                              },
+                              child: Container(
+                                height: 23.h,
+                                width: isMobile(context) ? 23.w : 15.w,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  color:
+                                  AppThemeData.cartItemBoxDecorationColor,
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(30.r),
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      spreadRadius: 3,
+                                      blurRadius: 5,
+                                      color: AppThemeData.boxShadowColor
+                                          .withOpacity(0.1),
+                                      offset: const Offset(0, 0),
+                                    )
+                                  ],
+                                ),
+                                child: _cartController.isCartUpdating &&
+                                    _cartController.updatingCartId ==
+                                        cart.id.toString() &&
+                                    _cartController.isIncreasing
+                                    ? const CircularProgressIndicator(
+                                    strokeWidth: 1)
+                                    : Icon(
+                                  Icons.add,
+                                  size: 16.r,
+                                  color: AppThemeData.cartItemIconColor,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
