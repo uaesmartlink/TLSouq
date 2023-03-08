@@ -526,39 +526,43 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                             ],
                           ),
                         )
-                      : Padding(
-                          padding: const EdgeInsets.only(
-                            top: 10,
+                      : Column(children: [
+                          SizedBox(
+                            height: size.height / 4,
                           ),
-                          child: InkWell(
-                            onTap: () => {
-                              if (token != null)
-                                {createAddress()}
-                              else
-                                {
-                                  Get.snackbar(
-                                    AppTags.login.tr,
-                                    AppTags.pleaseLoginFirst.tr,
-                                    snackPosition: SnackPosition.BOTTOM,
-                                    duration: const Duration(seconds: 3),
-                                    colorText: Colors.white,
-                                    backgroundColor: Colors.black,
-                                    forwardAnimationCurve: Curves.decelerate,
-                                    shouldIconPulse: false,
-                                  )
-                                }
-                            },
-                            child: const Text(
-                              "Add address",
-                              style: TextStyle(
-                                color: Colors.blue,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 14,
-                                fontFamily: 'Poppins',
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              top: 0,
+                            ),
+                            child: ElevatedButton(
+                              onPressed: () => {
+                                if (token != null)
+                                  {createAddress()}
+                                else
+                                  {
+                                    Get.snackbar(
+                                      AppTags.login.tr,
+                                      AppTags.pleaseLoginFirst.tr,
+                                      snackPosition: SnackPosition.BOTTOM,
+                                      duration: const Duration(seconds: 3),
+                                      colorText: Colors.white,
+                                      backgroundColor: Colors.black,
+                                      forwardAnimationCurve: Curves.decelerate,
+                                      shouldIconPulse: false,
+                                    )
+                                  }
+                              },
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(
+                                  Color(0xffFCB800),
+                                ), // <-- Button color
+                              ),
+                              child: Text(
+                                AppTags.addAddress.tr,
                               ),
                             ),
                           ),
-                        ),
+                        ]),
                   Padding(
                     padding:
                         EdgeInsets.only(right: 15.w, left: 15.w, bottom: 15.h),
@@ -728,8 +732,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                   } else {
                                     Get.snackbar(
                                       AppTags.selectAddress.tr,
-                                      AppTags.pleaseSelectBullingOrPickupAddress
-                                          .tr,
+                                      AppTags.pleaseSelectBullingOrPickupAddress.tr,
                                       snackPosition: SnackPosition.BOTTOM,
                                       duration: const Duration(seconds: 3),
                                       colorText: Colors.white,
@@ -874,9 +877,8 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                     TextButton(
                                       onPressed: () async {
                                         Navigator.of(context,
-                                            rootNavigator: true)
-                                            .pop(
-                                            true);
+                                                rootNavigator: true)
+                                            .pop(true);
                                         await Repository()
                                             .deleteUserAddress(
                                                 addressId: shippingAddressModel
@@ -1076,9 +1078,8 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                     TextButton(
                                       onPressed: () async {
                                         Navigator.of(context,
-                                            rootNavigator: true)
-                                            .pop(
-                                            true);
+                                                rootNavigator: true)
+                                            .pop(true);
                                         await Repository()
                                             .deleteUserAddress(
                                                 addressId: shippingAddressModel
@@ -1609,7 +1610,6 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                           _selectedState = newValue!;
                                           _selectedCity = null;
                                           cityModel.data!.cities = [];
-
                                         },
                                       );
                                     },
@@ -1649,11 +1649,11 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                     onChanged: (newValue) {
                                       setState(
                                         () {
-                                          print("@@@ _selectedCity $_selectedCity");
+                                          print(
+                                              "@@@ _selectedCity $_selectedCity");
                                           _selectedState = newValue!;
                                           _selectedCity = null;
                                           cityModel.data!.cities = [];
-
                                         },
                                       );
                                     },
@@ -2124,84 +2124,84 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                         ),
                         stateListModel.data != null
                             ? Container(
-                          height: 42.h,
-                          alignment: Alignment.center,
-                          padding:
-                          EdgeInsets.only(left: 12.w, right: 4.w),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(
-                                color: const Color(0xffF4F4F4)),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(5.r),
-                            ),
-                          ),
-                          child: DropdownButtonHideUnderline(
-                            child: DropdownButton(
-                              isExpanded: true,
-                              hint: Text(
-                                AppTags.selectState.tr,
-                                style: AppThemeData.hintTextStyle_13,
-                              ),
-                              value: _selectedState,
-                              onChanged: (newValue) {
-                                setState(
-                                      () {
-                                    print("_selectedCity $_selectedCity");
-                                    _selectedState = newValue!;
-                                    _selectedCity = null;
-                                    cityModel.data!.cities = [];
-
-                                      },
-                                );
-                              },
-                              items: stateListModel.data!.states!
-                                  .map((state) {
-                                return DropdownMenuItem(
-                                  onTap: () async {
-                                    await getCityList(state.id);
-                                    setState(() {});
-                                  },
-                                  value: state.id,
-                                  child: Text(state.name.toString()),
-                                );
-                              }).toList(),
-                            ),
-                          ),
-                        )
+                                height: 42.h,
+                                alignment: Alignment.center,
+                                padding:
+                                    EdgeInsets.only(left: 12.w, right: 4.w),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border: Border.all(
+                                      color: const Color(0xffF4F4F4)),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(5.r),
+                                  ),
+                                ),
+                                child: DropdownButtonHideUnderline(
+                                  child: DropdownButton(
+                                    isExpanded: true,
+                                    hint: Text(
+                                      AppTags.selectState.tr,
+                                      style: AppThemeData.hintTextStyle_13,
+                                    ),
+                                    value: _selectedState,
+                                    onChanged: (newValue) {
+                                      setState(
+                                        () {
+                                          print("_selectedCity $_selectedCity");
+                                          _selectedState = newValue!;
+                                          _selectedCity = null;
+                                          cityModel.data!.cities = [];
+                                        },
+                                      );
+                                    },
+                                    items: stateListModel.data!.states!
+                                        .map((state) {
+                                      return DropdownMenuItem(
+                                        onTap: () async {
+                                          await getCityList(state.id);
+                                          setState(() {});
+                                        },
+                                        value: state.id,
+                                        child: Text(state.name.toString()),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
+                              )
                             : Container(
-                          height: 42.h,
-                          alignment: Alignment.center,
-                          padding:
-                          EdgeInsets.only(left: 12.w, right: 4.w),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(
-                                color: const Color(0xffF4F4F4)),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(5.r),
-                            ),
-                          ),
-                          child: DropdownButtonHideUnderline(
-                            child: DropdownButton(
-                              isExpanded: true,
-                              hint: Text(AppTags.selectState.tr,
-                                  style: AppThemeData.hintTextStyle_13),
-                              value: _selectedState,
-                              onChanged: (newValue) {
-                                setState(
-                                      () {
-                                    print("@@@ _selectedCity $_selectedCity");
-                                    _selectedState = newValue!;
-                                    _selectedCity = null;
-                                    cityModel.data!.cities = [];
-                                  },
-                                );
-                              },
-                              items: null,
-                            ),
-                          ),
-                        ),
+                                height: 42.h,
+                                alignment: Alignment.center,
+                                padding:
+                                    EdgeInsets.only(left: 12.w, right: 4.w),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border: Border.all(
+                                      color: const Color(0xffF4F4F4)),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(5.r),
+                                  ),
+                                ),
+                                child: DropdownButtonHideUnderline(
+                                  child: DropdownButton(
+                                    isExpanded: true,
+                                    hint: Text(AppTags.selectState.tr,
+                                        style: AppThemeData.hintTextStyle_13),
+                                    value: _selectedState,
+                                    onChanged: (newValue) {
+                                      setState(
+                                        () {
+                                          print(
+                                              "@@@ _selectedCity $_selectedCity");
+                                          _selectedState = newValue!;
+                                          _selectedCity = null;
+                                          cityModel.data!.cities = [];
+                                        },
+                                      );
+                                    },
+                                    items: null,
+                                  ),
+                                ),
+                              ),
                         SizedBox(height: 16.r),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -2215,70 +2215,70 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                             ),
                             cityModel.data != null
                                 ? Container(
-                              height: 42.h,
-                              alignment: Alignment.center,
-                              padding:
-                              EdgeInsets.only(left: 12.w, right: 4.w),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border.all(
-                                    color: const Color(0xffF4F4F4)),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(5.r),
-                                ),
-                              ),
-                              child: DropdownButtonHideUnderline(
-                                child: DropdownButton(
-                                  isExpanded: true,
-                                  hint: Text(
-                                    AppTags.selectCity.tr,
-                                    style: AppThemeData.hintTextStyle_13,
-                                  ),
-                                  value: _selectedCity,
-                                  onChanged: (newValue) {
-                                    setState(() {
-                                      _selectedCity = newValue;
-                                    });
-                                  },
-                                  items:
-                                  cityModel.data!.cities!.map((city) {
-                                    return DropdownMenuItem(
-                                      onTap: () {},
-                                      value: city.id,
-                                      child: Text(city.name.toString()),
-                                    );
-                                  }).toList(),
-                                ),
-                              ),
-                            )
+                                    height: 42.h,
+                                    alignment: Alignment.center,
+                                    padding:
+                                        EdgeInsets.only(left: 12.w, right: 4.w),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      border: Border.all(
+                                          color: const Color(0xffF4F4F4)),
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(5.r),
+                                      ),
+                                    ),
+                                    child: DropdownButtonHideUnderline(
+                                      child: DropdownButton(
+                                        isExpanded: true,
+                                        hint: Text(
+                                          AppTags.selectCity.tr,
+                                          style: AppThemeData.hintTextStyle_13,
+                                        ),
+                                        value: _selectedCity,
+                                        onChanged: (newValue) {
+                                          setState(() {
+                                            _selectedCity = newValue;
+                                          });
+                                        },
+                                        items:
+                                            cityModel.data!.cities!.map((city) {
+                                          return DropdownMenuItem(
+                                            onTap: () {},
+                                            value: city.id,
+                                            child: Text(city.name.toString()),
+                                          );
+                                        }).toList(),
+                                      ),
+                                    ),
+                                  )
                                 : Container(
-                              height: 50.h,
-                              alignment: Alignment.center,
-                              padding:
-                              EdgeInsets.only(left: 12.w, right: 4.w),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border.all(
-                                    color: const Color(0xffF4F4F4)),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(5.r),
-                                ),
-                              ),
-                              child: DropdownButtonHideUnderline(
-                                child: DropdownButton(
-                                    isExpanded: true,
-                                    hint: Text(AppTags.selectCity.tr,
-                                        style: AppThemeData
-                                            .hintTextStyle_13),
-                                    value: _selectedCity,
-                                    onChanged: (newValue) {
-                                      setState(() {
-                                        _selectedCity = newValue;
-                                      });
-                                    },
-                                    items: null),
-                              ),
-                            ),
+                                    height: 50.h,
+                                    alignment: Alignment.center,
+                                    padding:
+                                        EdgeInsets.only(left: 12.w, right: 4.w),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      border: Border.all(
+                                          color: const Color(0xffF4F4F4)),
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(5.r),
+                                      ),
+                                    ),
+                                    child: DropdownButtonHideUnderline(
+                                      child: DropdownButton(
+                                          isExpanded: true,
+                                          hint: Text(AppTags.selectCity.tr,
+                                              style: AppThemeData
+                                                  .hintTextStyle_13),
+                                          value: _selectedCity,
+                                          onChanged: (newValue) {
+                                            setState(() {
+                                              _selectedCity = newValue;
+                                            });
+                                          },
+                                          items: null),
+                                    ),
+                                  ),
                           ],
                         ),
                         /*         SizedBox(

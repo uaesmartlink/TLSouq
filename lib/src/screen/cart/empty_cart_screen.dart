@@ -10,7 +10,9 @@ import 'package:TLSouq/src/utils/responsive.dart';
 
 
 class EmptyCartScreen extends StatelessWidget {
-  EmptyCartScreen({Key? key}) : super(key: key);
+  final String title;
+  final String message;
+  EmptyCartScreen({Key? key, required this.title, required this.message}) : super(key: key);
   final homeScreenController = Get.put(DashboardController());
 
   @override
@@ -30,7 +32,7 @@ class EmptyCartScreen extends StatelessWidget {
           height: 20.h,
         ),
         Text(
-          AppTags.emptyCart.tr,
+          title,
           style: TextStyle(
             fontSize: 16.sp,
             fontFamily: "Poppins Medium",
@@ -43,7 +45,7 @@ class EmptyCartScreen extends StatelessWidget {
         SizedBox(
           width: 172.w,
           child: Text(
-            AppTags.emptyCartText.tr,
+            message,
             style: isMobile(context)?AppThemeData.dateTextStyle_12:AppThemeData.dateTextStyle_9Tab,
             textAlign: TextAlign.center,
           ),
@@ -60,6 +62,7 @@ class EmptyCartScreen extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {
                 homeScreenController.changeTabIndex(0);
+                Get.back();
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppThemeData.headlineTextColor,

@@ -474,7 +474,10 @@ class _CartScreenState extends State<CartScreen> {
                 ],
               ),
             )
-          : EmptyCartScreen(),
+          : EmptyCartScreen(
+              title: AppTags.emptyCart.tr,
+              message: AppTags.emptyCartText.tr,
+            ),
     );
   }
 }

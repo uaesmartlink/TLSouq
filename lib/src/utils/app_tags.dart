@@ -198,6 +198,10 @@ class AppTags {
   static const String couponApply = "couponApply";
   static const String apply = "apply";
 
+  //Empty Order
+  static const String emptyOrder = "emptyOrder";
+  static const String emptyOrderText = "emptyOrderText";
+
   // Favorites Screen
   static const String products = "products";
   static const String store = "store";
