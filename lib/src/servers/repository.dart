@@ -733,7 +733,7 @@ class Repository {
   //User Create Address
   Future postCreateAddress({
     required String name,
-    required String email,
+    String? email,
     required String phoneNo,
     required int countryId,
     required int stateId,
@@ -744,12 +744,12 @@ class Repository {
     var headers = {"apiKey": Config.apiKey};
     var bodyData = {
       'name': name.toString(),
-      'email': email.toString(),
+      // 'email': email.toString(),
       'phone_no': phoneNo.toString(),
       'country_id': countryId.toString(),
       'state_id': stateId.toString(),
       'city_id': cityId.toString(),
-      'postal_code': postalCode.toString(),
+      // 'postal_code': postalCode.toString(),
       'address': address.toString()
     };
     var url = Uri.parse(
@@ -766,7 +766,7 @@ class Repository {
   //User Edit Address
   Future updateEditAddress({
     required String name,
-    required String email,
+    String? email,
     required String phoneNo,
     required int countryId,
     required int stateId,
@@ -778,12 +778,12 @@ class Repository {
     var headers = {"apiKey": Config.apiKey};
     var bodyData = {
       'name': name.toString(),
-      'email': email.toString(),
+      // 'email': email.toString(),
       'phone_no': phoneNo.toString(),
       'country_id': countryId.toString(),
       'state_id': stateId.toString(),
       'city_id': cityId.toString(),
-      'postal_code': postalCode.toString(),
+      // 'postal_code': postalCode.toString(),
       'address': address.toString()
     };
     var url = Uri.parse(
@@ -1304,6 +1304,7 @@ class Repository {
   Future<CouponAppliedList> getAppliedCouponList() async {
     var url =
         "${NetworkService.apiUrl}/applied-coupons?trx_id=${LocalDataHelper().getCartTrxId()}";
+        print("Applied: $url");
     final response = await _service.fetchJsonData(url);
     return CouponAppliedList.fromJson(response);
   }

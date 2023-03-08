@@ -829,12 +829,12 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 10.h),
-                    Text(
-                        "${AppTags.email.tr}: ${shippingAddressModel.data!.addresses![index].email.toString()}",
-                        style: isMobile(context)
-                            ? AppThemeData.profileTextStyle_13
-                            : AppThemeData.profileTextStyle_10Tab),
+                    // SizedBox(height: 10.h),
+                    // Text(
+                    //     "${AppTags.email.tr}: ${shippingAddressModel.data!.addresses![index].email.toString()}",
+                    //     style: isMobile(context)
+                    //         ? AppThemeData.profileTextStyle_13
+                    //         : AppThemeData.profileTextStyle_10Tab),
                     SizedBox(height: 8.h),
                     Text(
                         "${AppTags.phone.tr}: ${shippingAddressModel.data!.addresses![index].phoneNo.toString()}",
@@ -1030,12 +1030,12 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 10.h),
-                    Text(
-                        "${AppTags.email.tr}: ${shippingAddressModel.data!.addresses![index].email.toString()}",
-                        style: isMobile(context)
-                            ? AppThemeData.profileTextStyle_13
-                            : AppThemeData.profileTextStyle_10Tab),
+                    // SizedBox(height: 10.h),
+                    // Text(
+                    //     "${AppTags.email.tr}: ${shippingAddressModel.data!.addresses![index].email.toString()}",
+                    //     style: isMobile(context)
+                    //         ? AppThemeData.profileTextStyle_13
+                    //         : AppThemeData.profileTextStyle_10Tab),
                     SizedBox(height: 8.h),
                     Text(
                         "${AppTags.phone.tr}: ${shippingAddressModel.data!.addresses![index].phoneNo.toString()}",
@@ -1178,9 +1178,9 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
         'shipping_address[name]': shippingAddressModel
             .data!.addresses![shippingIndex!].name
             .toString(),
-        'shipping_address[email]': shippingAddressModel
-            .data!.addresses![shippingIndex!].email
-            .toString(),
+        // 'shipping_address[email]': shippingAddressModel
+        //     .data!.addresses![shippingIndex!].email
+        //     .toString(),
         'shipping_address[phone_no]': shippingAddressModel
             .data!.addresses![shippingIndex!].phoneNo
             .toString(),
@@ -1224,11 +1224,11 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                 .toString()
             : shippingAddressModel.data!.addresses![billingIndex!].name
                 .toString(),
-        'billing_address[email]': isSelectBilling
-            ? shippingAddressModel.data!.addresses![shippingIndex!].email
-                .toString()
-            : shippingAddressModel.data!.addresses![billingIndex!].email
-                .toString(),
+        // 'billing_address[email]': isSelectBilling
+        //     ? shippingAddressModel.data!.addresses![shippingIndex!].email
+        //         .toString()
+        //     : shippingAddressModel.data!.addresses![billingIndex!].email
+        //         .toString(),
         'billing_address[phone_no]': isSelectBilling
             ? shippingAddressModel.data!.addresses![shippingIndex!].phoneNo
                 .toString()
@@ -1417,44 +1417,44 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 10.h),
-                        Text(
-                          AppTags.email.tr,
-                          style: AppThemeData.titleTextStyle_13,
-                        ),
-                        SizedBox(height: 8.h),
-                        Container(
-                          height: 42.h,
-                          alignment: Alignment.center,
-                          padding: EdgeInsets.symmetric(horizontal: 4.w),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(color: const Color(0xffF4F4F4)),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(5.r),
-                            ),
-                          ),
-                          child: TextFormField(
-                            controller: emailController,
-                            maxLines: 1,
-                            textAlign: TextAlign.left,
-                            keyboardType: TextInputType.emailAddress,
-                            validator: (value) => textFieldValidator(
-                              AppTags.email.tr,
-                              emailController,
-                            ),
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: AppTags.email.tr,
-                              hintStyle: AppThemeData.hintTextStyle_13,
-                              contentPadding: EdgeInsets.only(
-                                left: 8.w,
-                                right: 8.w,
-                                bottom: 5.h,
-                              ),
-                            ),
-                          ),
-                        ),
+                        // SizedBox(height: 10.h),
+                        // Text(
+                        //   AppTags.email.tr,
+                        //   style: AppThemeData.titleTextStyle_13,
+                        // ),
+                        // SizedBox(height: 8.h),
+                        // Container(
+                        //   height: 42.h,
+                        //   alignment: Alignment.center,
+                        //   padding: EdgeInsets.symmetric(horizontal: 4.w),
+                        //   decoration: BoxDecoration(
+                        //     color: Colors.white,
+                        //     border: Border.all(color: const Color(0xffF4F4F4)),
+                        //     borderRadius: BorderRadius.all(
+                        //       Radius.circular(5.r),
+                        //     ),
+                        //   ),
+                        //   child: TextFormField(
+                        //     controller: emailController,
+                        //     maxLines: 1,
+                        //     textAlign: TextAlign.left,
+                        //     keyboardType: TextInputType.emailAddress,
+                        //     validator: (value) => textFieldValidator(
+                        //       AppTags.email.tr,
+                        //       emailController,
+                        //     ),
+                        //     decoration: InputDecoration(
+                        //       border: InputBorder.none,
+                        //       hintText: AppTags.email.tr,
+                        //       hintStyle: AppThemeData.hintTextStyle_13,
+                        //       contentPadding: EdgeInsets.only(
+                        //         left: 8.w,
+                        //         right: 8.w,
+                        //         bottom: 5.h,
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                         SizedBox(height: 10.h),
                         Text(
                           AppTags.phone.tr,
@@ -1838,7 +1838,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                           await Repository()
                               .postCreateAddress(
                                 name: nameController.text.toString(),
-                                email: emailController.text.toString(),
+                                // email: emailController.text.toString(),
                                 phoneNo:
                                     "+$phoneCode ${phoneController.text.toString()}",
                                 countryId: _selectedCountry,
@@ -1970,41 +1970,41 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 16.h),
-                        Text(
-                          AppTags.email.tr,
-                          style: AppThemeData.titleTextStyle_13,
-                        ),
-                        SizedBox(
-                          height: 8.h,
-                        ),
-                        Container(
-                          height: 42.h,
-                          alignment: Alignment.center,
-                          padding: EdgeInsets.symmetric(horizontal: 4.w),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(color: const Color(0xffF4F4F4)),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(5.r),
-                            ),
-                          ),
-                          child: TextField(
-                            controller: emailController,
-                            maxLines: 1,
-                            textAlign: TextAlign.left,
-                            keyboardType: TextInputType.emailAddress,
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText:
-                                  editViewModel.data!.address!.email.toString(),
-                              hintStyle: AppThemeData.hintTextStyle_13,
-                              contentPadding: EdgeInsets.only(
-                                  left: 8.w, right: 8.w, bottom: 8.h),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 16.h),
+                        // SizedBox(height: 16.h),
+                        // Text(
+                        //   AppTags.email.tr,
+                        //   style: AppThemeData.titleTextStyle_13,
+                        // ),
+                        // SizedBox(
+                        //   height: 8.h,
+                        // ),
+                        // Container(
+                        //   height: 42.h,
+                        //   alignment: Alignment.center,
+                        //   padding: EdgeInsets.symmetric(horizontal: 4.w),
+                        //   decoration: BoxDecoration(
+                        //     color: Colors.white,
+                        //     border: Border.all(color: const Color(0xffF4F4F4)),
+                        //     borderRadius: BorderRadius.all(
+                        //       Radius.circular(5.r),
+                        //     ),
+                        //   ),
+                        //   child: TextField(
+                        //     controller: emailController,
+                        //     maxLines: 1,
+                        //     textAlign: TextAlign.left,
+                        //     keyboardType: TextInputType.emailAddress,
+                        //     decoration: InputDecoration(
+                        //       border: InputBorder.none,
+                        //       hintText:
+                        //           editViewModel.data!.address!.email.toString(),
+                        //       hintStyle: AppThemeData.hintTextStyle_13,
+                        //       contentPadding: EdgeInsets.only(
+                        //           left: 8.w, right: 8.w, bottom: 8.h),
+                        //     ),
+                        //   ),
+                        // ),
+                        // SizedBox(height: 16.h),
                         Text(
                           AppTags.phone.tr,
                           style: AppThemeData.titleTextStyle_13,
@@ -2342,10 +2342,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                     ? nameController.text.toString()
                                     : editViewModel.data!.address!.name
                                         .toString(),
-                                email: emailController.text.isNotEmpty
-                                    ? emailController.text.toString()
-                                    : editViewModel.data!.address!.email
-                                        .toString(),
+                                // email: emailController.text.isNotEmpty
+                                //     ? emailController.text.toString()
+                                //     : editViewModel.data!.address!.email
+                                //         .toString(),
                                 phoneNo: phoneController.text.isNotEmpty
                                     ? "+$phoneCode ${phoneController.text.toString()}"
                                     : editViewModel.data!.address!.phoneNo
