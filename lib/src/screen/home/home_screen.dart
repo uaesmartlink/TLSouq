@@ -53,7 +53,8 @@ class HomeScreenContent extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Obx(
-      () => homeScreenContentController.homeDataModel.value.data != null && _cartController.addToCartListModel.data!=null
+      () => homeScreenContentController.homeDataModel.value.data != null &&
+              _cartController.addToCartListModel.data != null
           ? Scaffold(
               extendBodyBehindAppBar: false,
               appBar: isMobile(context)
@@ -63,11 +64,16 @@ class HomeScreenContent extends StatelessWidget {
                       leading: Builder(
                         builder: (BuildContext context) {
                           return IconButton(
-                            icon: SvgPicture.asset(Images.menuBar, height: 20.h,),
-                            tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+                            icon: SvgPicture.asset(
+                              Images.menuBar,
+                              height: 20.h,
+                            ),
+                            tooltip: MaterialLocalizations.of(context)
+                                .openAppDrawerTooltip,
                             onPressed: () {
                               Scaffold.of(context).openDrawer();
-                              homeScreenContentController.isVisibleUpdate(false);
+                              homeScreenContentController
+                                  .isVisibleUpdate(false);
                             },
                           );
                         },
@@ -84,10 +90,12 @@ class HomeScreenContent extends StatelessWidget {
                               color: Colors.white,
                               boxShadow: [
                                 BoxShadow(
-                                  color: AppThemeData.boxShadowColor.withOpacity(0.10),
+                                  color: AppThemeData.boxShadowColor
+                                      .withOpacity(0.10),
                                   spreadRadius: 0,
                                   blurRadius: 5.r,
-                                  offset: const Offset(0, 3), // changes position of shadow
+                                  offset: const Offset(
+                                      0, 3), // changes position of shadow
                                 ),
                               ],
                             ),
@@ -103,19 +111,25 @@ class HomeScreenContent extends StatelessWidget {
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
-                                  child: const VerticalDivider(thickness: 2,),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 10.w, vertical: 8.h),
+                                  child: const VerticalDivider(
+                                    thickness: 2,
+                                  ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 8.w),
-                                  child: Text(AppTags.searchProduct.tr, style: AppThemeData.hintTextStyle_13),
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 8.w),
+                                  child: Text(AppTags.searchProduct.tr,
+                                      style: AppThemeData.hintTextStyle_13),
                                 )
                               ],
                             )),
                       ),
                       actions: [
                         IconButton(
-                          icon: SvgPicture.asset(Images.notification,
+                          icon: SvgPicture.asset(
+                            Images.notification,
                             height: 22.h,
                             width: 19.w,
                           ),
@@ -133,11 +147,16 @@ class HomeScreenContent extends StatelessWidget {
                       leading: Builder(
                         builder: (BuildContext context) {
                           return IconButton(
-                            icon: SvgPicture.asset(Images.menuBar, height: 20.h,),
-                            tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+                            icon: SvgPicture.asset(
+                              Images.menuBar,
+                              height: 20.h,
+                            ),
+                            tooltip: MaterialLocalizations.of(context)
+                                .openAppDrawerTooltip,
                             onPressed: () {
                               Scaffold.of(context).openDrawer();
-                              homeScreenContentController.isVisibleUpdate(false);
+                              homeScreenContentController
+                                  .isVisibleUpdate(false);
                             },
                           );
                         },
@@ -153,8 +172,8 @@ class HomeScreenContent extends StatelessWidget {
                               color: Colors.white,
                               boxShadow: [
                                 BoxShadow(
-                                  color:
-                                  AppThemeData.boxShadowColor.withOpacity(0.10),
+                                  color: AppThemeData.boxShadowColor
+                                      .withOpacity(0.10),
                                   spreadRadius: 0,
                                   blurRadius: 5.r,
                                   offset: const Offset(
@@ -166,18 +185,23 @@ class HomeScreenContent extends StatelessWidget {
                               children: [
                                 Padding(
                                   padding: EdgeInsets.only(left: 10.w),
-                                  child: SvgPicture.asset(Images.searchBar,
+                                  child: SvgPicture.asset(
+                                    Images.searchBar,
                                     color: AppThemeData.searchIconColor,
                                     width: 18.w,
                                     height: 18.h,
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
-                                  child: const VerticalDivider(thickness: 2,),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 10.w, vertical: 8.h),
+                                  child: const VerticalDivider(
+                                    thickness: 2,
+                                  ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 8.w),
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 8.w),
                                   child: Text(AppTags.searchProduct.tr,
                                       style: AppThemeData.hintTextStyle_10Tab),
                                 )
@@ -188,7 +212,8 @@ class HomeScreenContent extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 18.w),
                           child: IconButton(
-                            icon: SvgPicture.asset(Images.notification,
+                            icon: SvgPicture.asset(
+                              Images.notification,
                               height: 22.h,
                               width: 19.w,
                             ),
@@ -219,8 +244,13 @@ class HomeScreenContent extends StatelessWidget {
                                 scrollDirection: Axis.vertical,
                                 itemBuilder: (context, index) {
                                   return Obx(
-                                      () => categoryCheck(
-                                          homeScreenContentController.homeDataModel.value,index, context));
+                                    () => categoryCheck(
+                                      homeScreenContentController
+                                          .homeDataModel.value,
+                                      index,
+                                      context,
+                                    ),
+                                  );
                                 },
                               ),
                             ),
@@ -257,7 +287,8 @@ class HomeScreenContent extends StatelessWidget {
               },
               child: Padding(
                 padding: EdgeInsets.all(15.0.r),
-                child: SvgPicture.asset(Images.more,
+                child: SvgPicture.asset(
+                  Images.more,
                   height: 4.h,
                   width: 18.w,
                 ),
@@ -381,7 +412,8 @@ class HomeScreenContent extends StatelessWidget {
               },
               child: Padding(
                 padding: EdgeInsets.all(15.r),
-                child: SvgPicture.asset(Images.more,
+                child: SvgPicture.asset(
+                  Images.more,
                   height: 4.h,
                   width: 18.w,
                 ),
@@ -431,33 +463,36 @@ class HomeScreenContent extends StatelessWidget {
                             height: 60.h,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: AppThemeData.homeMultipleColor[index % AppThemeData.homeMultipleColor.length]
+                              color: AppThemeData.homeMultipleColor[index %
+                                      AppThemeData.homeMultipleColor.length]
                                   .withOpacity(0.1),
                             ),
                             child: Padding(
                               padding: EdgeInsets.all(12.5.r),
                               child: homeScreenContentController
-                                  .homeDataModel
-                                  .value
-                                  .data![popularCategoriesIndex]
-                                  .popularCategories![index]
-                                  .icon!
-                                  .isEmpty
-                                  ? const SizedBox()
-                                  : Icon(
-                                MdiIcons.fromString(
-                                  homeScreenContentController
                                       .homeDataModel
                                       .value
                                       .data![popularCategoriesIndex]
                                       .popularCategories![index]
                                       .icon!
-                                      .substring(8),
-                                ),
-                                size: 32.r,
-                                color:
-                                AppThemeData.homeMultipleColor[index % AppThemeData.homeMultipleColor.length],
-                              ),
+                                      .isEmpty
+                                  ? const SizedBox()
+                                  : Icon(
+                                      MdiIcons.fromString(
+                                        homeScreenContentController
+                                            .homeDataModel
+                                            .value
+                                            .data![popularCategoriesIndex]
+                                            .popularCategories![index]
+                                            .icon!
+                                            .substring(8),
+                                      ),
+                                      size: 32.r,
+                                      color: AppThemeData.homeMultipleColor[
+                                          index %
+                                              AppThemeData
+                                                  .homeMultipleColor.length],
+                                    ),
                             ),
                           ),
                           SizedBox(
@@ -558,7 +593,7 @@ class HomeScreenContent extends StatelessWidget {
               children: [
                 Padding(
                   padding:
-                  EdgeInsets.only(left: isMobile(context) ? 15.w : 10.w),
+                      EdgeInsets.only(left: isMobile(context) ? 15.w : 10.w),
                   child: Container(
                     height: 15.h,
                     width: 1.5.w,
@@ -578,7 +613,8 @@ class HomeScreenContent extends StatelessWidget {
                       horizontal: isMobile(context) ? 15.w : 10.w,
                       vertical: 0.h,
                     ),
-                    child: SvgPicture.asset(Images.subMenu,
+                    child: SvgPicture.asset(
+                      Images.subMenu,
                       height: 12.h,
                       width: 12.w,
                     ),
@@ -614,7 +650,8 @@ class HomeScreenContent extends StatelessWidget {
               },
               child: Padding(
                 padding: EdgeInsets.all(15.r),
-                child: SvgPicture.asset(Images.more,
+                child: SvgPicture.asset(
+                  Images.more,
                   height: 4.h,
                   width: 18.w,
                 ),
@@ -953,7 +990,7 @@ class HomeScreenContent extends StatelessWidget {
         height: 100.h,
         child: Padding(
           padding:
-               EdgeInsets.only(left: 16.w, right: 16.w, top: 10.h, bottom: 10.h),
+              EdgeInsets.only(left: 16.w, right: 16.w, top: 10.h, bottom: 10.h),
           child: Container(
             width: MediaQuery.of(context).size.width - 30,
             decoration: BoxDecoration(
@@ -985,7 +1022,8 @@ class HomeScreenContent extends StatelessWidget {
     return SizedBox(
       height: 100.h,
       child: Padding(
-        padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 10.h, bottom: 10.h),
+        padding:
+            EdgeInsets.only(left: 16.w, right: 16.w, top: 10.h, bottom: 10.h),
         child: Container(
           width: MediaQuery.of(context).size.width - 30,
           decoration: BoxDecoration(
@@ -1033,11 +1071,12 @@ class HomeScreenContent extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
-                Get.to(()=>const AllCampaign());
+                Get.to(() => const AllCampaign());
               },
               child: Padding(
                 padding: EdgeInsets.all(15.r),
-                child: SvgPicture.asset(Images.more,
+                child: SvgPicture.asset(
+                  Images.more,
                   height: 4.h,
                   width: 18.w,
                 ),
@@ -1115,11 +1154,12 @@ class HomeScreenContent extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
-                Get.to(()=>const AllShop());
+                Get.to(() => const AllShop());
               },
               child: Padding(
                 padding: EdgeInsets.all(15.r),
-                child: SvgPicture.asset(Images.more,
+                child: SvgPicture.asset(
+                  Images.more,
                   height: 4.h,
                   width: 18.w,
                 ),
@@ -1128,7 +1168,7 @@ class HomeScreenContent extends StatelessWidget {
           ],
         ),
         SizedBox(
-          height: isMobile(context)? 230.h:260.h,
+          height: isMobile(context) ? 230.h : 260.h,
           child: ListView.builder(
             padding: EdgeInsets.only(right: 15.w),
             itemCount: homeScreenContentController.homeDataModel.value
@@ -1137,26 +1177,23 @@ class HomeScreenContent extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             itemBuilder: (context, index) {
               return InkWell(
-                  onTap: () {
-                    Get.toNamed(
-                      Routes.shopScreen,
-                      parameters: {
-                        'shopId': homeScreenContentController
-                            .homeDataModel
-                            .value
-                            .data![featureShopIndex]
-                            .featuredShops![index]
-                            .id!.toString(),
-                      },
-                    );
-                  },
-                  child: Padding(
-                    padding: EdgeInsets.only(right: 0.w, left: 15.w),
-                    child: ShopCardWidget(
-                      shop: homeScreenContentController.homeDataModel.value
-                          .data![featureShopIndex].featuredShops![index],
-                    ),
+                onTap: () {
+                  Get.toNamed(
+                    Routes.shopScreen,
+                    parameters: {
+                      'shopId': homeScreenContentController.homeDataModel.value
+                          .data![featureShopIndex].featuredShops![index].id!
+                          .toString(),
+                    },
+                  );
+                },
+                child: Padding(
+                  padding: EdgeInsets.only(right: 0.w, left: 15.w),
+                  child: ShopCardWidget(
+                    shop: homeScreenContentController.homeDataModel.value
+                        .data![featureShopIndex].featuredShops![index],
                   ),
+                ),
               );
             },
           ),
@@ -1183,11 +1220,12 @@ class HomeScreenContent extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
-                Get.to(()=>const AllShop());
+                Get.to(() => const AllShop());
               },
               child: Padding(
                 padding: EdgeInsets.all(15.r),
-                child: SvgPicture.asset(Images.more,
+                child: SvgPicture.asset(
+                  Images.more,
                   height: 4.h,
                   width: 18.w,
                 ),
@@ -1196,7 +1234,7 @@ class HomeScreenContent extends StatelessWidget {
           ],
         ),
         SizedBox(
-          height: isMobile(context)? 230.h:260.h,
+          height: isMobile(context) ? 230.h : 260.h,
           child: ListView.builder(
             padding: EdgeInsets.only(right: 15.w),
             itemCount: homeScreenContentController.homeDataModel.value
@@ -1210,16 +1248,17 @@ class HomeScreenContent extends StatelessWidget {
                     Routes.shopScreen,
                     parameters: {
                       'shopId': homeScreenContentController.homeDataModel.value
-                          .data![expressShopIndex].expressShops![index].id!.toString(),
+                          .data![expressShopIndex].expressShops![index].id!
+                          .toString(),
                     },
                   );
                 },
                 child: Padding(
-                    padding: EdgeInsets.only(right: 0.w, left: 15.w),
-                    child: ShopCardWidget(
-                      shop: homeScreenContentController.homeDataModel.value
-                          .data![expressShopIndex].expressShops![index],
-                    ),
+                  padding: EdgeInsets.only(right: 0.w, left: 15.w),
+                  child: ShopCardWidget(
+                    shop: homeScreenContentController.homeDataModel.value
+                        .data![expressShopIndex].expressShops![index],
+                  ),
                 ),
               );
             },
@@ -1247,11 +1286,12 @@ class HomeScreenContent extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
-                Get.to(()=>const BestShop());
+                Get.to(() => const BestShop());
               },
               child: Padding(
                 padding: EdgeInsets.all(15.r),
-                child: SvgPicture.asset(Images.more,
+                child: SvgPicture.asset(
+                  Images.more,
                   height: 4.h,
                   width: 18.w,
                 ),
@@ -1260,7 +1300,7 @@ class HomeScreenContent extends StatelessWidget {
           ],
         ),
         SizedBox(
-          height: isMobile(context)? 230.h:260.h,
+          height: isMobile(context) ? 230.h : 260.h,
           child: ListView.builder(
             padding: EdgeInsets.only(right: 15.w),
             itemCount: homeScreenContentController
@@ -1274,16 +1314,17 @@ class HomeScreenContent extends StatelessWidget {
                     Routes.shopScreen,
                     parameters: {
                       'shopId': homeScreenContentController.homeDataModel.value
-                          .data![bestShopIndex].bestShops![index].id!.toString(),
+                          .data![bestShopIndex].bestShops![index].id!
+                          .toString(),
                     },
                   );
                 },
                 child: Padding(
-                    padding: EdgeInsets.only(left: 15.w),
-                    child: ShopCardWidget(
-                      shop: homeScreenContentController.homeDataModel.value
-                          .data![bestShopIndex].bestShops![index],
-                    ),
+                  padding: EdgeInsets.only(left: 15.w),
+                  child: ShopCardWidget(
+                    shop: homeScreenContentController.homeDataModel.value
+                        .data![bestShopIndex].bestShops![index],
+                  ),
                 ),
               );
             },
@@ -1312,11 +1353,12 @@ class HomeScreenContent extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
-                Get.to(()=>const TopShop());
+                Get.to(() => const TopShop());
               },
               child: Padding(
                 padding: EdgeInsets.all(15.r),
-                child: SvgPicture.asset(Images.more,
+                child: SvgPicture.asset(
+                  Images.more,
                   height: 4.h,
                   width: 18.w,
                 ),
@@ -1325,7 +1367,7 @@ class HomeScreenContent extends StatelessWidget {
           ],
         ),
         SizedBox(
-          height:isMobile(context)? 230.h:260.h,
+          height: isMobile(context) ? 230.h : 260.h,
           child: ListView.builder(
             padding: EdgeInsets.only(right: 15.w),
             itemCount: homeScreenContentController
@@ -1339,16 +1381,17 @@ class HomeScreenContent extends StatelessWidget {
                     Routes.shopScreen,
                     parameters: {
                       'shopId': homeScreenContentController.homeDataModel.value
-                          .data![sellersIndex].topShops![index].id!.toString(),
+                          .data![sellersIndex].topShops![index].id!
+                          .toString(),
                     },
                   );
                 },
                 child: Padding(
-                    padding: EdgeInsets.only(right: 0.w, left: 15.w),
-                    child: ShopCardWidget(
-                      shop: homeScreenContentController.homeDataModel.value
-                          .data![sellersIndex].topShops![index],
-                    ),
+                  padding: EdgeInsets.only(right: 0.w, left: 15.w),
+                  child: ShopCardWidget(
+                    shop: homeScreenContentController.homeDataModel.value
+                        .data![sellersIndex].topShops![index],
+                  ),
                 ),
               );
             },
@@ -1380,7 +1423,8 @@ class HomeScreenContent extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.all(15.r),
-                child: SvgPicture.asset(Images.more,
+                child: SvgPicture.asset(
+                  Images.more,
                   height: 4.h,
                   width: 18.w,
                 ),
@@ -1424,7 +1468,8 @@ class HomeScreenContent extends StatelessWidget {
                           borderRadius: BorderRadius.all(Radius.circular(7.r)),
                           boxShadow: [
                             BoxShadow(
-                              color: AppThemeData.boxShadowColor.withOpacity(0.1),
+                              color:
+                                  AppThemeData.boxShadowColor.withOpacity(0.1),
                               spreadRadius: 0,
                               blurRadius: 10.r,
                               offset: const Offset(
@@ -1457,7 +1502,7 @@ class HomeScreenContent extends StatelessWidget {
                             ),
                             Expanded(
                               child: Padding(
-                                padding:  EdgeInsets.only(
+                                padding: EdgeInsets.only(
                                     left: 4.w, bottom: 4.h, top: 4.h),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
@@ -1565,8 +1610,8 @@ class HomeScreenContent extends StatelessWidget {
                                 BoxShadow(
                                   spreadRadius: 30.r,
                                   blurRadius: 5.r,
-                                  color:
-                                  AppThemeData.boxShadowColor.withOpacity(0.01),
+                                  color: AppThemeData.boxShadowColor
+                                      .withOpacity(0.01),
                                   offset: const Offset(0, 15),
                                 ),
                               ],
@@ -1595,8 +1640,8 @@ class HomeScreenContent extends StatelessWidget {
                                 BoxShadow(
                                   spreadRadius: 30.r,
                                   blurRadius: 5.r,
-                                  color:
-                                  AppThemeData.boxShadowColor.withOpacity(0.01),
+                                  color: AppThemeData.boxShadowColor
+                                      .withOpacity(0.01),
                                   offset: const Offset(0, 15),
                                 ),
                               ],
@@ -1625,8 +1670,8 @@ class HomeScreenContent extends StatelessWidget {
                                 BoxShadow(
                                   spreadRadius: 30.r,
                                   blurRadius: 5.r,
-                                  color:
-                                  AppThemeData.boxShadowColor.withOpacity(0.01),
+                                  color: AppThemeData.boxShadowColor
+                                      .withOpacity(0.01),
                                   offset: const Offset(0, 15),
                                 ),
                               ],
@@ -1649,11 +1694,12 @@ class HomeScreenContent extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
-                Get.to(()=>const TodayDeal());
+                Get.to(() => const TodayDeal());
               },
               child: Padding(
                 padding: EdgeInsets.all(15.r),
-                child: SvgPicture.asset(Images.more,
+                child: SvgPicture.asset(
+                  Images.more,
                   height: 4.h,
                   width: 18.w,
                 ),
@@ -1676,8 +1722,8 @@ class HomeScreenContent extends StatelessWidget {
               return Padding(
                 padding: EdgeInsets.only(left: 15.w),
                 child: HomeProductCard(
-                  dataModel: homeScreenContentController.homeDataModel
-                      .value.data![todayDealIndex].todayDeals,
+                  dataModel: homeScreenContentController
+                      .homeDataModel.value.data![todayDealIndex].todayDeals,
                   index: index,
                 ),
               );
@@ -1709,11 +1755,12 @@ class HomeScreenContent extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
-                Get.to(()=>const OfferEndingProductsView());
+                Get.to(() => const OfferEndingProductsView());
               },
               child: Padding(
                 padding: EdgeInsets.all(15.r),
-                child: SvgPicture.asset(Images.more,
+                child: SvgPicture.asset(
+                  Images.more,
                   height: 4.h,
                   width: 18.w,
                 ),
@@ -1735,8 +1782,8 @@ class HomeScreenContent extends StatelessWidget {
                 child: Column(
                   children: [
                     HomeProductCard(
-                      dataModel: homeScreenContentController.homeDataModel
-                          .value.data![offerEndingIndex].offerEnding,
+                      dataModel: homeScreenContentController.homeDataModel.value
+                          .data![offerEndingIndex].offerEnding,
                       index: index,
                     ),
                   ],
@@ -1767,11 +1814,12 @@ class HomeScreenContent extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
-                Get.to(()=>const FlashSales());
+                Get.to(() => const FlashSales());
               },
               child: Padding(
                 padding: EdgeInsets.all(15.0.r),
-                child: SvgPicture.asset(Images.more,
+                child: SvgPicture.asset(
+                  Images.more,
                   height: 4.h,
                   width: 18.w,
                 ),
@@ -1798,8 +1846,8 @@ class HomeScreenContent extends StatelessWidget {
                 child: Column(
                   children: [
                     HomeProductCard(
-                      dataModel: homeScreenContentController.homeDataModel
-                          .value.data![flashProductsIndex].flashDeals,
+                      dataModel: homeScreenContentController.homeDataModel.value
+                          .data![flashProductsIndex].flashDeals,
                       index: index,
                     ),
                   ],
@@ -1830,11 +1878,12 @@ class HomeScreenContent extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
-                Get.to(()=>const RecentViewProduct());
+                Get.to(() => const RecentViewProduct());
               },
               child: Padding(
                 padding: EdgeInsets.all(15.r),
-                child: SvgPicture.asset(Images.more,
+                child: SvgPicture.asset(
+                  Images.more,
                   height: 4.h,
                   width: 18.w,
                 ),
@@ -1857,11 +1906,8 @@ class HomeScreenContent extends StatelessWidget {
                 child: Column(
                   children: [
                     HomeProductCard(
-                      dataModel: homeScreenContentController
-                          .homeDataModel
-                          .value
-                          .data![recentViewProductsIndex]
-                          .recentViewedProduct,
+                      dataModel: homeScreenContentController.homeDataModel.value
+                          .data![recentViewProductsIndex].recentViewedProduct,
                       index: index,
                     ),
                   ],
@@ -1873,6 +1919,7 @@ class HomeScreenContent extends StatelessWidget {
       ],
     );
   }
+
   //Custom Product
   Widget customProducts(customIndex, context) {
     return Column(
@@ -1891,7 +1938,7 @@ class HomeScreenContent extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
-                Get.to(()=>const AllProductView());
+                Get.to(() => const AllProductView());
               },
               child: Padding(
                 padding: EdgeInsets.all(15.r),
@@ -1909,8 +1956,8 @@ class HomeScreenContent extends StatelessWidget {
           height: 255.h,
           child: ListView.builder(
             padding: EdgeInsets.only(right: 15.w),
-            itemCount: homeScreenContentController.homeDataModel.value
-                .data![customIndex].customProducts!.length,
+            itemCount: homeScreenContentController
+                .homeDataModel.value.data![customIndex].customProducts!.length,
             scrollDirection: Axis.horizontal,
             physics: const BouncingScrollPhysics(),
             itemBuilder: (context, index) {
@@ -1919,11 +1966,8 @@ class HomeScreenContent extends StatelessWidget {
                 child: Column(
                   children: [
                     HomeProductCard(
-                      dataModel: homeScreenContentController
-                          .homeDataModel
-                          .value
-                          .data![customIndex]
-                          .customProducts,
+                      dataModel: homeScreenContentController.homeDataModel.value
+                          .data![customIndex].customProducts,
                       index: index,
                     ),
                   ],
@@ -1954,7 +1998,7 @@ class HomeScreenContent extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
-                Get.to(()=>const AllProductView());
+                Get.to(() => const AllProductView());
               },
               child: Padding(
                 padding: EdgeInsets.all(15.r),
@@ -1982,8 +2026,8 @@ class HomeScreenContent extends StatelessWidget {
                 child: Column(
                   children: [
                     HomeProductCard(
-                      dataModel: homeScreenContentController.homeDataModel
-                          .value.data![latestProductsIndex].latestProducts,
+                      dataModel: homeScreenContentController.homeDataModel.value
+                          .data![latestProductsIndex].latestProducts,
                       index: index,
                     ),
                   ],
@@ -2014,7 +2058,7 @@ class HomeScreenContent extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
-                Get.to(()=>const BestSellingProductsView());
+                Get.to(() => const BestSellingProductsView());
               },
               child: Padding(
                 padding: EdgeInsets.all(15.r),
@@ -2042,11 +2086,8 @@ class HomeScreenContent extends StatelessWidget {
                 child: Column(
                   children: [
                     HomeProductCard(
-                      dataModel: homeScreenContentController
-                          .homeDataModel
-                          .value
-                          .data![bestSellingProductIndex]
-                          .bestSellingProducts,
+                      dataModel: homeScreenContentController.homeDataModel.value
+                          .data![bestSellingProductIndex].bestSellingProducts,
                       index: index,
                     ),
                   ],
@@ -2077,7 +2118,7 @@ class HomeScreenContent extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
-                Get.to(()=>const AllVideoShopping());
+                Get.to(() => const AllVideoShopping());
               },
               child: Padding(
                 padding: EdgeInsets.all(15.r),
@@ -2091,7 +2132,7 @@ class HomeScreenContent extends StatelessWidget {
           ],
         ),
         SizedBox(
-          height: isMobile(context)? 150.h : 220.h,
+          height: isMobile(context) ? 150.h : 220.h,
           child: ListView.builder(
             padding: EdgeInsets.only(right: 15.w),
             itemCount: homeScreenContentController.homeDataModel.value
@@ -2104,8 +2145,12 @@ class HomeScreenContent extends StatelessWidget {
                   Get.toNamed(
                     Routes.detailsVideoShopping,
                     parameters: {
-                      'videoSlug': homeScreenContentController.homeDataModel.value
-                          .data![videoShoppingIndex].videoShopping![index].slug
+                      'videoSlug': homeScreenContentController
+                          .homeDataModel
+                          .value
+                          .data![videoShoppingIndex]
+                          .videoShopping![index]
+                          .slug
                           .toString(),
                     },
                   );
@@ -2121,35 +2166,57 @@ class HomeScreenContent extends StatelessWidget {
                         children: [
                           Container(
                             decoration: BoxDecoration(
-                                color:Colors.white,
+                                color: Colors.white,
                                 borderRadius: BorderRadius.circular(10.r),
-                                image:  DecorationImage(
-                                  image:  NetworkImage(homeScreenContentController.homeDataModel.value
-                                      .data![videoShoppingIndex].videoShopping![index].thumbnail.toString()),
-                                  fit: BoxFit.cover,)
-                            ),
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                      homeScreenContentController
+                                          .homeDataModel
+                                          .value
+                                          .data![videoShoppingIndex]
+                                          .videoShopping![index]
+                                          .thumbnail
+                                          .toString()),
+                                  fit: BoxFit.cover,
+                                )),
                           ),
-                          isMobile(context)?
-                          Positioned(child: SvgPicture.asset(Images.playVideo)):
-                          Positioned(child: SvgPicture.asset(Images.playVideo,height: 35.h)),
-
+                          isMobile(context)
+                              ? Positioned(
+                                  child: SvgPicture.asset(Images.playVideo))
+                              : Positioned(
+                                  child: SvgPicture.asset(Images.playVideo,
+                                      height: 35.h)),
                           Positioned(
                             top: 5.h,
                             left: 10.w,
-                            child: Text("LIVE",style: isMobile(context)? AppThemeData.todayDealNewStyle:AppThemeData.todayDealNewStyleTab,),
+                            child: Text(
+                              "LIVE",
+                              style: isMobile(context)
+                                  ? AppThemeData.todayDealNewStyle
+                                  : AppThemeData.todayDealNewStyleTab,
+                            ),
                           ),
                           Positioned(
                             bottom: 5.h,
                             left: 3.w,
                             right: 3.w,
-                            child: Text(homeScreenContentController.homeDataModel.value
-                                .data![videoShoppingIndex].videoShopping![index].title.toString(),style: isMobile(context)? AppThemeData.timeDateTextStyle_12:AppThemeData.timeDateTextStyleTab,overflow: TextOverflow.ellipsis,),
+                            child: Text(
+                              homeScreenContentController
+                                  .homeDataModel
+                                  .value
+                                  .data![videoShoppingIndex]
+                                  .videoShopping![index]
+                                  .title
+                                  .toString(),
+                              style: isMobile(context)
+                                  ? AppThemeData.timeDateTextStyle_12
+                                  : AppThemeData.timeDateTextStyleTab,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           )
                         ],
                       ),
-                    )
-                ),
-
+                    )),
               );
             },
           ),
@@ -2158,7 +2225,7 @@ class HomeScreenContent extends StatelessWidget {
     );
   }
 
-  categoryCheck(HomeDataModel data,index, context) {
+  categoryCheck(HomeDataModel data, index, context) {
     switch (data.data![index].sectionType) {
       case "categories":
         return _categories(index, context);
@@ -2210,11 +2277,11 @@ class HomeScreenContent extends StatelessWidget {
         return expressShop(index, context);
       case 'recent_viewed_product':
         return recentViewProducts(index, context);
-        case 'custom_products':
+      case 'custom_products':
         return customProducts(index, context);
       case 'subscription_section':
         return const SizedBox();
-        case 'video_shopping':
+      case 'video_shopping':
         return videoShopping(index, context);
       default:
         return const SizedBox();

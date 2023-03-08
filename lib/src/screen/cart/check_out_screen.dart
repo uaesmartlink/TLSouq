@@ -530,36 +530,31 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                           SizedBox(
                             height: size.height / 4,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: 0,
+                          ElevatedButton(
+                            onPressed: () => {
+                              if (token != null)
+                                {createAddress()}
+                              else
+                                {
+                                  Get.snackbar(
+                                    AppTags.login.tr,
+                                    AppTags.pleaseLoginFirst.tr,
+                                    snackPosition: SnackPosition.BOTTOM,
+                                    duration: const Duration(seconds: 3),
+                                    colorText: Colors.white,
+                                    backgroundColor: Colors.black,
+                                    forwardAnimationCurve: Curves.decelerate,
+                                    shouldIconPulse: false,
+                                  )
+                                }
+                            },
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all(
+                                Color(0xffFCB800),
+                              ), // <-- Button color
                             ),
-                            child: ElevatedButton(
-                              onPressed: () => {
-                                if (token != null)
-                                  {createAddress()}
-                                else
-                                  {
-                                    Get.snackbar(
-                                      AppTags.login.tr,
-                                      AppTags.pleaseLoginFirst.tr,
-                                      snackPosition: SnackPosition.BOTTOM,
-                                      duration: const Duration(seconds: 3),
-                                      colorText: Colors.white,
-                                      backgroundColor: Colors.black,
-                                      forwardAnimationCurve: Curves.decelerate,
-                                      shouldIconPulse: false,
-                                    )
-                                  }
-                              },
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(
-                                  Color(0xffFCB800),
-                                ), // <-- Button color
-                              ),
-                              child: Text(
-                                AppTags.addAddress.tr,
-                              ),
+                            child: Text(
+                              AppTags.addAddress.tr,
                             ),
                           ),
                         ]),
@@ -732,7 +727,8 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                   } else {
                                     Get.snackbar(
                                       AppTags.selectAddress.tr,
-                                      AppTags.pleaseSelectBullingOrPickupAddress.tr,
+                                      AppTags.pleaseSelectBullingOrPickupAddress
+                                          .tr,
                                       snackPosition: SnackPosition.BOTTOM,
                                       duration: const Duration(seconds: 3),
                                       colorText: Colors.white,

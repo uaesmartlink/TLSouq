@@ -74,7 +74,7 @@ class _VoucherListState extends State<VoucherList> {
                       padding:  EdgeInsets.symmetric(
                           horizontal: 15.w, vertical: 8.h),
                       child: Container(
-                        height: isMobile(context)? 100.h:120.h,
+                        height: isMobile(context)? 130.h:150.h,
                         decoration: BoxDecoration(
                           color: AppThemeData.voucherMultipleColor[index % AppThemeData.voucherMultipleColor.length]
                               .withOpacity(0.1),

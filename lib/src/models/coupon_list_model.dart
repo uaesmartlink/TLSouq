@@ -74,7 +74,7 @@ class Coupons {
   String? title;
   String? code;
   String? discountType;
-  double? discount;
+  dynamic discount;
   String? image145x110;
   String? endTime;
 

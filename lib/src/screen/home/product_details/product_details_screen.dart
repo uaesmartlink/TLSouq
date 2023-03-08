@@ -989,6 +989,9 @@ class DetailsPage extends StatelessWidget {
                                                       onTap: () {
                                                         detailsController
                                                             .incrementProductQuantity();
+                                                            print("calc: ");
+                                                            print(53.07*6);
+                                                            print(1+1.01);
                                                       },
                                                       child: Container(
                                                           height: 23.h,

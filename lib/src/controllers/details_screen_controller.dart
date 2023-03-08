@@ -237,6 +237,8 @@ class DetailsPageController extends GetxController {
   void calculateTotalPrice() {
     double price =
         productQuantity.value * double.parse(productDetail.value.data!.price);
+    print("price: $price");
+
     if (productDetail.value.data != null) {
       if (productDetail.value.data!.isWholesale &&
           productDetail.value.data!.wholesalePrices != null) {
@@ -244,6 +246,8 @@ class DetailsPageController extends GetxController {
           if (productQuantity.value >= wholesale.minQty &&
               productQuantity.value <= wholesale.maxQty) {
             price = productQuantity.value * double.parse(wholesale.price);
+            print("price: $price");
+
           }
         }
       }

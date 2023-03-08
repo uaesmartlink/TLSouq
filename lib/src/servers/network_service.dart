@@ -16,6 +16,7 @@ class NetworkService {
   Future<dynamic> _getData(String url) async {
     dynamic responseJson;
     try {
+      print("url $url");
       var headers = {"apiKey": Config.apiKey};
       final response = await http.get(Uri.parse(url), headers: headers);
       responseJson = _returnResponse(response);
