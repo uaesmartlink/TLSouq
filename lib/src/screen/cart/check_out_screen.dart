@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
@@ -27,6 +29,8 @@ import '../../utils/validators.dart';
 import '../../widgets/loader/loader_widget.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class CheckOutScreen extends StatefulWidget {
   final AddToCartListModel? addToCartListModel;
@@ -43,6 +47,19 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
+  final Completer<GoogleMapController> _controller =
+      Completer<GoogleMapController>();
+  LatLng _initialPosition = LatLng(25.206450, 55.272896);
+  List<Marker> markers = [];
+
+  void _getCurrentLocation() async {
+    Position position = await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.high,
+    );
+    setState(() {
+      _initialPosition = LatLng(position.latitude, position.longitude);
+    });
+  }
 
   // final postalCodeController = TextEditingController();
   final addressController = TextEditingController();
@@ -77,6 +94,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
     SystemChannels.textInput.invokeMethod('TextInput.hide');
     getCountryList();
     getShippingAddress();
+    _getCurrentLocation();
     super.initState();
   }
 
@@ -128,6 +146,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    if (_initialPosition == null) {
+      // show loading indicator or error message
+      return Center(child: CircularProgressIndicator());
+    }
     return shippingAddressModel.data != null
         ? Scaffold(
             key: _scaffoldkey,
@@ -1736,6 +1758,38 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                   ),
                           ],
                         ),
+                        Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                AppTags.location.tr,
+                                style: AppThemeData.titleTextStyle_13,
+                              ),
+                              SizedBox(
+                                height: 8.h,
+                              ),
+                              Container(
+                                height: 50.h,
+                                alignment: Alignment.center,
+                                padding:
+                                    EdgeInsets.only(left: 12.w, right: 4.w),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border: Border.all(
+                                      color: const Color(0xffF4F4F4)),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(5.r),
+                                  ),
+                                ),
+                                child: Container(
+                                  child: Text(
+                                    AppTags.add.tr,
+                                    style: AppThemeData.hintTextStyle_13,
+                                    textAlign: TextAlign.left,
+                                  ),
+                                ),
+                              ),
+                            ]),
                         /*         SizedBox(
                           height: 16.h,
                         ),
@@ -1789,9 +1843,13 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                           height: 8.h,
                         ),
                         Container(
-                          height: 65.h,
+                          height: 50.h,
                           alignment: Alignment.center,
-                          padding: EdgeInsets.symmetric(horizontal: 4.w),
+                          padding: EdgeInsets.only(
+                            left: 12.w,
+                            right: 4.w,
+                            top: 10.h,
+                          ),
                           decoration: BoxDecoration(
                             color: Colors.white,
                             border: Border.all(color: const Color(0xffF4F4F4)),
@@ -1815,7 +1873,6 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                               contentPadding: EdgeInsets.only(
                                 left: 8.w,
                                 right: 8.w,
-                                bottom: 5.h,
                               ),
                             ),
                           ),

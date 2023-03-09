@@ -293,6 +293,8 @@ class AppTags {
   static const String state = "state";
   static const String selectState = "selectState";
   static const String city = "city";
+  static const String location = "Location";
+  static const String selectLocation = "selectLocation";
   static const String selectCity = "selectCity";
   static const String postalCode = "postalCode";
   static const String streetAddress = "streetAddress";

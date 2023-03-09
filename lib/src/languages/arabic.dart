@@ -89,7 +89,7 @@ const Map<String, String> arSA = {
   "allCategory": "كل الفئات",
   "phone": "هاتف",
   "email": "بريد الالكتروني",
-  "address": "تبوك",
+  "address": "العنوان",
   "update": "تحديث",
   "yourFavorites": "المفضلة لديك",
   "specialEvents": "أحداث خاصة",
@@ -188,6 +188,8 @@ const Map<String, String> arSA = {
   "state": "حالة",
   "selectState": "حدد الدولة",
   "city": "مدينة",
+  "Location": "الموقع",
+  "selectLocation" "إضافة الموقع"
   "postalCode": "الرمز البريدي",
   "streetAddress": "عنوان الشارع",
   "selectCity": "حدد المدينة",

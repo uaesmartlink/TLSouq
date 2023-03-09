@@ -17,6 +17,8 @@ const Map<String, String> enUS = {
   "orderHistory": "Order History",
   "changePassword": "Change Password",
   "skip": "Skip",
+  "Location": "Location",
+  "selectLocation": "Select Location",
   "welcomeToShopping": "Welcome to\nshopping",
   "signIn": "Log In",
   "signUp": "Sign Up",
