@@ -544,7 +544,8 @@ class Repository {
     if (response.statusCode == 200) {
       UserDataModel userDataModel = UserDataModel.fromJson(data);
       LocalDataHelper().saveUserToken(userDataModel.data!.token);
-      printLog("----update profile:user token: ${LocalDataHelper().getUserToken()}");
+      printLog(
+          "----update profile:user token: ${LocalDataHelper().getUserToken()}");
 
       return userDataModel;
     } else {
@@ -1522,9 +1523,11 @@ class Repository {
       try {
         String url =
             "${NetworkService.apiUrl}/user/delete-account?token=${LocalDataHelper().getUserToken()}&$langCurrCode";
+        print("delete: $url");
         return _service.fetchJsonData(url).then(
           (response) {
             if (response != null) {
+              print(response);
               showShortToast(response["message"]);
               if (response["success"]) return true;
             }
