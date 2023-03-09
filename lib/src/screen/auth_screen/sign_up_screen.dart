@@ -6,6 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:TLSouq/config.dart';
 import 'package:TLSouq/src/utils/images.dart';
 import '../../data/local_data_helper.dart';
+import '../../models/shipping_address_model/state_list_model.dart';
+import '../../servers/repository.dart';
+
 import '../../_route/routes.dart';
 import '../../controllers/auth_controller.dart';
 import 'package:TLSouq/src/utils/app_tags.dart';
@@ -17,11 +20,29 @@ import '../../widgets/loader/loader_widget.dart';
 import '../../widgets/login_edit_textform_field.dart';
 import 'package:file_picker/file_picker.dart';
 
-class SignupScreen extends StatelessWidget {
+class SignupScreen extends StatefulWidget {
   SignupScreen({Key? key}) : super(key: key);
+
+  @override
+  State<SignupScreen> createState() => _SignupScreen();
+}
+
+class _SignupScreen extends State<SignupScreen> {
+  dynamic _selectedState;
   final AuthController authController = Get.find<AuthController>();
   final String type = Get.arguments;
   late String pathFile = '';
+
+  _SignupScreen() {
+    getStateList(231);
+  }
+
+  StateListModel? stateListModel = StateListModel();
+
+  Future getStateList(int? countryId) async {
+    stateListModel = await Repository().getStateList(countryId: countryId);
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -210,6 +231,67 @@ class SignupScreen extends StatelessWidget {
                   ),
                 ),
               ),*/
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 5.h),
+              child: Container(
+                alignment: Alignment.center,
+                padding: EdgeInsets.symmetric(horizontal: 4.w),
+                decoration: BoxDecoration(
+                  //color: Color(0xfff3f3f4),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10.r),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppThemeData.boxShadowColor.withOpacity(0.15),
+                      spreadRadius: 2,
+                      blurRadius: 30,
+                      offset: const Offset(0, 15), // changes position of shadow
+                    ),
+                  ],
+                ),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButtonFormField(
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.pin_drop,
+                        ),
+                        border: InputBorder.none,
+                      ),
+                      isExpanded: true,
+                      hint: Text(
+                        AppTags.selectState.tr,
+                        style: AppThemeData.hintTextStyle_13,
+                      ),
+                      value: _selectedState,
+                      onChanged: (newValue) {
+                        setState(
+                          () {
+                            _selectedState = newValue;
+                          },
+                        );
+                      },
+                      items: (stateListModel!.data != null)
+                          ? stateListModel!.data!.states!.map((state) {
+                              return DropdownMenuItem(
+                                onTap: () async {
+                                  setState(() {});
+                                },
+                                value: state.id,
+                                child: Text(state.name.toString()),
+                              );
+                            }).toList()
+                          : [].map((state) {
+                              return DropdownMenuItem(
+                                onTap: () async {
+                                  setState(() {});
+                                },
+                                value: state.id,
+                                child: Text(state.name.toString()),
+                              );
+                            }).toList()),
+                ),
+              ),
+            ),
             SizedBox(
               height: 34.h,
             ),

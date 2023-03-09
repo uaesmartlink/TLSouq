@@ -83,6 +83,8 @@ dependencies:
   flutter_easyloading: ^3.0.5
   flutter_share: ^2.0.0
   whatsapp_share: ^2.0.1
+  google_maps_flutter: ^2.2.5
+  geolocator: ^9.0.2
 #  webview_flutter_android: ^3.0.0
 
 dev_dependencies:
