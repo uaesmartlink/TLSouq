@@ -537,13 +537,14 @@ class Repository {
     var url = Uri.parse(
         "${NetworkService.apiUrl}/user/update-profile?token=${LocalDataHelper().getUserToken()}&$langCurrCode");
     final response = await http.post(url, body: body, headers: headers);
-
+    print("Without url: $url");
     var data = json.decode(response.body);
     printLog("----update profile without image: $data");
-    printLog(
-        "----update profile:user token: ${LocalDataHelper().getUserToken()}");
+
     if (response.statusCode == 200) {
       UserDataModel userDataModel = UserDataModel.fromJson(data);
+      LocalDataHelper().saveUserToken(userDataModel.data!.token);
+      printLog("----update profile:user token: ${LocalDataHelper().getUserToken()}");
 
       return userDataModel;
     } else {
@@ -559,10 +560,12 @@ class Repository {
       required String emailAddress,
       required File image,
       required String gender,
-      required String dob}) async {
+      String? dob}) async {
     try {
       var url = Uri.parse(
           "${NetworkService.apiUrl}/user/update-profile?token=${LocalDataHelper().getUserToken()}&$langCurrCode");
+
+      print("edit-url: $url");
       var requestBody = http.MultipartRequest('POST', url);
       requestBody.headers['apiKey'] = Config.apiKey;
       requestBody.fields['first_name'] = firstName;
@@ -570,7 +573,7 @@ class Repository {
       requestBody.fields['email'] = emailAddress;
       requestBody.fields['phone'] = phoneNumber;
       requestBody.fields['gender'] = gender.toString();
-      requestBody.fields['date_of_birth'] = dob;
+      requestBody.fields['date_of_birth'] = dob!;
       var stream = http.ByteStream(image.openRead())..cast();
       var length = await image.length();
       var multipartFile = http.MultipartFile('image', stream, length,
@@ -658,7 +661,8 @@ class Repository {
     printLog("addToCart: variants_ids ${variantsIds.toString()}");
     printLog("addToCart: variants_name ${variantsNames.toString()}");
     printLog("addToCart: trx_id $trxId");
-    printLog("LocalDataHelper().getUserToken() ${LocalDataHelper().getUserToken()}");
+    printLog(
+        "LocalDataHelper().getUserToken() ${LocalDataHelper().getUserToken()}");
     var url = Uri.parse(
         "${NetworkService.apiUrl}/cart-store?token=${LocalDataHelper().getUserToken()}&$langCurrCode");
     final response = await http.post(url, body: body, headers: headers);
@@ -718,7 +722,8 @@ class Repository {
     print("url: ${url}");
     final response = await http.post(url, body: body, headers: headers);
     print("response: ${response.body}");
-    printLog("LocalDataHelper().getUserToken() ${LocalDataHelper().getUserToken()}");
+    printLog(
+        "LocalDataHelper().getUserToken() ${LocalDataHelper().getUserToken()}");
 
     var data = json.decode(response.body);
     if (response.statusCode == 200) {
@@ -1304,7 +1309,7 @@ class Repository {
   Future<CouponAppliedList> getAppliedCouponList() async {
     var url =
         "${NetworkService.apiUrl}/applied-coupons?trx_id=${LocalDataHelper().getCartTrxId()}";
-        print("Applied: $url");
+    print("Applied: $url");
     final response = await _service.fetchJsonData(url);
     return CouponAppliedList.fromJson(response);
   }

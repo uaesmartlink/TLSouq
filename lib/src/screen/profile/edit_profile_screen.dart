@@ -169,8 +169,8 @@ class _EditProfileState extends State<EditProfile> {
                             : Image.network(
                                 widget.userDataModel.data!.image!,
                                 fit: BoxFit.cover,
-                                height: 75.h,
-                                width:isMobile(context)? 75.w:50.w,
+                                height: 100.w,
+                                width:isMobile(context)? 100.w:100.w,
                               ))
                     : ClipOval(
                         child: SvgPicture.asset(Images.dUser,
