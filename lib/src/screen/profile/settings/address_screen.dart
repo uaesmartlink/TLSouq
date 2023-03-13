@@ -918,6 +918,8 @@ class _AddressesState extends State<Addresses> {
                         if (formKey.currentState!.validate()) {
                           await Repository()
                               .postCreateAddress(
+                            lat: 0.0,
+                            lng: 0.0,
                             name: nameController.text.toString(),
                             email: emailController.text.toString(),
                             phoneNo:

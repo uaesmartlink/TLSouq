@@ -98,10 +98,10 @@ class Routes {
       name: signUp,
       page: () => SignupScreen(),
     ),
-    GetPage(
-      name: addAddress,
-      page: () => AddAddress(),
-    ),
+    // GetPage(
+    //   name: addAddress,
+    //   page: () => AddAddress(),
+    // ),
     GetPage(
       name: preSignUp,
       page: () => PreSignUp(),

@@ -744,6 +744,8 @@ class Repository {
     required int countryId,
     required int stateId,
     required int cityId,
+    required double lat,
+    required double lng,
     String? postalCode,
     required String address,
   }) async {
@@ -755,6 +757,8 @@ class Repository {
       'country_id': countryId.toString(),
       'state_id': stateId.toString(),
       'city_id': cityId.toString(),
+      'lat': lat.toString(),
+      'lng': lng.toString(),
       // 'postal_code': postalCode.toString(),
       'address': address.toString()
     };

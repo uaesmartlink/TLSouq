@@ -3,12 +3,15 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapSample extends StatefulWidget {
   LatLng initialPosition;
   Position position;
-
+  final Completer<GoogleMapController> controller =
+  Completer<GoogleMapController>();
   MapSample({
     Key? key,
     required this.initialPosition,
@@ -20,8 +23,7 @@ class MapSample extends StatefulWidget {
 }
 
 class MapSampleState extends State<MapSample> {
-  final Completer<GoogleMapController> _controller =
-      Completer<GoogleMapController>();
+
   List<Marker> markers = [];
 
   @override
@@ -56,13 +58,15 @@ class MapSampleState extends State<MapSample> {
       body: Column(children: [
         Expanded(
           child: GoogleMap(
+
             mapType: MapType.normal,
             initialCameraPosition: CameraPosition(
               target: widget.initialPosition,
               zoom: 16,
             ),
+
             onMapCreated: (GoogleMapController controller) {
-              _controller.complete(controller);
+              widget.controller.complete(controller);
             },
             markers: Set.from(markers),
             onLongPress: _handleTap,
@@ -107,7 +111,9 @@ class MapSampleState extends State<MapSample> {
                     borderRadius: BorderRadius.all(Radius.circular(8)),
                   ),
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                        Navigator.pop(context, widget.initialPosition);
+                    },
                     style: TextButton.styleFrom(
                       // backgroundColor: Colors.red,
                       foregroundColor: Colors.white,
@@ -134,11 +140,13 @@ class MapSampleState extends State<MapSample> {
         position: point,
         markerId: MarkerId(point.toString()),
       );
+      widget.initialPosition = point;
+
     });
   }
 
   Future<void> _goToTheLake() async {
-    final GoogleMapController controller = await _controller.future;
+    final GoogleMapController controller = await widget.controller.future;
     controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
       target: widget.initialPosition,
       zoom: 18,

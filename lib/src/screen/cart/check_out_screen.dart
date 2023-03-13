@@ -51,12 +51,12 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
   final phoneController = TextEditingController();
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
-  LatLng _initialPosition = LatLng(25.206450, 55.272896);
+  LatLng _initialPosition = const LatLng(25.206450, 55.272896);
   late Position position;
   List<Marker> markers = [];
 
   void _getCurrentLocation() async {
-     position = await Geolocator.getCurrentPosition(
+    position = await Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.high,
     );
     setState(() {
@@ -1350,24 +1350,28 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
   }
 
   //Create Address
-   createAddress() {
+  createAddress() async {
     print("AAAAA");
     print(_initialPosition);
     print(position);
+    await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => AddAddress(
+          initialPosition: _initialPosition,
+          countryListModel: countryListModel,
+          stateListModel: stateListModel,
+          cityModel: cityModel,
+          shippingAddressModel: shippingAddressModel,
+          position: position,
+        )
+      ),
+    );
+    setState(() {
+      getShippingAddress();
+    });
 
-     Get.toNamed(
-         Routes.addAddress,
-         arguments: [
-           _initialPosition,
-           countryListModel,
-           stateListModel,
-           cityModel,
-           shippingAddressModel,
-           position,
-         ]
-     );
-
-   }
+  }
 
   //Edit Address
   Future editAddress(int? addressId, EditViewModel editViewModel) {

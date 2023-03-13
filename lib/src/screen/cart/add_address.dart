@@ -25,15 +25,24 @@ import 'package:TLSouq/src/utils/responsive.dart';
 import 'package:flutter/services.dart';
 
 class AddAddress extends StatefulWidget {
-  LatLng _initialPosition = Get.arguments[0];
+  LatLng initialPosition;
   final phoneCode = "971";
-  CountryListModel countryListModel = Get.arguments[1];
-  StateListModel stateListModel = Get.arguments[2];
-  GetCityModel cityModel = Get.arguments[3];
-  ShippingAddressModel shippingAddressModel = Get.arguments[4];
-  Position position = Get.arguments[5];
+  CountryListModel countryListModel;
 
-  AddAddress({Key? key}) : super(key: key);
+  StateListModel stateListModel;
+  GetCityModel cityModel;
+  ShippingAddressModel shippingAddressModel;
+  Position position;
+
+  AddAddress(
+      {Key? key,
+      required this.initialPosition,
+      required this.countryListModel,
+      required this.stateListModel,
+      required this.cityModel,
+      required this.shippingAddressModel,
+      required this.position})
+      : super(key: key);
 
   @override
   State<AddAddress> createState() => _AddAddress();
@@ -42,6 +51,7 @@ class AddAddress extends StatefulWidget {
 class _AddAddress extends State<AddAddress> {
   final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
   final currencyConverterController = Get.find<CurrencyConverterController>();
+
   // final postalCodeController = TextEditingController();
   final addressController = TextEditingController();
   final formKey = GlobalKey<FormState>();
@@ -57,6 +67,7 @@ class _AddAddress extends State<AddAddress> {
   dynamic _selectedCountry; // Option 2
   dynamic _selectedState; // Option 2// Option 2
   dynamic _selectedCity; // Option 2
+  bool selectedLocation = false;
 
   @override
   void initState() {
@@ -89,14 +100,15 @@ class _AddAddress extends State<AddAddress> {
       desiredAccuracy: LocationAccuracy.high,
     );
     setState(() {
-      widget._initialPosition = LatLng(widget.position.latitude, widget.position.longitude);
+      widget.initialPosition =
+          LatLng(widget.position.latitude, widget.position.longitude);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     print("----00----");
-    print(widget._initialPosition);
+    print(widget.initialPosition);
     print(widget.position.toString());
     return Scaffold(
       appBar: AppBar(
@@ -440,6 +452,9 @@ class _AddAddress extends State<AddAddress> {
                             ),
                     ],
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -464,21 +479,34 @@ class _AddAddress extends State<AddAddress> {
                           child: Container(
                             alignment: Alignment.centerLeft,
                             child: InkWell(
-                              child: Text(
-                                AppTags.selectLocation.tr,
-                                style: AppThemeData.hintTextStyle_13,
-                                textAlign: TextAlign.left,
-                              ),
-                              onTap: () {
-                                Navigator.push(
+                              child: (!selectedLocation)
+                                  ? Text(
+                                      AppTags.selectLocation.tr,
+                                      style: AppThemeData.hintTextStyle_13,
+                                      textAlign: TextAlign.left,
+                                    )
+                                  : Text(
+                                      "Selected",
+                                      style: TextStyle(
+                                          color: Colors.green,
+                                          fontFamily: "Poppins",
+                                          fontSize: 13.sp),
+                                      textAlign: TextAlign.left,
+                                    ),
+                              onTap: () async {
+                                LatLng result = await Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => MapSample(
-                                      initialPosition: widget._initialPosition,
+                                      initialPosition: widget.initialPosition,
                                       position: widget.position,
                                     ),
                                   ),
                                 );
+                                setState(() {
+                                  selectedLocation = true;
+                                  widget.initialPosition = result;
+                                });
                               },
                             ),
                           ),
@@ -551,9 +579,11 @@ class _AddAddress extends State<AddAddress> {
                     cityId: _selectedCity,
                     // postalCode: postalCodeController.text.toString(),
                     address: addressController.text.toString(),
+                    lat: widget.initialPosition.latitude,
+                    lng: widget.initialPosition.longitude,
                   )
                       .then((value) {
-                    Get.back();
+                    Navigator.pop(context);
                   });
                 }
               },

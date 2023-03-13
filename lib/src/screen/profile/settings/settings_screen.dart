@@ -227,24 +227,24 @@ class Settings extends StatelessWidget {
               ),
             ),
 
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: isMobile(context)? 0.w:10.w,vertical: isMobile(context)? 0.h:8.h),
-              child: InkWell(
-                onTap: () {
-                 Get.to(const Addresses());
-                },
-                child:  ListTile(
-                  title: Text(
-                    AppTags.address.tr,
-                    style: isMobile(context)? AppThemeData.settingsTitleStyle:AppThemeData.settingsTitleStyleTab,
-                  ),
-                  trailing:  Icon(
-                    Icons.arrow_forward_ios,
-                    size: 18.r,
-                  ),
-                ),
-              ),
-            ),
+            // Padding(
+            //   padding: EdgeInsets.symmetric(horizontal: isMobile(context)? 0.w:10.w,vertical: isMobile(context)? 0.h:8.h),
+            //   child: InkWell(
+            //     onTap: () {
+            //      Get.to(const Addresses());
+            //     },
+            //     child:  ListTile(
+            //       title: Text(
+            //         AppTags.address.tr,
+            //         style: isMobile(context)? AppThemeData.settingsTitleStyle:AppThemeData.settingsTitleStyleTab,
+            //       ),
+            //       trailing:  Icon(
+            //         Icons.arrow_forward_ios,
+            //         size: 18.r,
+            //       ),
+            //     ),
+            //   ),
+            // ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: isMobile(context)? 0.w:10.w,vertical: isMobile(context)? 0.h:8.h),
               child: InkWell(
