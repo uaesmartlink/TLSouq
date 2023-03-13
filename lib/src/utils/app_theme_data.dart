@@ -409,7 +409,7 @@ class AppThemeData {
   static final todayDealNewStyleTab = TextStyle(
       color: const Color(0xFFF51E46), fontFamily: "Poppins", fontSize: 8.sp);
   static final todayDealTitleStyle =
-      TextStyle(color: Colors.black, fontFamily: "Poppins", fontSize: 12.sp);
+      TextStyle(color: Colors.black, fontFamily: "Poppins", fontSize: 8.sp);
   static final todayDealTitleStyleTab =
       TextStyle(color: Colors.black, fontFamily: "Poppins", fontSize: 10.sp);
   static final todayDealOriginalPriceStyle = TextStyle(

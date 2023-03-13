@@ -290,96 +290,100 @@ class HomeScreenContent extends StatelessWidget {
                 child: SvgPicture.asset(
                   Images.more,
                   height: 4.h,
-                  width: 18.w,
+                  width: 4.w,
                 ),
               ),
             ),
           ],
         ),
         SizedBox(
-          height: 150.h,
-          child: ListView.builder(
-            padding: EdgeInsets.only(right: 15.w),
-            physics: const BouncingScrollPhysics(),
-            itemCount: homeScreenContentController.homeDataModel.value
-                .data![topCategoriesIndex].topCategories!.length,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: EdgeInsets.only(right: 0.w, left: 15.w),
-                child: InkWell(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (_) => ProductByCategory(
-                          id: homeScreenContentController
-                              .homeDataModel
-                              .value
-                              .data![topCategoriesIndex]
-                              .topCategories![index]
-                              .id!,
-                          title: homeScreenContentController
-                              .homeDataModel
-                              .value
-                              .data![topCategoriesIndex]
-                              .topCategories![index]
-                              .title,
-                        ),
-                      ),
-                    );
-                  },
-                  child: Container(
-                    height: 150.h,
-                    width: isMobile(context) ? 105.w : 80.w,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(7.r),
-                      ),
-                      border: Border.all(
-                        width: 1,
-                        color: const Color(0xFFEEEEEE),
-                      ),
-                    ),
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(vertical: 8.h),
-                            child: CachedNetworkImage(
-                              imageUrl: homeScreenContentController
-                                  .homeDataModel
-                                  .value
-                                  .data![topCategoriesIndex]
-                                  .topCategories![index]
-                                  .image!,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 8.w, vertical: 3.h),
-                          child: Text(
-                            homeScreenContentController
+          height: (homeScreenContentController.homeDataModel.value
+              .data![topCategoriesIndex].topCategories!.length / 4).ceil() * 110,
+          child: GridView.count(
+            crossAxisCount: 4,
+            children: List.generate(
+              homeScreenContentController.homeDataModel.value
+                  .data![topCategoriesIndex].topCategories!.length,
+              (index) => GridTile(
+                child: Center(
+                    child: Padding(
+                  padding: EdgeInsets.only(right: 5.w, left: 5.w,),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => ProductByCategory(
+                            id: homeScreenContentController
                                 .homeDataModel
                                 .value
                                 .data![topCategoriesIndex]
                                 .topCategories![index]
-                                .title!
-                                .toString(),
-                            maxLines: 1,
-                            textAlign: TextAlign.center,
-                            overflow: TextOverflow.ellipsis,
-                            style: AppThemeData.todayDealTitleStyle,
+                                .id!,
+                            title: homeScreenContentController
+                                .homeDataModel
+                                .value
+                                .data![topCategoriesIndex]
+                                .topCategories![index]
+                                .title,
                           ),
                         ),
-                      ],
+                      );
+                    },
+                    child: Container(
+                      height: 100.h,
+                      width: isMobile(context) ? 70.w : 60.w,
+                      // decoration: BoxDecoration(
+                      //   color: Colors.white,
+                      //   borderRadius: BorderRadius.all(
+                      //     Radius.circular(7.r),
+                      //   ),
+                      //   border: Border.all(
+                      //     width: 1,
+                      //     color: const Color(0xFFEEEEEE),
+                      //   ),
+                      // ),
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(vertical: 8.h),
+                              child: CachedNetworkImage(
+                                imageUrl: homeScreenContentController
+                                    .homeDataModel
+                                    .value
+                                    .data![topCategoriesIndex]
+                                    .topCategories![index]
+                                    .image!,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 8.w, vertical: 3.h),
+                            child: Text(
+                              homeScreenContentController
+                                  .homeDataModel
+                                  .value
+                                  .data![topCategoriesIndex]
+                                  .topCategories![index]
+                                  .title!
+                                  .toString(),
+                              maxLines: 2,
+                              textAlign: TextAlign.center,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 10,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              );
-            },
+                )),
+              ),
+            ),
           ),
         ),
         SizedBox(
@@ -508,7 +512,8 @@ class HomeScreenContent extends StatelessWidget {
                                   .popularCategories![index]
                                   .title
                                   .toString(),
-                              maxLines: 1,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
                               textAlign: TextAlign.center,
                               style: isMobile(context)
                                   ? AppThemeData.titleTextStyle_13
@@ -734,148 +739,154 @@ class HomeScreenContent extends StatelessWidget {
     return homeScreenContentController
             .homeDataModel.value.data![sliderIndex].slider!.isEmpty
         ? const SizedBox()
-        : Stack(
-            children: [
-              CarouselSlider(
-                carouselController: homeScreenContentController.controller,
-                options: CarouselOptions(
-                  onPageChanged: (index, reason) {
-                    homeScreenContentController.currentUpdate(index);
-                  },
-                  height: isMobile(context) ? 140.h : 150.h,
-                  autoPlayInterval: const Duration(seconds: 6),
-                  viewportFraction: isMobile(context) ? 0.92 : 0.58,
-                  aspectRatio: 16 / 4,
-                  enlargeCenterPage: true,
-                  scrollDirection: Axis.horizontal,
-                  autoPlay: true,
-                ),
-                items: homeScreenContentController
-                    .homeDataModel.value.data![sliderIndex].slider!
-                    .map(
-                      (item) => Container(
-                        //height:100,
-                        alignment: Alignment.center,
-                        margin: const EdgeInsets.all(0.0),
-                        child: Stack(
-                          children: <Widget>[
-                            InkWell(
-                              onTap: () {
-                                if (item.actionType == "product") {
-                                  Get.toNamed(
-                                    Routes.detailsPage,
-                                    parameters: {
-                                      'productId': item.id!.toString(),
-                                    },
-                                  );
-                                } else if (item.actionType == "category") {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (_) => ProductByCategory(
-                                        id: item.id!,
-                                        title: item.title.toString(),
+        : Padding(
+            padding: EdgeInsets.symmetric(vertical: 10.h),
+            child: Stack(
+              children: [
+                CarouselSlider(
+                  carouselController: homeScreenContentController.controller,
+                  options: CarouselOptions(
+                    onPageChanged: (index, reason) {
+                      homeScreenContentController.currentUpdate(index);
+                    },
+                    height: isMobile(context) ? 140.h : 150.h,
+                    autoPlayInterval: const Duration(seconds: 6),
+                    viewportFraction: isMobile(context) ? 0.92 : 0.58,
+                    aspectRatio: 16 / 4,
+                    enlargeCenterPage: true,
+                    scrollDirection: Axis.horizontal,
+                    autoPlay: true,
+                  ),
+                  items: homeScreenContentController
+                      .homeDataModel.value.data![sliderIndex].slider!
+                      .map(
+                        (item) => Container(
+                          //height:100,
+                          alignment: Alignment.center,
+                          margin: const EdgeInsets.all(0.0),
+                          child: Stack(
+                            children: <Widget>[
+                              InkWell(
+                                onTap: () {
+                                  if (item.actionType == "product") {
+                                    Get.toNamed(
+                                      Routes.detailsPage,
+                                      parameters: {
+                                        'productId': item.id!.toString(),
+                                      },
+                                    );
+                                  } else if (item.actionType == "category") {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (_) => ProductByCategory(
+                                          id: item.id!,
+                                          title: item.title.toString(),
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                } else if (item.actionType == "brand") {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (_) => ProductByBrand(
-                                        id: item.id!,
-                                        title: "Brand",
+                                    );
+                                  } else if (item.actionType == "brand") {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (_) => ProductByBrand(
+                                          id: item.id!,
+                                          title: "Brand",
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                } else if (item.actionType == "seller") {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (_) => ProductByShop(
-                                        id: item.id!,
-                                        shopName: "Shop",
+                                    );
+                                  } else if (item.actionType == "seller") {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (_) => ProductByShop(
+                                          id: item.id!,
+                                          shopName: "Shop",
+                                        ),
                                       ),
+                                    );
+                                  } else if (item.actionType == "url") {
+                                    Get.toNamed(
+                                      Routes.wvScreen,
+                                      parameters: {
+                                        'url': item.actionTo.toString(),
+                                        'title': "",
+                                      },
+                                    );
+                                  } else if (item.actionType == "blog") {
+                                    Get.toNamed(
+                                      Routes.newsScreen,
+                                      parameters: {
+                                        'title': item.title.toString(),
+                                        'url': item.url.toString(),
+                                        'image':
+                                            item.backgroundImage.toString(),
+                                      },
+                                    );
+                                  }
+                                },
+                                child: SizedBox(
+                                  height: 140.h,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(15.r),
+                                    child: CachedNetworkImage(
+                                      imageUrl: item.banner!,
+                                      fit: BoxFit.cover,
                                     ),
-                                  );
-                                } else if (item.actionType == "url") {
-                                  Get.toNamed(
-                                    Routes.wvScreen,
-                                    parameters: {
-                                      'url': item.actionTo.toString(),
-                                      'title': "",
-                                    },
-                                  );
-                                } else if (item.actionType == "blog") {
-                                  Get.toNamed(
-                                    Routes.newsScreen,
-                                    parameters: {
-                                      'title': item.title.toString(),
-                                      'url': item.url.toString(),
-                                      'image': item.backgroundImage.toString(),
-                                    },
-                                  );
-                                }
-                              },
-                              child: SizedBox(
-                                height: 140.h,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(15.r),
-                                  child: CachedNetworkImage(
-                                    imageUrl: item.banner!,
-                                    fit: BoxFit.cover,
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
-                    .toList(),
-              ),
-              Positioned(
-                bottom: isMobile(context) ? 0.h : 5.h,
-                left: 0.w,
-                right: 0.w,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: homeScreenContentController
-                      .homeDataModel.value.data![sliderIndex].slider!
-                      .asMap()
-                      .entries
-                      .map(
-                    (entry) {
-                      return GestureDetector(
-                        onTap: () {
-                          homeScreenContentController.controller
-                              .animateToPage(entry.key);
-                          homeScreenContentController.currentUpdate(entry.key);
-                        },
-                        child: Obx(
-                          () => Container(
-                            width: homeScreenContentController.current.value ==
-                                    entry.key
-                                ? 20.0.w
-                                : 10.w,
-                            height: 3.0.h,
-                            margin: EdgeInsets.symmetric(
-                                vertical: 8.h, horizontal: 4.w),
-                            decoration: BoxDecoration(
-                              //shape: BoxShape.circle,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(8.r)),
-                              color:
-                                  homeScreenContentController.current.value ==
-                                          entry.key
-                                      ? const Color(0xff333333)
-                                      : const Color(0xff999999),
-                            ),
+                            ],
                           ),
                         ),
-                      );
-                    },
-                  ).toList(),
+                      )
+                      .toList(),
                 ),
-              ),
-            ],
+                Positioned(
+                  bottom: isMobile(context) ? 0.h : 5.h,
+                  left: 0.w,
+                  right: 0.w,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: homeScreenContentController
+                        .homeDataModel.value.data![sliderIndex].slider!
+                        .asMap()
+                        .entries
+                        .map(
+                      (entry) {
+                        return GestureDetector(
+                          onTap: () {
+                            homeScreenContentController.controller
+                                .animateToPage(entry.key);
+                            homeScreenContentController
+                                .currentUpdate(entry.key);
+                          },
+                          child: Obx(
+                            () => Container(
+                              width:
+                                  homeScreenContentController.current.value ==
+                                          entry.key
+                                      ? 20.0.w
+                                      : 10.w,
+                              height: 3.0.h,
+                              margin: EdgeInsets.symmetric(
+                                  vertical: 8.h, horizontal: 4.w),
+                              decoration: BoxDecoration(
+                                //shape: BoxShape.circle,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8.r)),
+                                color:
+                                    homeScreenContentController.current.value ==
+                                            entry.key
+                                        ? const Color(0xff333333)
+                                        : const Color(0xff999999),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ).toList(),
+                  ),
+                ),
+              ],
+            ),
           );
   }
 
@@ -2227,8 +2238,8 @@ class HomeScreenContent extends StatelessWidget {
 
   categoryCheck(HomeDataModel data, index, context) {
     switch (data.data![index].sectionType) {
-      case "categories":
-        return _categories(index, context);
+      // case "categories":
+      //   return _categories(index, context);
       case 'slider':
         return slider(index, context);
       case 'benefits':

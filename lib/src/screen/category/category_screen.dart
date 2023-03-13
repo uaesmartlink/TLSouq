@@ -1,4 +1,3 @@
-/*
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -36,7 +35,6 @@ class CategoryScreen extends StatelessWidget {
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.only(
-                    left: 15.0.w,
                     right: 7.5.w,
                   ),
                   child: Container(
@@ -60,10 +58,30 @@ class CategoryScreen extends StatelessWidget {
                                           },
                                           child: Container(
                                             height: 70.h,
-                                            color: _catController
-                                                    .featuredIndex.value
-                                                ? AppThemeData.buttonTextColor
-                                                : AppThemeData.categoryColor,
+                                            // color: _catController
+                                            //         .featuredIndex.value
+                                            //     ? AppThemeData.buttonTextColor
+                                            //     : AppThemeData.categoryColor,
+                                            decoration: BoxDecoration(
+                                              color: _catController
+                                                  .featuredIndex.value
+                                                  ? AppThemeData.buttonTextColor
+                                                  : AppThemeData.categoryColor,
+                                              border: _catController
+                                                  .featuredIndex.value
+                                                  ? Border(
+                                                left: BorderSide(
+                                                  color: Colors.yellow,
+                                                  width: 5,
+                                                ),
+                                              )
+                                                  : Border(
+                                                left: BorderSide(
+                                                  color: Colors.blue,
+                                                  width: 5,
+                                                ),
+                                              ),
+                                            ),
                                             alignment: Alignment.center,
                                             child: Row(
                                               children: [
@@ -76,27 +94,32 @@ class CategoryScreen extends StatelessWidget {
                                                         CrossAxisAlignment
                                                             .center,
                                                     children: [
-                                                      if (_catController
-                                                          .featuredCategory
-                                                          .value
-                                                          .icon!
-                                                          .isNotEmpty)
-                                                        Icon(
-                                                          MdiIcons.fromString(
-                                                            _catController
-                                                                .featuredCategory
-                                                                .value
-                                                                .icon!
-                                                                .substring(8),
-                                                          ),
-                                                          size: 30.r,
-                                                          color: AppThemeData
-                                                              .headlineTextColor,
-                                                        ),
-                                                      */
-/*    :Icon( MdiIcons.fromString("checkbox-multiple-blank-outline"),size: 30.r,
-                                                        color: AppThemeData.headlineTextColor,),*/ /*
-
+                                                      _catController
+                                                              .featuredCategory
+                                                              .value
+                                                              .icon!
+                                                              .isNotEmpty
+                                                          ? Icon(
+                                                              MdiIcons
+                                                                  .fromString(
+                                                                _catController
+                                                                    .featuredCategory
+                                                                    .value
+                                                                    .icon!
+                                                                    .substring(
+                                                                        8),
+                                                              ),
+                                                              size: 30.r,
+                                                              color: AppThemeData
+                                                                  .headlineTextColor,
+                                                            )
+                                                          : Icon(
+                                                              MdiIcons.fromString(
+                                                                  "checkbox-multiple-blank-outline"),
+                                                              size: 30.r,
+                                                              color: AppThemeData
+                                                                  .headlineTextColor,
+                                                            ),
                                                       SizedBox(height: 5.h),
                                                       Text(
                                                         _catController
@@ -270,7 +293,7 @@ class CategoryScreen extends StatelessWidget {
                                                         index]
                                                     .title
                                                     .toString(),
-                                                maxLines: 1,
+                                                maxLines: 2,
                                                 overflow: TextOverflow.ellipsis,
                                                 style: isMobile(context)
                                                     ? AppThemeData
@@ -508,7 +531,7 @@ class CategoryScreen extends StatelessWidget {
                                                                         childIndex]
                                                                     .title
                                                                     .toString(),
-                                                                maxLines: 1,
+                                                                maxLines: 2,
                                                                 overflow:
                                                                     TextOverflow
                                                                         .ellipsis,
@@ -576,24 +599,24 @@ class CategoryScreen extends StatelessWidget {
                                                 children: [
                                                   Column(
                                                     children: [
-                                                      // Expanded(
-                                                      //   child: Padding(
-                                                      //     padding:
-                                                      //         EdgeInsets.all(
-                                                      //             8.r),
-                                                      //     child: Image.network(
-                                                      //       _catController
-                                                      //           .categoryList[
-                                                      //               _catController
-                                                      //                   .index
-                                                      //                   .value]
-                                                      //           .subCategories![
-                                                      //               subCtIndex]
-                                                      //           .banner!,
-                                                      //     ),
-                                                      //   ),
-                                                      // )
-                                       s             ],
+                                                      Expanded(
+                                                        child: Padding(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  8.r),
+                                                          child: Image.network(
+                                                            _catController
+                                                                .categoryList[
+                                                                    _catController
+                                                                        .index
+                                                                        .value]
+                                                                .subCategories![
+                                                                    subCtIndex]
+                                                                .banner!,
+                                                          ),
+                                                        ),
+                                                      )
+                                                    ],
                                                   ),
                                                   Expanded(
                                                     child: Column(
@@ -668,10 +691,26 @@ class CategoryScreen extends StatelessWidget {
       },
       child: Container(
         height: 80.h,
-        color: _catController.index.value == index &&
-                !_catController.featuredIndex.value
-            ? AppThemeData.buttonTextColor
-            : AppThemeData.categoryColor,
+        decoration: BoxDecoration(
+          color: _catController.index.value == index &&
+                  !_catController.featuredIndex.value
+              ? AppThemeData.buttonTextColor
+              : AppThemeData.categoryColor,
+          border: _catController.index.value == index &&
+                  !_catController.featuredIndex.value
+              ? Border(
+                  left: BorderSide(
+                    color: Colors.yellow,
+                    width: 5,
+                  ),
+                )
+              : Border(
+                  left: BorderSide(
+                    color: Colors.blue,
+                    width: 5,
+                  ),
+                ),
+        ),
         alignment: Alignment.center,
         child: Row(
           children: [
@@ -679,15 +718,17 @@ class CategoryScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(height: 20.h,),
-                  if (_catController.categoryList[index].icon!.isNotEmpty)
-                    Icon(
-                      MdiIcons.fromString(
-                        _catController.categoryList[index].icon!.substring(8),
-                      ),
-                      size: 30.r,
-                      color: AppThemeData.headlineTextColor,
-                    ),
+                  SizedBox(
+                    height: 20.h,
+                  ),
+                  // if (_catController.categoryList[index].icon!.isNotEmpty)
+                  //   Icon(
+                  //     MdiIcons.fromString(
+                  //       _catController.categoryList[index].icon!.substring(8),
+                  //     ),
+                  //     size: 30.r,
+                  //     color: AppThemeData.headlineTextColor,
+                  //   ),
                   // _catController.categoryList[index].icon!.isNotEmpty?Icon(
                   //   MdiIcons.fromString(
                   //     _catController.categoryList[index].icon!.substring(8),
@@ -716,7 +757,7 @@ class CategoryScreen extends StatelessWidget {
     );
   }
 }
-*/
+/*
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -881,7 +922,8 @@ class CategoryScreen extends StatelessWidget {
                     //color: Colors.green,
                     child: Column(
                       children: [
-                        /*  Container(
+                        */
+/*  Container(
                           height: 100.h,
                           decoration: BoxDecoration(
                             color: const Color(0xffDBE8C2),
@@ -904,7 +946,8 @@ class CategoryScreen extends StatelessWidget {
                               )
                             ],
                           ),
-                        ),*/
+                        ),*/ /*
+
                         SizedBox(height: 15.h),
                         Container(
                           alignment: Alignment.center,
@@ -1504,3 +1547,4 @@ class CategoryScreen extends StatelessWidget {
     );
   }
 }
+*/

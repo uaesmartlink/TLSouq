@@ -4,6 +4,8 @@ import '../bindings/splash_binding.dart';
 import '../screen/auth_screen/login_screen.dart';
 import '../screen/auth_screen/sign_up_screen.dart';
 import '../screen/auth_screen/pre_sign_up_screen.dart';
+import '../screen/cart/add_address.dart';
+import '../screen/cart/check_out_screen.dart';
 import '../screen/profile/change_password_screen.dart';
 import '../screen/auth_screen/forgot_password_screen.dart';
 import '../screen/auth_screen/phone_login_screen.dart';
@@ -42,6 +44,8 @@ class Routes {
   static const String logIn = '/logIn';
   static const String signUp = '/signUp';
   static const String preSignUp ='/preSignUp';
+  static const String checkOut = '/checkOut';
+  static const String addAddress ='/addAddress';
   static const String forgetPassword = '/forgetPassword';
   static const String phoneRegistration = '/phoneRegistration';
   static const String phoneLoginScreen = '/phoneLoginScreen';
@@ -93,6 +97,10 @@ class Routes {
     GetPage(
       name: signUp,
       page: () => SignupScreen(),
+    ),
+    GetPage(
+      name: addAddress,
+      page: () => AddAddress(),
     ),
     GetPage(
       name: preSignUp,
@@ -151,6 +159,10 @@ class Routes {
     GetPage(
       name: trackingOrder,
       page: () => TrackingOrder(),
+    ),
+    GetPage(
+      name: checkOut,
+      page: () => const CheckOutScreen(),
     ),
     GetPage(
       name: settings,

@@ -6,7 +6,14 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapSample extends StatefulWidget {
-  const MapSample({Key? key}) : super(key: key);
+  LatLng initialPosition;
+  Position position;
+
+  MapSample({
+    Key? key,
+    required this.initialPosition,
+    required this.position,
+  }) : super(key: key);
 
   @override
   State<MapSample> createState() => MapSampleState();
@@ -15,7 +22,6 @@ class MapSample extends StatefulWidget {
 class MapSampleState extends State<MapSample> {
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
-  LatLng _initialPosition = LatLng(25.206450, 55.272896);
   List<Marker> markers = [];
 
   @override
@@ -25,21 +31,26 @@ class MapSampleState extends State<MapSample> {
   }
 
   void _getCurrentLocation() async {
-    Position position = await Geolocator.getCurrentPosition(
+    widget.position = await Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.high,
     );
     setState(() {
-      _initialPosition = LatLng(position.latitude, position.longitude);
+      widget.initialPosition =
+          LatLng(widget.position.latitude, widget.position.longitude);
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    markers[0] = Marker(
+      position: widget.initialPosition,
+      markerId: MarkerId(widget.position.toString()),
+    );
     return Scaffold(
       body: GoogleMap(
         mapType: MapType.normal,
         initialCameraPosition: CameraPosition(
-          target: _initialPosition,
+          target: widget.initialPosition,
           zoom: 15,
         ),
         onMapCreated: (GoogleMapController controller) {
@@ -48,10 +59,16 @@ class MapSampleState extends State<MapSample> {
         markers: Set.from(markers),
         onLongPress: _handleTap,
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: _goToTheLake,
-        label: const Text('To the lake!'),
-        icon: const Icon(Icons.directions_boat),
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniStartFloat,
+      floatingActionButton: SizedBox(
+        child: FloatingActionButton(
+          child: Icon(Icons.my_location_outlined),
+          //child widget inside this button
+          onPressed: () {
+            _goToTheLake();
+            //task to execute when this button is pressed
+          },
+        ),
       ),
     );
   }
@@ -71,8 +88,8 @@ class MapSampleState extends State<MapSample> {
   Future<void> _goToTheLake() async {
     final GoogleMapController controller = await _controller.future;
     controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-      target: _initialPosition,
-      zoom: 15,
+      target: widget.initialPosition,
+      zoom: 20,
     )));
   }
 }
