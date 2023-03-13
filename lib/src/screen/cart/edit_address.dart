@@ -39,6 +39,9 @@ class EditAddress extends StatefulWidget {
   EditViewModel editViewModel;
   Position position;
   int addressId;
+  dynamic selectedCountry; // Option 2
+  dynamic selectedState; // Option 2// Option 2
+  dynamic selectedCity; // Option 2
   EditAddress({
     Key? key,
     required this.initialPosition,
@@ -53,6 +56,9 @@ class EditAddress extends StatefulWidget {
     required this.addressController,
     required this.editViewModel,
     required this.addressId,
+    required this.selectedCity,
+    required this.selectedState,
+    required this.selectedCountry,
   }) : super(key: key);
 
   @override
@@ -71,13 +77,18 @@ class _EditAddress extends State<EditAddress> {
 
   String? phoneCode = "971";
   dynamic selectPickUpAddress;
-  dynamic _selectedCountry; // Option 2
-  dynamic _selectedState; // Option 2// Option 2
-  dynamic _selectedCity; // Option 2
-  bool selectedLocation = false;
+
+  bool selectedLocation = true;
 
   @override
   void initState() {
+    print("SSSSs");
+    print(widget.editViewModel.data!.address!.longitude);
+    print(widget.editViewModel.data!.address!.latitude);
+    print(widget.editViewModel.data!.address!.country!);
+    print(widget.editViewModel.data!.address!.state!);
+    print(widget.editViewModel.data!.address!.phoneNo!);
+    print(widget.editViewModel.data!.address!.name!);
     super.initState();
   }
 
@@ -88,7 +99,7 @@ class _EditAddress extends State<EditAddress> {
 
   Future getStateList(int? countryId) async {
     widget.stateListModel =
-    await Repository().getStateList(countryId: countryId);
+        await Repository().getStateList(countryId: countryId);
     setState(() {});
   }
 
@@ -143,8 +154,7 @@ class _EditAddress extends State<EditAddress> {
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
         child: Column(children: [
           SingleChildScrollView(
-            keyboardDismissBehavior:
-            ScrollViewKeyboardDismissBehavior.onDrag,
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             padding: EdgeInsets.zero,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -177,10 +187,10 @@ class _EditAddress extends State<EditAddress> {
                       // label: Text(editViewModel.data!.address!.name.toString()),
                       border: InputBorder.none,
                       hintText:
-                      widget.editViewModel.data!.address!.name.toString(),
+                          widget.editViewModel.data!.address!.name.toString(),
                       hintStyle: AppThemeData.hintTextStyle_13,
-                      contentPadding: EdgeInsets.only(
-                          left: 8.w, right: 8.w, bottom: 8.h),
+                      contentPadding:
+                          EdgeInsets.only(left: 8.w, right: 8.w, bottom: 8.h),
                     ),
                   ),
                 ),
@@ -244,8 +254,7 @@ class _EditAddress extends State<EditAddress> {
                       Expanded(
                         flex: 7,
                         child: CountryPickerDropdown(
-                          isFirstDefaultIfInitialValueNotProvided:
-                          false,
+                          isFirstDefaultIfInitialValueNotProvided: false,
                           initialValue: 'AE',
                           isExpanded: true,
                           itemBuilder: _buildDropdownItem,
@@ -263,8 +272,8 @@ class _EditAddress extends State<EditAddress> {
                           keyboardType: TextInputType.phone,
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: widget.editViewModel
-                                .data!.address!.phoneNo
+                            hintText: widget
+                                .editViewModel.data!.address!.phoneNo
                                 .toString(),
                           ),
                           onChanged: (value) {},
@@ -304,10 +313,10 @@ class _EditAddress extends State<EditAddress> {
                         ),
                       ),
                       // Not necessary for Option 1
-                      value: _selectedCountry,
+                      value: widget.selectedCountry,
                       onChanged: (newValue) {
                         setState(() {
-                          _selectedCountry = newValue;
+                          widget.selectedCountry = newValue;
                         });
                       },
                       items: widget.countryListModel.data!.countries!
@@ -334,84 +343,78 @@ class _EditAddress extends State<EditAddress> {
                 ),
                 widget.stateListModel.data != null
                     ? Container(
-                  height: 42.h,
-                  alignment: Alignment.center,
-                  padding:
-                  EdgeInsets.only(left: 12.w, right: 4.w),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(
-                        color: const Color(0xffF4F4F4)),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(5.r),
-                    ),
-                  ),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton(
-                      isExpanded: true,
-                      hint: Text(
-                        AppTags.selectState.tr,
-                        style: AppThemeData.hintTextStyle_13,
-                      ),
-                      value: _selectedState,
-                      onChanged: (newValue) {
-                        setState(
-                              () {
-                            print("_selectedCity $_selectedCity");
-                            _selectedState = newValue!;
-                            _selectedCity = null;
-                            widget.cityModel.data!.cities = [];
-                          },
-                        );
-                      },
-                      items: widget.stateListModel.data!.states!
-                          .map((state) {
-                        return DropdownMenuItem(
-                          onTap: () async {
-                            await getCityList(state.id);
-                            setState(() {});
-                          },
-                          value: state.id,
-                          child: Text(state.name.toString()),
-                        );
-                      }).toList(),
-                    ),
-                  ),
-                )
+                        height: 42.h,
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.only(left: 12.w, right: 4.w),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(color: const Color(0xffF4F4F4)),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(5.r),
+                          ),
+                        ),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton(
+                            isExpanded: true,
+                            hint: Text(
+                              AppTags.selectState.tr,
+                              style: AppThemeData.hintTextStyle_13,
+                            ),
+                            value: widget.selectedState,
+                            onChanged: (newValue) {
+                              setState(
+                                () {
+                                  widget.selectedState = newValue!;
+                                  widget.selectedCity = null;
+                                  widget.cityModel.data!.cities = [];
+                                },
+                              );
+                            },
+                            items: widget.stateListModel.data!.states!
+                                .map((state) {
+                              return DropdownMenuItem(
+                                onTap: () async {
+                                  await getCityList(state.id);
+                                  setState(() {});
+                                },
+                                value: state.id,
+                                child: Text(state.name.toString()),
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                      )
                     : Container(
-                  height: 42.h,
-                  alignment: Alignment.center,
-                  padding:
-                  EdgeInsets.only(left: 12.w, right: 4.w),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(
-                        color: const Color(0xffF4F4F4)),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(5.r),
-                    ),
-                  ),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton(
-                      isExpanded: true,
-                      hint: Text(AppTags.selectState.tr,
-                          style: AppThemeData.hintTextStyle_13),
-                      value: _selectedState,
-                      onChanged: (newValue) {
-                        setState(
-                              () {
-                            print(
-                                "@@@ _selectedCity $_selectedCity");
-                            _selectedState = newValue!;
-                            _selectedCity = null;
-                            widget.cityModel.data!.cities = [];
-                          },
-                        );
-                      },
-                      items: null,
-                    ),
-                  ),
-                ),
+                        height: 42.h,
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.only(left: 12.w, right: 4.w),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(color: const Color(0xffF4F4F4)),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(5.r),
+                          ),
+                        ),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton(
+                            isExpanded: true,
+                            hint: Text(AppTags.selectState.tr,
+                                style: AppThemeData.hintTextStyle_13),
+                            value: widget.selectedState,
+                            onChanged: (newValue) {
+                              setState(
+                                () {
+                                  widget.selectedState = newValue!;
+                                  widget.selectedCity = null;
+                                  widget.cityModel.data!.cities = [];
+                                },
+                              );
+                            },
+                            items: null,
+                          ),
+                        ),
+                      ),
+
                 SizedBox(height: 16.r),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -425,70 +428,67 @@ class _EditAddress extends State<EditAddress> {
                     ),
                     widget.cityModel.data != null
                         ? Container(
-                      height: 42.h,
-                      alignment: Alignment.center,
-                      padding:
-                      EdgeInsets.only(left: 12.w, right: 4.w),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(
-                            color: const Color(0xffF4F4F4)),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(5.r),
-                        ),
-                      ),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton(
-                          isExpanded: true,
-                          hint: Text(
-                            AppTags.selectCity.tr,
-                            style: AppThemeData.hintTextStyle_13,
-                          ),
-                          value: _selectedCity,
-                          onChanged: (newValue) {
-                            setState(() {
-                              _selectedCity = newValue;
-                            });
-                          },
-                          items:
-                          widget.cityModel.data!.cities!.map((city) {
-                            return DropdownMenuItem(
-                              onTap: () {},
-                              value: city.id,
-                              child: Text(city.name.toString()),
-                            );
-                          }).toList(),
-                        ),
-                      ),
-                    )
+                            height: 42.h,
+                            alignment: Alignment.center,
+                            padding: EdgeInsets.only(left: 12.w, right: 4.w),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border:
+                                  Border.all(color: const Color(0xffF4F4F4)),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(5.r),
+                              ),
+                            ),
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton(
+                                isExpanded: true,
+                                hint: Text(
+                                  AppTags.selectCity.tr,
+                                  style: AppThemeData.hintTextStyle_13,
+                                ),
+                                value: widget.selectedCity,
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    widget.selectedCity = newValue;
+                                  });
+                                },
+                                items:
+                                    widget.cityModel.data!.cities!.map((city) {
+                                  return DropdownMenuItem(
+                                    onTap: () {},
+                                    value: city.id,
+                                    child: Text(city.name.toString()),
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                          )
                         : Container(
-                      height: 50.h,
-                      alignment: Alignment.center,
-                      padding:
-                      EdgeInsets.only(left: 12.w, right: 4.w),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(
-                            color: const Color(0xffF4F4F4)),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(5.r),
-                        ),
-                      ),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton(
-                            isExpanded: true,
-                            hint: Text(AppTags.selectCity.tr,
-                                style: AppThemeData
-                                    .hintTextStyle_13),
-                            value: _selectedCity,
-                            onChanged: (newValue) {
-                              setState(() {
-                                _selectedCity = newValue;
-                              });
-                            },
-                            items: null),
-                      ),
-                    ),
+                            height: 50.h,
+                            alignment: Alignment.center,
+                            padding: EdgeInsets.only(left: 12.w, right: 4.w),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border:
+                                  Border.all(color: const Color(0xffF4F4F4)),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(5.r),
+                              ),
+                            ),
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton(
+                                  isExpanded: true,
+                                  hint: Text(AppTags.selectCity.tr,
+                                      style: AppThemeData.hintTextStyle_13),
+                                  value: widget.selectedCity,
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      widget.selectedCity = newValue;
+                                    });
+                                  },
+                                  items: null),
+                            ),
+                          ),
                   ],
                 ),
                 /*         SizedBox(
@@ -498,6 +498,64 @@ class _EditAddress extends State<EditAddress> {
                           AppTags.postalCode.tr,
                           style: AppThemeData.titleTextStyle_13,
                         ),*/
+                SizedBox(
+                  height: 10,
+                ),
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  Text(
+                    AppTags.location.tr,
+                    style: AppThemeData.titleTextStyle_13,
+                  ),
+                  SizedBox(
+                    height: 8.h,
+                  ),
+                  Container(
+                    height: 50.h,
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.only(left: 12.w, right: 4.w),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: const Color(0xffF4F4F4)),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(5.r),
+                      ),
+                    ),
+                    child: Container(
+                      alignment: Alignment.centerLeft,
+                      child: InkWell(
+                        child: (!selectedLocation)
+                            ? Text(
+                                AppTags.selectLocation.tr,
+                                style: AppThemeData.hintTextStyle_13,
+                                textAlign: TextAlign.left,
+                              )
+                            : Text(
+                                "Selected",
+                                style: TextStyle(
+                                    color: Colors.green,
+                                    fontFamily: "Poppins",
+                                    fontSize: 13.sp),
+                                textAlign: TextAlign.left,
+                              ),
+                        onTap: () async {
+                          LatLng result = await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MapSample(
+                                initialPosition: widget.initialPosition,
+                                position: widget.position,
+                              ),
+                            ),
+                          );
+                          setState(() {
+                            selectedLocation = true;
+                            widget.initialPosition = result;
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                ]),
                 SizedBox(
                   height: 8.h,
                 ),
@@ -512,10 +570,9 @@ class _EditAddress extends State<EditAddress> {
                   height: 8.h,
                 ),
                 Container(
-                  height: 30.h,
+                  height: 42.h,
                   alignment: Alignment.center,
-                  padding: EdgeInsets.symmetric(
-                      horizontal: 4.w, vertical: 4.h),
+                  padding: EdgeInsets.symmetric(horizontal: 4.w),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(color: const Color(0xffF4F4F4)),
@@ -523,75 +580,84 @@ class _EditAddress extends State<EditAddress> {
                       Radius.circular(5.r),
                     ),
                   ),
-                  child: TextField(
+                  child: TextFormField(
                     controller: widget.addressController,
-                    maxLines: 3,
+                    maxLines: 1,
                     textAlign: TextAlign.left,
                     keyboardType: TextInputType.name,
+                    validator: (value) => textFieldValidator(
+                      AppTags.name.tr,
+                      widget.addressController,
+                    ),
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: widget.editViewModel.data!.address!.address!
                           .toString(),
                       hintStyle: AppThemeData.hintTextStyle_13,
                       contentPadding: EdgeInsets.only(
-                          left: 8.w, right: 8.w, bottom: 8.h),
+                        left: 8.w,
+                        right: 8.w,
+                        bottom: 10.h,
+                      ),
                     ),
                   ),
                 ),
                 SizedBox(
-                  height: 8.h,
+                  height: 16.h,
                 ),
               ],
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(
-                left: 15.w, bottom: 15.h, right: 15.w),
+            padding: EdgeInsets.only(left: 15.w, bottom: 15.h, right: 15.w),
             child: InkWell(
               onTap: () async {
                 await Repository()
                     .updateEditAddress(
-                  name: widget.nameController.text.isNotEmpty
-                      ? widget.nameController.text.toString()
-                      : widget.editViewModel.data!.address!.name
-                      .toString(),
-                  // email: emailController.text.isNotEmpty
-                  //     ? emailController.text.toString()
-                  //     : editViewModel.data!.address!.email
-                  //         .toString(),
-                  phoneNo: widget.phoneController.text.isNotEmpty
-                      ? "+$phoneCode ${widget.phoneController.text.toString()}"
-                      : widget.editViewModel.data!.address!.phoneNo
-                      .toString(),
-                  countryId: _selectedCountry ??
-                      int.parse(widget.editViewModel
-                          .data!.address!.addressIds!.countryId
-                          .toString()),
-                  stateId: _selectedState ??
-                      int.parse(widget.editViewModel
-                          .data!.address!.addressIds!.stateId
-                          .toString()),
-                  cityId: _selectedCity ??
-                      int.parse(widget.editViewModel
-                          .data!.address!.addressIds!.cityId
-                          .toString()),
-                  // postalCode: postalCodeController.text.isNotEmpty?postalCodeController.text.toString():editViewModel.data!.address!.postalCode.toString(),
-                  address: widget.addressController.text.isNotEmpty
-                      ? widget.addressController.text.toString()
-                      : widget.editViewModel.data!.address!.address
-                      .toString(),
-                  addressId: widget.addressId!,
-                )
+                      name: widget.nameController.text.isNotEmpty
+                          ? widget.nameController.text.toString()
+                          : widget.editViewModel.data!.address!.name.toString(),
+                      // email: emailController.text.isNotEmpty
+                      //     ? emailController.text.toString()
+                      //     : editViewModel.data!.address!.email
+                      //         .toString(),
+                      phoneNo: widget.phoneController.text.isNotEmpty
+                          ? "+$phoneCode ${widget.phoneController.text.toString()}"
+                          : widget.editViewModel.data!.address!.phoneNo
+                              .toString(),
+                      countryId: widget.selectedCountry ??
+                          int.parse(widget.editViewModel.data!.address!
+                              .addressIds!.countryId
+                              .toString()),
+                      stateId: widget.selectedState ??
+                          int.parse(widget
+                              .editViewModel.data!.address!.addressIds!.stateId
+                              .toString()),
+                      cityId: widget.selectedCity ??
+                          int.parse(widget
+                              .editViewModel.data!.address!.addressIds!.cityId
+                              .toString()),
+                      // postalCode: postalCodeController.text.isNotEmpty?postalCodeController.text.toString():editViewModel.data!.address!.postalCode.toString(),
+                      address: widget.addressController.text.isNotEmpty
+                          ? widget.addressController.text.toString()
+                          : widget.editViewModel.data!.address!.address
+                              .toString(),
+                      addressId: widget.addressId!,
+                      lng: widget.initialPosition.longitude,
+                      lat: widget.initialPosition.latitude,
+                    )
                     .then((value) => getShippingAddress());
                 Get.back();
               },
               child: Container(
                 alignment: Alignment.bottomRight,
-                width: 42.w,
+                width: 120.w,
                 height: 42.h,
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(color: const Color(0xffF4F4F4)),
+                  color: const Color(0xFF31478f),
+                  border: Border.all(
+                    color: const Color(0xffF4F4F4),
+                  ),
                   borderRadius: BorderRadius.all(
                     Radius.circular(5.r),
                   ),
@@ -599,10 +665,22 @@ class _EditAddress extends State<EditAddress> {
                 child: Container(
                   alignment: Alignment.center,
                   child: Text(
-                    AppTags.add.tr,
+                    AppTags.edit.tr,
                     style: isMobile(context)
-                        ? AppThemeData.buttonTextStyle_13
-                        : AppThemeData.buttonTextStyle_10Tab,
+                        ? TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: "Poppins",
+                            fontSize: 13.sp,
+                            overflow: TextOverflow.clip,
+                          )
+                        : TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: "Poppins",
+                            fontSize: 10.sp,
+                            overflow: TextOverflow.clip,
+                          ),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -615,16 +693,15 @@ class _EditAddress extends State<EditAddress> {
   }
 
   Widget _buildDropdownItem(Country country) => Row(
-    children: <Widget>[
-      CountryPickerUtils.getDefaultFlagImage(country),
-      Text("+${country.phoneCode}"),
-    ],
-  );
+        children: <Widget>[
+          CountryPickerUtils.getDefaultFlagImage(country),
+          Text("+${country.phoneCode}"),
+        ],
+      );
+
   textFieldValidator(name, textController) {
     if (textController.text.isEmpty) {
       return "$name ${AppTags.required.tr}";
     }
   }
-
-
 }

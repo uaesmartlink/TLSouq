@@ -69,15 +69,15 @@ class CategoryScreen extends StatelessWidget {
                                                   : AppThemeData.categoryColor,
                                               border: _catController
                                                   .featuredIndex.value
-                                                  ? Border(
+                                                  ? const Border(
                                                 left: BorderSide(
-                                                  color: Colors.yellow,
+                                                  color: Color(0xFFe1ba52),
                                                   width: 5,
                                                 ),
                                               )
-                                                  : Border(
+                                                  : const Border(
                                                 left: BorderSide(
-                                                  color: Colors.blue,
+                                                  color: Color(0xFF31478f),
                                                   width: 5,
                                                 ),
                                               ),
@@ -698,15 +698,15 @@ class CategoryScreen extends StatelessWidget {
               : AppThemeData.categoryColor,
           border: _catController.index.value == index &&
                   !_catController.featuredIndex.value
-              ? Border(
+              ? const Border(
                   left: BorderSide(
-                    color: Colors.yellow,
+                    color: Color(0xFFe1ba52),
                     width: 5,
                   ),
                 )
-              : Border(
+              : const Border(
                   left: BorderSide(
-                    color: Colors.blue,
+                    color: Color(0xFF31478f),
                     width: 5,
                   ),
                 ),

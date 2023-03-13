@@ -52,8 +52,8 @@ class Address {
   String? country;
   String? state;
   String? city;
-  dynamic latitude;
-  dynamic longitude;
+  String? latitude;
+  String? longitude;
   String? postalCode;
   int? defaultShipping;
   int? defaultBilling;

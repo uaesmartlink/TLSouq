@@ -1375,7 +1375,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
         context,
         MaterialPageRoute(
           builder: (context) => EditAddress(
-            initialPosition: _initialPosition,
+            initialPosition: LatLng(double.parse(editViewModel.data!.address!.latitude!),double.parse(editViewModel.data!.address!.longitude!)),
             countryListModel: countryListModel,
             stateListModel: stateListModel,
             cityModel: cityModel,
@@ -1387,6 +1387,9 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
             emailController: emailController,
             addressId: addressId!,
             editViewModel: editViewModel,
+            selectedCity: _selectedCity,
+            selectedCountry: _selectedCountry,
+            selectedState: _selectedState,
           ),
         ));
 

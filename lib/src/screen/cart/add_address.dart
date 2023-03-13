@@ -547,8 +547,8 @@ class _AddAddress extends State<AddAddress> {
                       ),
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: AppTags.streetAddress.tr,
                         hintStyle: AppThemeData.hintTextStyle_13,
+                        hintText: AppTags.streetAddress.tr,
                         contentPadding: EdgeInsets.only(
                           left: 8.w,
                           right: 8.w,
@@ -558,7 +558,7 @@ class _AddAddress extends State<AddAddress> {
                     ),
                   ),
                   SizedBox(
-                    height: 8.h,
+                    height: 16.h,
                   ),
                 ],
               ),
@@ -587,12 +587,13 @@ class _AddAddress extends State<AddAddress> {
                   });
                 }
               },
+
               child: Container(
                 alignment: Alignment.bottomRight,
                 width: 80.w,
                 height: 42.h,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: const Color(0xFF31478f),
                   border: Border.all(color: const Color(0xffF4F4F4)),
                   borderRadius: BorderRadius.all(
                     Radius.circular(5.r),
@@ -603,8 +604,20 @@ class _AddAddress extends State<AddAddress> {
                   child: Text(
                     AppTags.add.tr,
                     style: isMobile(context)
-                        ? AppThemeData.buttonTextStyle_13
-                        : AppThemeData.buttonTextStyle_10Tab,
+                        ? TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: "Poppins",
+                      fontSize: 13.sp,
+                      overflow: TextOverflow.clip,
+                    )
+                        : TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: "Poppins",
+                      fontSize: 10.sp,
+                      overflow: TextOverflow.clip,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                 ),

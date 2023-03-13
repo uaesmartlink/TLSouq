@@ -784,6 +784,8 @@ class Repository {
     String? postalCode,
     required String address,
     required int addressId,
+    required double lat,
+    required double lng,
   }) async {
     var headers = {"apiKey": Config.apiKey};
     var bodyData = {
@@ -794,7 +796,9 @@ class Repository {
       'state_id': stateId.toString(),
       'city_id': cityId.toString(),
       // 'postal_code': postalCode.toString(),
-      'address': address.toString()
+      'address': address.toString(),
+      'lat': lat.toString(),
+      'lng': lng.toString(),
     };
     var url = Uri.parse(
         "${NetworkService.apiUrl}/user/shipping-addresses/$addressId?token=${LocalDataHelper().getUserToken()}&$langCurrCode");
@@ -843,6 +847,7 @@ class Repository {
     var headers = {"apiKey": Config.apiKey};
     var url = Uri.parse(
         "${NetworkService.apiUrl}/user/shipping-addresses/$addressId/edit?token=${LocalDataHelper().getUserToken()}&$langCurrCode");
+    print(url);
     final response = await http.get(url, headers: headers);
     var data = json.decode(response.body.toString());
     if (response.statusCode == 200) {
