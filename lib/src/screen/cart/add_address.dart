@@ -34,15 +34,15 @@ class AddAddress extends StatefulWidget {
   ShippingAddressModel shippingAddressModel;
   Position position;
 
-  AddAddress(
-      {Key? key,
-      required this.initialPosition,
-      required this.countryListModel,
-      required this.stateListModel,
-      required this.cityModel,
-      required this.shippingAddressModel,
-      required this.position})
-      : super(key: key);
+  AddAddress({
+    Key? key,
+    required this.initialPosition,
+    required this.countryListModel,
+    required this.stateListModel,
+    required this.cityModel,
+    required this.shippingAddressModel,
+    required this.position,
+  }) : super(key: key);
 
   @override
   State<AddAddress> createState() => _AddAddress();

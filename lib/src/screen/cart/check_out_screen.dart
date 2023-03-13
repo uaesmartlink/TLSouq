@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:TLSouq/src/screen/cart/edit_address.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
@@ -51,7 +52,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
   final phoneController = TextEditingController();
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
-  LatLng _initialPosition = const LatLng(25.206450, 55.272896);
+  LatLng _initialPosition = LatLng(25.206450, 55.272896);
   late Position position;
   List<Marker> markers = [];
 
@@ -1351,547 +1352,564 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
 
   //Create Address
   createAddress() async {
-    print("AAAAA");
-    print(_initialPosition);
-    print(position);
     await Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => AddAddress(
-          initialPosition: _initialPosition,
-          countryListModel: countryListModel,
-          stateListModel: stateListModel,
-          cityModel: cityModel,
-          shippingAddressModel: shippingAddressModel,
-          position: position,
-        )
-      ),
-    );
+        context,
+        MaterialPageRoute(
+          builder: (context) => AddAddress(
+              initialPosition: _initialPosition,
+              countryListModel: countryListModel,
+              stateListModel: stateListModel,
+              cityModel: cityModel,
+              shippingAddressModel: shippingAddressModel,
+              position: position),
+        ));
+
     setState(() {
       getShippingAddress();
     });
-
   }
 
   //Edit Address
-  Future editAddress(int? addressId, EditViewModel editViewModel) {
-    return showDialog(
-      //barrierColor: Colors.red,
-      barrierDismissible: false,
-      context: context,
-      useSafeArea: true,
-      builder: (BuildContext context) {
-        return StatefulBuilder(
-          builder: (BuildContext context, StateSetter setState) {
-            return WillPopScope(
-                onWillPop: () => Future.value(true),
-                child: AlertDialog(
-                  title: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        AppTags.addAddress.tr,
-                        style: AppThemeData.priceTextStyle_14,
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Get.back();
-                        },
-                        child: Container(
-                            height: 18.h,
-                            width: 18.w,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color: const Color(0xff56A8C7),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(5.r),
-                              ),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.all(2.5.r),
-                              child: Icon(
-                                Icons.clear,
-                                size: 12.r,
-                                color: Colors.white,
-                              ),
-                            )),
-                      ),
-                    ],
-                  ),
-                  content: SingleChildScrollView(
-                    keyboardDismissBehavior:
-                        ScrollViewKeyboardDismissBehavior.onDrag,
-                    padding: EdgeInsets.zero,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          AppTags.name.tr,
-                          style: AppThemeData.titleTextStyle_13,
-                        ),
-                        SizedBox(
-                          height: 8.h,
-                        ),
-                        Container(
-                          height: 42.h,
-                          alignment: Alignment.center,
-                          padding: EdgeInsets.symmetric(horizontal: 4.w),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(color: const Color(0xffF4F4F4)),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(5.r),
-                            ),
-                          ),
-                          child: TextField(
-                            controller: nameController,
-                            maxLines: 1,
-                            textAlign: TextAlign.left,
-                            keyboardType: TextInputType.name,
-                            decoration: InputDecoration(
-                              // label: Text(editViewModel.data!.address!.name.toString()),
-                              border: InputBorder.none,
-                              hintText:
-                                  editViewModel.data!.address!.name.toString(),
-                              hintStyle: AppThemeData.hintTextStyle_13,
-                              contentPadding: EdgeInsets.only(
-                                  left: 8.w, right: 8.w, bottom: 8.h),
-                            ),
-                          ),
-                        ),
-                        // SizedBox(height: 16.h),
-                        // Text(
-                        //   AppTags.email.tr,
-                        //   style: AppThemeData.titleTextStyle_13,
-                        // ),
-                        // SizedBox(
-                        //   height: 8.h,
-                        // ),
-                        // Container(
-                        //   height: 42.h,
-                        //   alignment: Alignment.center,
-                        //   padding: EdgeInsets.symmetric(horizontal: 4.w),
-                        //   decoration: BoxDecoration(
-                        //     color: Colors.white,
-                        //     border: Border.all(color: const Color(0xffF4F4F4)),
-                        //     borderRadius: BorderRadius.all(
-                        //       Radius.circular(5.r),
-                        //     ),
-                        //   ),
-                        //   child: TextField(
-                        //     controller: emailController,
-                        //     maxLines: 1,
-                        //     textAlign: TextAlign.left,
-                        //     keyboardType: TextInputType.emailAddress,
-                        //     decoration: InputDecoration(
-                        //       border: InputBorder.none,
-                        //       hintText:
-                        //           editViewModel.data!.address!.email.toString(),
-                        //       hintStyle: AppThemeData.hintTextStyle_13,
-                        //       contentPadding: EdgeInsets.only(
-                        //           left: 8.w, right: 8.w, bottom: 8.h),
-                        //     ),
-                        //   ),
-                        // ),
-                        // SizedBox(height: 16.h),
-                        Text(
-                          AppTags.phone.tr,
-                          style: AppThemeData.titleTextStyle_13,
-                        ),
-                        SizedBox(
-                          height: 8.h,
-                        ),
-                        Container(
-                          height: 42.h,
-                          alignment: Alignment.center,
-                          padding: EdgeInsets.symmetric(horizontal: 4.w),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(color: const Color(0xffF4F4F4)),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(5.r),
-                            ),
-                          ),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Expanded(
-                                flex: 7,
-                                child: CountryPickerDropdown(
-                                  isFirstDefaultIfInitialValueNotProvided:
-                                      false,
-                                  initialValue: 'AE',
-                                  isExpanded: true,
-                                  itemBuilder: _buildDropdownItem,
-                                  onValuePicked: (Country country) {
-                                    setState(() {
-                                      phoneCode = country.phoneCode;
-                                    });
-                                  },
-                                ),
-                              ),
-                              Expanded(
-                                flex: 9,
-                                child: TextField(
-                                  controller: phoneController,
-                                  keyboardType: TextInputType.phone,
-                                  decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: editViewModel
-                                        .data!.address!.phoneNo
-                                        .toString(),
-                                  ),
-                                  onChanged: (value) {},
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: 16.h),
-                        Text(
-                          AppTags.country.tr,
-                          style: AppThemeData.titleTextStyle_13,
-                        ),
-                        SizedBox(
-                          height: 16.h,
-                        ),
-                        Container(
-                          height: 42.h,
-                          alignment: Alignment.center,
-                          padding: EdgeInsets.symmetric(horizontal: 4.w),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(color: const Color(0xffF4F4F4)),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(5.r),
-                            ),
-                          ),
-                          child: DropdownButtonHideUnderline(
-                            child: DropdownButton(
-                              isExpanded: true,
-                              hint: Padding(
-                                padding: EdgeInsets.only(left: 6.w),
-                                child: Text(
-                                  editViewModel.data!.address!.country!
-                                      .toString(),
-                                  style: AppThemeData.hintTextStyle_13,
-                                ),
-                              ),
-                              // Not necessary for Option 1
-                              value: _selectedCountry,
-                              onChanged: (newValue) {
-                                setState(() {
-                                  _selectedCountry = newValue;
-                                });
-                              },
-                              items: countryListModel.data!.countries!
-                                  .map((country) {
-                                return DropdownMenuItem(
-                                  onTap: () async {
-                                    await getStateList(country.id);
-                                    setState(() {});
-                                  },
-                                  value: country.id,
-                                  child: Text(country.name.toString()),
-                                );
-                              }).toList(),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 16.h),
-                        Text(
-                          AppTags.state.tr,
-                          style: AppThemeData.titleTextStyle_13,
-                        ),
-                        SizedBox(
-                          height: 8.h,
-                        ),
-                        stateListModel.data != null
-                            ? Container(
-                                height: 42.h,
-                                alignment: Alignment.center,
-                                padding:
-                                    EdgeInsets.only(left: 12.w, right: 4.w),
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  border: Border.all(
-                                      color: const Color(0xffF4F4F4)),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(5.r),
-                                  ),
-                                ),
-                                child: DropdownButtonHideUnderline(
-                                  child: DropdownButton(
-                                    isExpanded: true,
-                                    hint: Text(
-                                      AppTags.selectState.tr,
-                                      style: AppThemeData.hintTextStyle_13,
-                                    ),
-                                    value: _selectedState,
-                                    onChanged: (newValue) {
-                                      setState(
-                                        () {
-                                          print("_selectedCity $_selectedCity");
-                                          _selectedState = newValue!;
-                                          _selectedCity = null;
-                                          cityModel.data!.cities = [];
-                                        },
-                                      );
-                                    },
-                                    items: stateListModel.data!.states!
-                                        .map((state) {
-                                      return DropdownMenuItem(
-                                        onTap: () async {
-                                          await getCityList(state.id);
-                                          setState(() {});
-                                        },
-                                        value: state.id,
-                                        child: Text(state.name.toString()),
-                                      );
-                                    }).toList(),
-                                  ),
-                                ),
-                              )
-                            : Container(
-                                height: 42.h,
-                                alignment: Alignment.center,
-                                padding:
-                                    EdgeInsets.only(left: 12.w, right: 4.w),
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  border: Border.all(
-                                      color: const Color(0xffF4F4F4)),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(5.r),
-                                  ),
-                                ),
-                                child: DropdownButtonHideUnderline(
-                                  child: DropdownButton(
-                                    isExpanded: true,
-                                    hint: Text(AppTags.selectState.tr,
-                                        style: AppThemeData.hintTextStyle_13),
-                                    value: _selectedState,
-                                    onChanged: (newValue) {
-                                      setState(
-                                        () {
-                                          print(
-                                              "@@@ _selectedCity $_selectedCity");
-                                          _selectedState = newValue!;
-                                          _selectedCity = null;
-                                          cityModel.data!.cities = [];
-                                        },
-                                      );
-                                    },
-                                    items: null,
-                                  ),
-                                ),
-                              ),
-                        SizedBox(height: 16.r),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              AppTags.city.tr,
-                              style: AppThemeData.titleTextStyle_13,
-                            ),
-                            SizedBox(
-                              height: 8.h,
-                            ),
-                            cityModel.data != null
-                                ? Container(
-                                    height: 42.h,
-                                    alignment: Alignment.center,
-                                    padding:
-                                        EdgeInsets.only(left: 12.w, right: 4.w),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border: Border.all(
-                                          color: const Color(0xffF4F4F4)),
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(5.r),
-                                      ),
-                                    ),
-                                    child: DropdownButtonHideUnderline(
-                                      child: DropdownButton(
-                                        isExpanded: true,
-                                        hint: Text(
-                                          AppTags.selectCity.tr,
-                                          style: AppThemeData.hintTextStyle_13,
-                                        ),
-                                        value: _selectedCity,
-                                        onChanged: (newValue) {
-                                          setState(() {
-                                            _selectedCity = newValue;
-                                          });
-                                        },
-                                        items:
-                                            cityModel.data!.cities!.map((city) {
-                                          return DropdownMenuItem(
-                                            onTap: () {},
-                                            value: city.id,
-                                            child: Text(city.name.toString()),
-                                          );
-                                        }).toList(),
-                                      ),
-                                    ),
-                                  )
-                                : Container(
-                                    height: 50.h,
-                                    alignment: Alignment.center,
-                                    padding:
-                                        EdgeInsets.only(left: 12.w, right: 4.w),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border: Border.all(
-                                          color: const Color(0xffF4F4F4)),
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(5.r),
-                                      ),
-                                    ),
-                                    child: DropdownButtonHideUnderline(
-                                      child: DropdownButton(
-                                          isExpanded: true,
-                                          hint: Text(AppTags.selectCity.tr,
-                                              style: AppThemeData
-                                                  .hintTextStyle_13),
-                                          value: _selectedCity,
-                                          onChanged: (newValue) {
-                                            setState(() {
-                                              _selectedCity = newValue;
-                                            });
-                                          },
-                                          items: null),
-                                    ),
-                                  ),
-                          ],
-                        ),
-                        /*         SizedBox(
-                          height: 16.h,
-                        ),
-                        Text(
-                          AppTags.postalCode.tr,
-                          style: AppThemeData.titleTextStyle_13,
-                        ),*/
-                        SizedBox(
-                          height: 8.h,
-                        ),
-                        SizedBox(
-                          height: 16.h,
-                        ),
-                        Text(
-                          AppTags.address.tr,
-                          style: AppThemeData.titleTextStyle_13,
-                        ),
-                        SizedBox(
-                          height: 8.h,
-                        ),
-                        Container(
-                          height: 30.h,
-                          alignment: Alignment.center,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 4.w, vertical: 4.h),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(color: const Color(0xffF4F4F4)),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(5.r),
-                            ),
-                          ),
-                          child: TextField(
-                            controller: addressController,
-                            maxLines: 3,
-                            textAlign: TextAlign.left,
-                            keyboardType: TextInputType.name,
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: editViewModel.data!.address!.address!
-                                  .toString(),
-                              hintStyle: AppThemeData.hintTextStyle_13,
-                              contentPadding: EdgeInsets.only(
-                                  left: 8.w, right: 8.w, bottom: 8.h),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 8.h,
-                        ),
-                      ],
-                    ),
-                  ),
-                  actions: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.only(
-                          left: 15.w, bottom: 15.h, right: 15.w),
-                      child: InkWell(
-                        onTap: () async {
-                          await Repository()
-                              .updateEditAddress(
-                                name: nameController.text.isNotEmpty
-                                    ? nameController.text.toString()
-                                    : editViewModel.data!.address!.name
-                                        .toString(),
-                                // email: emailController.text.isNotEmpty
-                                //     ? emailController.text.toString()
-                                //     : editViewModel.data!.address!.email
-                                //         .toString(),
-                                phoneNo: phoneController.text.isNotEmpty
-                                    ? "+$phoneCode ${phoneController.text.toString()}"
-                                    : editViewModel.data!.address!.phoneNo
-                                        .toString(),
-                                countryId: _selectedCountry ??
-                                    int.parse(editViewModel
-                                        .data!.address!.addressIds!.countryId
-                                        .toString()),
-                                stateId: _selectedState ??
-                                    int.parse(editViewModel
-                                        .data!.address!.addressIds!.stateId
-                                        .toString()),
-                                cityId: _selectedCity ??
-                                    int.parse(editViewModel
-                                        .data!.address!.addressIds!.cityId
-                                        .toString()),
-                                // postalCode: postalCodeController.text.isNotEmpty?postalCodeController.text.toString():editViewModel.data!.address!.postalCode.toString(),
-                                address: addressController.text.isNotEmpty
-                                    ? addressController.text.toString()
-                                    : editViewModel.data!.address!.address
-                                        .toString(),
-                                addressId: addressId!,
-                              )
-                              .then((value) => getShippingAddress());
-                          Get.back();
-                        },
-                        child: Container(
-                          alignment: Alignment.bottomRight,
-                          width: 42.w,
-                          height: 42.h,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(color: const Color(0xffF4F4F4)),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(5.r),
-                            ),
-                          ),
-                          child: Container(
-                            alignment: Alignment.center,
-                            child: Text(
-                              AppTags.add.tr,
-                              style: isMobile(context)
-                                  ? AppThemeData.buttonTextStyle_13
-                                  : AppThemeData.buttonTextStyle_10Tab,
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ));
-          },
-        );
-      },
-    );
+  editAddress(int? addressId, EditViewModel editViewModel) async {
+    await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => EditAddress(
+            initialPosition: _initialPosition,
+            countryListModel: countryListModel,
+            stateListModel: stateListModel,
+            cityModel: cityModel,
+            shippingAddressModel: shippingAddressModel,
+            position: position,
+            addressController: addressController,
+            phoneController: phoneController,
+            nameController: nameController,
+            emailController: emailController,
+            addressId: addressId!,
+            editViewModel: editViewModel,
+          ),
+        ));
+
+    setState(() {
+      getShippingAddress();
+    });
+    // return showDialog(
+    //   //barrierColor: Colors.red,
+    //   barrierDismissible: false,
+    //   context: context,
+    //   useSafeArea: true,
+    //   builder: (BuildContext context) {
+    //     return StatefulBuilder(
+    //       builder: (BuildContext context, StateSetter setState) {
+    //         return WillPopScope(
+    //             onWillPop: () => Future.value(true),
+    //             child: AlertDialog(
+    //               title: Row(
+    //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //                 children: [
+    //                   Text(
+    //                     AppTags.addAddress.tr,
+    //                     style: AppThemeData.priceTextStyle_14,
+    //                   ),
+    //                   InkWell(
+    //                     onTap: () {
+    //                       Get.back();
+    //                     },
+    //                     child: Container(
+    //                         height: 18.h,
+    //                         width: 18.w,
+    //                         alignment: Alignment.center,
+    //                         decoration: BoxDecoration(
+    //                           color: const Color(0xff56A8C7),
+    //                           borderRadius: BorderRadius.all(
+    //                             Radius.circular(5.r),
+    //                           ),
+    //                         ),
+    //                         child: Padding(
+    //                           padding: EdgeInsets.all(2.5.r),
+    //                           child: Icon(
+    //                             Icons.clear,
+    //                             size: 12.r,
+    //                             color: Colors.white,
+    //                           ),
+    //                         )),
+    //                   ),
+    //                 ],
+    //               ),
+    //               content: SingleChildScrollView(
+    //                 keyboardDismissBehavior:
+    //                     ScrollViewKeyboardDismissBehavior.onDrag,
+    //                 padding: EdgeInsets.zero,
+    //                 child: Column(
+    //                   mainAxisAlignment: MainAxisAlignment.start,
+    //                   crossAxisAlignment: CrossAxisAlignment.start,
+    //                   children: [
+    //                     Text(
+    //                       AppTags.name.tr,
+    //                       style: AppThemeData.titleTextStyle_13,
+    //                     ),
+    //                     SizedBox(
+    //                       height: 8.h,
+    //                     ),
+    //                     Container(
+    //                       height: 42.h,
+    //                       alignment: Alignment.center,
+    //                       padding: EdgeInsets.symmetric(horizontal: 4.w),
+    //                       decoration: BoxDecoration(
+    //                         color: Colors.white,
+    //                         border: Border.all(color: const Color(0xffF4F4F4)),
+    //                         borderRadius: BorderRadius.all(
+    //                           Radius.circular(5.r),
+    //                         ),
+    //                       ),
+    //                       child: TextField(
+    //                         controller: nameController,
+    //                         maxLines: 1,
+    //                         textAlign: TextAlign.left,
+    //                         keyboardType: TextInputType.name,
+    //                         decoration: InputDecoration(
+    //                           // label: Text(editViewModel.data!.address!.name.toString()),
+    //                           border: InputBorder.none,
+    //                           hintText:
+    //                               editViewModel.data!.address!.name.toString(),
+    //                           hintStyle: AppThemeData.hintTextStyle_13,
+    //                           contentPadding: EdgeInsets.only(
+    //                               left: 8.w, right: 8.w, bottom: 8.h),
+    //                         ),
+    //                       ),
+    //                     ),
+    //                     // SizedBox(height: 16.h),
+    //                     // Text(
+    //                     //   AppTags.email.tr,
+    //                     //   style: AppThemeData.titleTextStyle_13,
+    //                     // ),
+    //                     // SizedBox(
+    //                     //   height: 8.h,
+    //                     // ),
+    //                     // Container(
+    //                     //   height: 42.h,
+    //                     //   alignment: Alignment.center,
+    //                     //   padding: EdgeInsets.symmetric(horizontal: 4.w),
+    //                     //   decoration: BoxDecoration(
+    //                     //     color: Colors.white,
+    //                     //     border: Border.all(color: const Color(0xffF4F4F4)),
+    //                     //     borderRadius: BorderRadius.all(
+    //                     //       Radius.circular(5.r),
+    //                     //     ),
+    //                     //   ),
+    //                     //   child: TextField(
+    //                     //     controller: emailController,
+    //                     //     maxLines: 1,
+    //                     //     textAlign: TextAlign.left,
+    //                     //     keyboardType: TextInputType.emailAddress,
+    //                     //     decoration: InputDecoration(
+    //                     //       border: InputBorder.none,
+    //                     //       hintText:
+    //                     //           editViewModel.data!.address!.email.toString(),
+    //                     //       hintStyle: AppThemeData.hintTextStyle_13,
+    //                     //       contentPadding: EdgeInsets.only(
+    //                     //           left: 8.w, right: 8.w, bottom: 8.h),
+    //                     //     ),
+    //                     //   ),
+    //                     // ),
+    //                     // SizedBox(height: 16.h),
+    //                     Text(
+    //                       AppTags.phone.tr,
+    //                       style: AppThemeData.titleTextStyle_13,
+    //                     ),
+    //                     SizedBox(
+    //                       height: 8.h,
+    //                     ),
+    //                     Container(
+    //                       height: 42.h,
+    //                       alignment: Alignment.center,
+    //                       padding: EdgeInsets.symmetric(horizontal: 4.w),
+    //                       decoration: BoxDecoration(
+    //                         color: Colors.white,
+    //                         border: Border.all(color: const Color(0xffF4F4F4)),
+    //                         borderRadius: BorderRadius.all(
+    //                           Radius.circular(5.r),
+    //                         ),
+    //                       ),
+    //                       child: Row(
+    //                         crossAxisAlignment: CrossAxisAlignment.start,
+    //                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //                         children: <Widget>[
+    //                           Expanded(
+    //                             flex: 7,
+    //                             child: CountryPickerDropdown(
+    //                               isFirstDefaultIfInitialValueNotProvided:
+    //                                   false,
+    //                               initialValue: 'AE',
+    //                               isExpanded: true,
+    //                               itemBuilder: _buildDropdownItem,
+    //                               onValuePicked: (Country country) {
+    //                                 setState(() {
+    //                                   phoneCode = country.phoneCode;
+    //                                 });
+    //                               },
+    //                             ),
+    //                           ),
+    //                           Expanded(
+    //                             flex: 9,
+    //                             child: TextField(
+    //                               controller: phoneController,
+    //                               keyboardType: TextInputType.phone,
+    //                               decoration: InputDecoration(
+    //                                 border: InputBorder.none,
+    //                                 hintText: editViewModel
+    //                                     .data!.address!.phoneNo
+    //                                     .toString(),
+    //                               ),
+    //                               onChanged: (value) {},
+    //                             ),
+    //                           ),
+    //                         ],
+    //                       ),
+    //                     ),
+    //                     SizedBox(height: 16.h),
+    //                     Text(
+    //                       AppTags.country.tr,
+    //                       style: AppThemeData.titleTextStyle_13,
+    //                     ),
+    //                     SizedBox(
+    //                       height: 16.h,
+    //                     ),
+    //                     Container(
+    //                       height: 42.h,
+    //                       alignment: Alignment.center,
+    //                       padding: EdgeInsets.symmetric(horizontal: 4.w),
+    //                       decoration: BoxDecoration(
+    //                         color: Colors.white,
+    //                         border: Border.all(color: const Color(0xffF4F4F4)),
+    //                         borderRadius: BorderRadius.all(
+    //                           Radius.circular(5.r),
+    //                         ),
+    //                       ),
+    //                       child: DropdownButtonHideUnderline(
+    //                         child: DropdownButton(
+    //                           isExpanded: true,
+    //                           hint: Padding(
+    //                             padding: EdgeInsets.only(left: 6.w),
+    //                             child: Text(
+    //                               editViewModel.data!.address!.country!
+    //                                   .toString(),
+    //                               style: AppThemeData.hintTextStyle_13,
+    //                             ),
+    //                           ),
+    //                           // Not necessary for Option 1
+    //                           value: _selectedCountry,
+    //                           onChanged: (newValue) {
+    //                             setState(() {
+    //                               _selectedCountry = newValue;
+    //                             });
+    //                           },
+    //                           items: countryListModel.data!.countries!
+    //                               .map((country) {
+    //                             return DropdownMenuItem(
+    //                               onTap: () async {
+    //                                 await getStateList(country.id);
+    //                                 setState(() {});
+    //                               },
+    //                               value: country.id,
+    //                               child: Text(country.name.toString()),
+    //                             );
+    //                           }).toList(),
+    //                         ),
+    //                       ),
+    //                     ),
+    //                     SizedBox(height: 16.h),
+    //                     Text(
+    //                       AppTags.state.tr,
+    //                       style: AppThemeData.titleTextStyle_13,
+    //                     ),
+    //                     SizedBox(
+    //                       height: 8.h,
+    //                     ),
+    //                     stateListModel.data != null
+    //                         ? Container(
+    //                             height: 42.h,
+    //                             alignment: Alignment.center,
+    //                             padding:
+    //                                 EdgeInsets.only(left: 12.w, right: 4.w),
+    //                             decoration: BoxDecoration(
+    //                               color: Colors.white,
+    //                               border: Border.all(
+    //                                   color: const Color(0xffF4F4F4)),
+    //                               borderRadius: BorderRadius.all(
+    //                                 Radius.circular(5.r),
+    //                               ),
+    //                             ),
+    //                             child: DropdownButtonHideUnderline(
+    //                               child: DropdownButton(
+    //                                 isExpanded: true,
+    //                                 hint: Text(
+    //                                   AppTags.selectState.tr,
+    //                                   style: AppThemeData.hintTextStyle_13,
+    //                                 ),
+    //                                 value: _selectedState,
+    //                                 onChanged: (newValue) {
+    //                                   setState(
+    //                                     () {
+    //                                       print("_selectedCity $_selectedCity");
+    //                                       _selectedState = newValue!;
+    //                                       _selectedCity = null;
+    //                                       cityModel.data!.cities = [];
+    //                                     },
+    //                                   );
+    //                                 },
+    //                                 items: stateListModel.data!.states!
+    //                                     .map((state) {
+    //                                   return DropdownMenuItem(
+    //                                     onTap: () async {
+    //                                       await getCityList(state.id);
+    //                                       setState(() {});
+    //                                     },
+    //                                     value: state.id,
+    //                                     child: Text(state.name.toString()),
+    //                                   );
+    //                                 }).toList(),
+    //                               ),
+    //                             ),
+    //                           )
+    //                         : Container(
+    //                             height: 42.h,
+    //                             alignment: Alignment.center,
+    //                             padding:
+    //                                 EdgeInsets.only(left: 12.w, right: 4.w),
+    //                             decoration: BoxDecoration(
+    //                               color: Colors.white,
+    //                               border: Border.all(
+    //                                   color: const Color(0xffF4F4F4)),
+    //                               borderRadius: BorderRadius.all(
+    //                                 Radius.circular(5.r),
+    //                               ),
+    //                             ),
+    //                             child: DropdownButtonHideUnderline(
+    //                               child: DropdownButton(
+    //                                 isExpanded: true,
+    //                                 hint: Text(AppTags.selectState.tr,
+    //                                     style: AppThemeData.hintTextStyle_13),
+    //                                 value: _selectedState,
+    //                                 onChanged: (newValue) {
+    //                                   setState(
+    //                                     () {
+    //                                       print(
+    //                                           "@@@ _selectedCity $_selectedCity");
+    //                                       _selectedState = newValue!;
+    //                                       _selectedCity = null;
+    //                                       cityModel.data!.cities = [];
+    //                                     },
+    //                                   );
+    //                                 },
+    //                                 items: null,
+    //                               ),
+    //                             ),
+    //                           ),
+    //                     SizedBox(height: 16.r),
+    //                     Column(
+    //                       crossAxisAlignment: CrossAxisAlignment.start,
+    //                       children: [
+    //                         Text(
+    //                           AppTags.city.tr,
+    //                           style: AppThemeData.titleTextStyle_13,
+    //                         ),
+    //                         SizedBox(
+    //                           height: 8.h,
+    //                         ),
+    //                         cityModel.data != null
+    //                             ? Container(
+    //                                 height: 42.h,
+    //                                 alignment: Alignment.center,
+    //                                 padding:
+    //                                     EdgeInsets.only(left: 12.w, right: 4.w),
+    //                                 decoration: BoxDecoration(
+    //                                   color: Colors.white,
+    //                                   border: Border.all(
+    //                                       color: const Color(0xffF4F4F4)),
+    //                                   borderRadius: BorderRadius.all(
+    //                                     Radius.circular(5.r),
+    //                                   ),
+    //                                 ),
+    //                                 child: DropdownButtonHideUnderline(
+    //                                   child: DropdownButton(
+    //                                     isExpanded: true,
+    //                                     hint: Text(
+    //                                       AppTags.selectCity.tr,
+    //                                       style: AppThemeData.hintTextStyle_13,
+    //                                     ),
+    //                                     value: _selectedCity,
+    //                                     onChanged: (newValue) {
+    //                                       setState(() {
+    //                                         _selectedCity = newValue;
+    //                                       });
+    //                                     },
+    //                                     items:
+    //                                         cityModel.data!.cities!.map((city) {
+    //                                       return DropdownMenuItem(
+    //                                         onTap: () {},
+    //                                         value: city.id,
+    //                                         child: Text(city.name.toString()),
+    //                                       );
+    //                                     }).toList(),
+    //                                   ),
+    //                                 ),
+    //                               )
+    //                             : Container(
+    //                                 height: 50.h,
+    //                                 alignment: Alignment.center,
+    //                                 padding:
+    //                                     EdgeInsets.only(left: 12.w, right: 4.w),
+    //                                 decoration: BoxDecoration(
+    //                                   color: Colors.white,
+    //                                   border: Border.all(
+    //                                       color: const Color(0xffF4F4F4)),
+    //                                   borderRadius: BorderRadius.all(
+    //                                     Radius.circular(5.r),
+    //                                   ),
+    //                                 ),
+    //                                 child: DropdownButtonHideUnderline(
+    //                                   child: DropdownButton(
+    //                                       isExpanded: true,
+    //                                       hint: Text(AppTags.selectCity.tr,
+    //                                           style: AppThemeData
+    //                                               .hintTextStyle_13),
+    //                                       value: _selectedCity,
+    //                                       onChanged: (newValue) {
+    //                                         setState(() {
+    //                                           _selectedCity = newValue;
+    //                                         });
+    //                                       },
+    //                                       items: null),
+    //                                 ),
+    //                               ),
+    //                       ],
+    //                     ),
+    //                     /*         SizedBox(
+    //                       height: 16.h,
+    //                     ),
+    //                     Text(
+    //                       AppTags.postalCode.tr,
+    //                       style: AppThemeData.titleTextStyle_13,
+    //                     ),*/
+    //                     SizedBox(
+    //                       height: 8.h,
+    //                     ),
+    //                     SizedBox(
+    //                       height: 16.h,
+    //                     ),
+    //                     Text(
+    //                       AppTags.address.tr,
+    //                       style: AppThemeData.titleTextStyle_13,
+    //                     ),
+    //                     SizedBox(
+    //                       height: 8.h,
+    //                     ),
+    //                     Container(
+    //                       height: 30.h,
+    //                       alignment: Alignment.center,
+    //                       padding: EdgeInsets.symmetric(
+    //                           horizontal: 4.w, vertical: 4.h),
+    //                       decoration: BoxDecoration(
+    //                         color: Colors.white,
+    //                         border: Border.all(color: const Color(0xffF4F4F4)),
+    //                         borderRadius: BorderRadius.all(
+    //                           Radius.circular(5.r),
+    //                         ),
+    //                       ),
+    //                       child: TextField(
+    //                         controller: addressController,
+    //                         maxLines: 3,
+    //                         textAlign: TextAlign.left,
+    //                         keyboardType: TextInputType.name,
+    //                         decoration: InputDecoration(
+    //                           border: InputBorder.none,
+    //                           hintText: editViewModel.data!.address!.address!
+    //                               .toString(),
+    //                           hintStyle: AppThemeData.hintTextStyle_13,
+    //                           contentPadding: EdgeInsets.only(
+    //                               left: 8.w, right: 8.w, bottom: 8.h),
+    //                         ),
+    //                       ),
+    //                     ),
+    //                     SizedBox(
+    //                       height: 8.h,
+    //                     ),
+    //                   ],
+    //                 ),
+    //               ),
+    //               actions: <Widget>[
+    //                 Padding(
+    //                   padding: EdgeInsets.only(
+    //                       left: 15.w, bottom: 15.h, right: 15.w),
+    //                   child: InkWell(
+    //                     onTap: () async {
+    //                       await Repository()
+    //                           .updateEditAddress(
+    //                             name: nameController.text.isNotEmpty
+    //                                 ? nameController.text.toString()
+    //                                 : editViewModel.data!.address!.name
+    //                                     .toString(),
+    //                             // email: emailController.text.isNotEmpty
+    //                             //     ? emailController.text.toString()
+    //                             //     : editViewModel.data!.address!.email
+    //                             //         .toString(),
+    //                             phoneNo: phoneController.text.isNotEmpty
+    //                                 ? "+$phoneCode ${phoneController.text.toString()}"
+    //                                 : editViewModel.data!.address!.phoneNo
+    //                                     .toString(),
+    //                             countryId: _selectedCountry ??
+    //                                 int.parse(editViewModel
+    //                                     .data!.address!.addressIds!.countryId
+    //                                     .toString()),
+    //                             stateId: _selectedState ??
+    //                                 int.parse(editViewModel
+    //                                     .data!.address!.addressIds!.stateId
+    //                                     .toString()),
+    //                             cityId: _selectedCity ??
+    //                                 int.parse(editViewModel
+    //                                     .data!.address!.addressIds!.cityId
+    //                                     .toString()),
+    //                             // postalCode: postalCodeController.text.isNotEmpty?postalCodeController.text.toString():editViewModel.data!.address!.postalCode.toString(),
+    //                             address: addressController.text.isNotEmpty
+    //                                 ? addressController.text.toString()
+    //                                 : editViewModel.data!.address!.address
+    //                                     .toString(),
+    //                             addressId: addressId!,
+    //                           )
+    //                           .then((value) => getShippingAddress());
+    //                       Get.back();
+    //                     },
+    //                     child: Container(
+    //                       alignment: Alignment.bottomRight,
+    //                       width: 42.w,
+    //                       height: 42.h,
+    //                       decoration: BoxDecoration(
+    //                         color: Colors.white,
+    //                         border: Border.all(color: const Color(0xffF4F4F4)),
+    //                         borderRadius: BorderRadius.all(
+    //                           Radius.circular(5.r),
+    //                         ),
+    //                       ),
+    //                       child: Container(
+    //                         alignment: Alignment.center,
+    //                         child: Text(
+    //                           AppTags.add.tr,
+    //                           style: isMobile(context)
+    //                               ? AppThemeData.buttonTextStyle_13
+    //                               : AppThemeData.buttonTextStyle_10Tab,
+    //                           textAlign: TextAlign.center,
+    //                         ),
+    //                       ),
+    //                     ),
+    //                   ),
+    //                 ),
+    //               ],
+    //             ));
+    //       },
+    //     );
+    //   },
+    // );
   }
 
   textFieldValidator(name, textController) {

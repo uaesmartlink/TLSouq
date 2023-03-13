@@ -79,6 +79,7 @@ class AppTags {
   static const String officeAddress = "officeAddress";
   static const String homeAddress = "homeAddress";
   static const String addAddress = "addAddress";
+  static const String editAddress = "editAddress";
   static const String continues = "continues";
   static const String delete = "delete";
   static const String edit = "edit";
