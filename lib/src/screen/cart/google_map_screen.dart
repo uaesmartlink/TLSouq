@@ -49,43 +49,92 @@ class MapSampleState extends State<MapSample> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      body: GoogleMap(
-        mapType: MapType.normal,
-        initialCameraPosition: CameraPosition(
-          target: widget.initialPosition,
-          zoom: 16,
-        ),
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
-        markers: Set.from(markers),
-        onLongPress: _handleTap,
+      appBar: AppBar(
+        title: Text('Add Address'),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.miniStartFloat,
-      floatingActionButton: SizedBox(
-        child: FloatingActionButton(
-          child: Icon(Icons.my_location_outlined),
-          //child widget inside this button
-          onPressed: () {
-            _goToTheLake();
-            //task to execute when this button is pressed
-          },
+      body: Column(children: [
+        Expanded(
+          child: GoogleMap(
+            mapType: MapType.normal,
+            initialCameraPosition: CameraPosition(
+              target: widget.initialPosition,
+              zoom: 16,
+            ),
+            onMapCreated: (GoogleMapController controller) {
+              _controller.complete(controller);
+            },
+            markers: Set.from(markers),
+            onLongPress: _handleTap,
+          ),
         ),
-      ),
+        Container(
+          padding: EdgeInsets.only(bottom: 15, top: 10, right: 10),
+          height: 80,
+          child: Row(
+            children: [
+              Expanded(
+                flex: 1,
+                child: TextButton(
+                  onPressed: () {
+                    _goToTheLake();
+                  },
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Icon(Icons.my_location_rounded),
+                      SizedBox(
+                        width: 3,
+                      ),
+                      Text(
+                        "LOCATE ME",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: Container(
+                  padding: EdgeInsets.all(10),
+                  height: 100,
+                  decoration: const BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                  ),
+                  child: TextButton(
+                    onPressed: () {},
+                    style: TextButton.styleFrom(
+                      // backgroundColor: Colors.red,
+                      foregroundColor: Colors.white,
+                    ),
+                    child: const Text(
+                      "CONFIRM LOCATION",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        )
+      ]),
     );
   }
 
   _handleTap(LatLng point) {
     setState(() {
-      markers[0] =
-        Marker(
-          position: point,
-          markerId: MarkerId(point.toString()),
-        );
+      markers[0] = Marker(
+        position: point,
+        markerId: MarkerId(point.toString()),
+      );
     });
-
   }
 
   Future<void> _goToTheLake() async {
