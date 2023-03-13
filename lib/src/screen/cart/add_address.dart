@@ -95,6 +95,9 @@ class _AddAddress extends State<AddAddress> {
 
   @override
   Widget build(BuildContext context) {
+    print("----00----");
+    print(widget._initialPosition);
+    print(widget.position.toString());
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,

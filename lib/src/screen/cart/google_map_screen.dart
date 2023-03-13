@@ -26,6 +26,13 @@ class MapSampleState extends State<MapSample> {
 
   @override
   void initState() {
+    markers.add(Marker(
+      position: widget.initialPosition,
+      markerId: MarkerId(widget.position.toString()),
+    ));
+    print("Location");
+    print(widget.initialPosition);
+    print(widget.position.toString());
     _getCurrentLocation();
     super.initState();
   }
@@ -42,16 +49,13 @@ class MapSampleState extends State<MapSample> {
 
   @override
   Widget build(BuildContext context) {
-    markers[0] = Marker(
-      position: widget.initialPosition,
-      markerId: MarkerId(widget.position.toString()),
-    );
+
     return Scaffold(
       body: GoogleMap(
         mapType: MapType.normal,
         initialCameraPosition: CameraPosition(
           target: widget.initialPosition,
-          zoom: 15,
+          zoom: 16,
         ),
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
@@ -75,21 +79,20 @@ class MapSampleState extends State<MapSample> {
 
   _handleTap(LatLng point) {
     setState(() {
-      markers = [];
-      markers.add(
+      markers[0] =
         Marker(
           position: point,
           markerId: MarkerId(point.toString()),
-        ),
-      );
+        );
     });
+
   }
 
   Future<void> _goToTheLake() async {
     final GoogleMapController controller = await _controller.future;
     controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
       target: widget.initialPosition,
-      zoom: 20,
+      zoom: 18,
     )));
   }
 }

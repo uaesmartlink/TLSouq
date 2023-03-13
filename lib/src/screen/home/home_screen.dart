@@ -330,8 +330,8 @@ class HomeScreenContent extends StatelessWidget {
                       );
                     },
                     child: Container(
-                      height: 100.h,
-                      width: isMobile(context) ? 70.w : 60.w,
+                      height: 150.h,
+                      width: isMobile(context) ? 90.w : 80.w,
                       // decoration: BoxDecoration(
                       //   color: Colors.white,
                       //   borderRadius: BorderRadius.all(
@@ -346,7 +346,7 @@ class HomeScreenContent extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Padding(
-                              padding: EdgeInsets.symmetric(vertical: 8.h),
+                              padding: EdgeInsets.symmetric(vertical: 0.h,horizontal: 0.h),
                               child: CachedNetworkImage(
                                 imageUrl: homeScreenContentController
                                     .homeDataModel
@@ -360,7 +360,7 @@ class HomeScreenContent extends StatelessWidget {
                           ),
                           Padding(
                             padding: EdgeInsets.symmetric(
-                                horizontal: 8.w, vertical: 3.h),
+                                horizontal: 0.w, vertical: 0.h),
                             child: Text(
                               homeScreenContentController
                                   .homeDataModel

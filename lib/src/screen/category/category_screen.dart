@@ -94,32 +94,32 @@ class CategoryScreen extends StatelessWidget {
                                                         CrossAxisAlignment
                                                             .center,
                                                     children: [
-                                                      _catController
-                                                              .featuredCategory
-                                                              .value
-                                                              .icon!
-                                                              .isNotEmpty
-                                                          ? Icon(
-                                                              MdiIcons
-                                                                  .fromString(
-                                                                _catController
-                                                                    .featuredCategory
-                                                                    .value
-                                                                    .icon!
-                                                                    .substring(
-                                                                        8),
-                                                              ),
-                                                              size: 30.r,
-                                                              color: AppThemeData
-                                                                  .headlineTextColor,
-                                                            )
-                                                          : Icon(
-                                                              MdiIcons.fromString(
-                                                                  "checkbox-multiple-blank-outline"),
-                                                              size: 30.r,
-                                                              color: AppThemeData
-                                                                  .headlineTextColor,
-                                                            ),
+                                                      // _catController
+                                                      //         .featuredCategory
+                                                      //         .value
+                                                      //         .icon!
+                                                      //         .isNotEmpty
+                                                      //     ? Icon(
+                                                      //         MdiIcons
+                                                      //             .fromString(
+                                                      //           _catController
+                                                      //               .featuredCategory
+                                                      //               .value
+                                                      //               .icon!
+                                                      //               .substring(
+                                                      //                   8),
+                                                      //         ),
+                                                      //         size: 30.r,
+                                                      //         color: AppThemeData
+                                                      //             .headlineTextColor,
+                                                      //       )
+                                                      //     : Icon(
+                                                      //         MdiIcons.fromString(
+                                                      //             "checkbox-multiple-blank-outline"),
+                                                      //         size: 30.r,
+                                                      //         color: AppThemeData
+                                                      //             .headlineTextColor,
+                                                      //       ),
                                                       SizedBox(height: 5.h),
                                                       Text(
                                                         _catController

@@ -1351,6 +1351,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
 
   //Create Address
    createAddress() {
+    print("AAAAA");
+    print(_initialPosition);
+    print(position);
+
      Get.toNamed(
          Routes.addAddress,
          arguments: [
